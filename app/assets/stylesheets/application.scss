@@ -16,3 +16,17 @@
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
+
+.small-text {
+  font-size: smaller;
+  margin: 10px 0 20px 0;
+}
+
+input {
+  margin: 10px 0 20px 0;
+}
+
+input[type=submit] {
+  margin-top: 25px;
+}
+

@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Books</h1>
 
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
-  <% end %>
-</div>
+<%= link_to "Create book", new_book_path, class: 'btn btn-success' %>
 
-<%= link_to "New book", new_book_path %>
+<div class="row">
+  <div class="col-md-2">
+    <% if @books.any? %>
+      <% @books.each do |book| %>
+        <%= link_to book.title, book %>
+      <% end %>
+    <% else %>
+      <p>You don't have any books on your shelf!</p>
+      <p>Would you like to <%= link_to 'add one', new_book_path %>?</p>
+    <% end %>
+  </div>
+</div>

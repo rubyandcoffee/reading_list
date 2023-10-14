@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-inline-block">
+  <%= link_to "Edit this book", edit_book_path(@book), class: 'btn btn-primary' %>
+</div>
+<div class="d-inline-block">
+  <%= button_to "Remove this book", @book, method: :delete, class: 'btn btn-danger' %>
+</div>
 
-<%= render @book %>
+<div class="row">
+  <div class="col-md-2">
+    <h3>Title</h3> 
+    <p><%= @book.title %></p>
 
-<div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
+    <h3>Author</h3>
+    <p><%= link_to @book.author.full_name, @book.author %></p>
 
-  <%= button_to "Destroy this book", @book, method: :delete %>
+    <h3>Genre</h3>
+    <p><%= link_to @book.genre.name, @book.genre %></p>
+
+    <h3>Status</h3>
+    <p><%= @book.status %></p>
+  </div>
 </div>

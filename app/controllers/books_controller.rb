@@ -37,7 +37,9 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1 or /books/1.json
   def update
     respond_to do |format|
-      if @book.update(book_params)
+      @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
+
+      if @book.update(book_params.except(:status))
         format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @book }
       else
@@ -65,6 +67,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author_id, :genre_id)
+      params.require(:book).permit(:title, :author_id, :genre_id, :status)
     end
 end

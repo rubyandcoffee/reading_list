@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-inline-block">
+  <%= link_to "Rename genre", edit_genre_path(@genre), class: 'btn btn-primary' %>
+</div>
+<div class="d-inline-block">
+  <%= button_to "Remove genre", @genre, method: :delete, class: 'btn btn-danger' %>
+</div>
 
-<%= render @genre %>
-
-<div>
-  <%= link_to "Edit this genre", edit_genre_path(@genre) %> |
-  <%= link_to "Back to genres", genres_path %>
-
-  <%= button_to "Destroy this genre", @genre, method: :delete %>
+<div class="row">
+  <div class="col-md-2">
+    <%= render @genre %>
+  </div>
 </div>
