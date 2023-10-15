@@ -13,7 +13,11 @@
   <body>
     <%= render partial: 'layouts/navigation' %>
     <div class="container">
-      <p class="success"><%= notice %></p>
+      <% flash.each do |type, msg| %>
+        <div class="alert alert-success">
+          <%= msg %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>

@@ -5,9 +5,11 @@
 <div class="row">
   <div class="col-md-2">
     <% if @books.any? %>
-      <% @books.each do |book| %>
-        <%= link_to book.title, book %>
-      <% end %>
+      <ul>
+        <% @books.each do |book| %>
+          <li><%= link_to book.title, book %></li>
+        <% end %>
+      </ul>
     <% else %>
       <p>You don't have any books on your shelf!</p>
       <p>Would you like to <%= link_to 'add one', new_book_path %>?</p>

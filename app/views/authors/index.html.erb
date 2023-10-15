@@ -5,9 +5,11 @@
 <div class="row">
   <div class="col-md-2">
     <div id="authors">
-      <% @authors.each do |author| %>
-        <%= link_to author.full_name, author %>
-      <% end %>
+      <ul>
+        <% @authors.each do |author| %>
+          <li><%= link_to author.full_name, author %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>

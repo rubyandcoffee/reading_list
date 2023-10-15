@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>TBR</h3>
+    <%= link_to 'Add book to reading list', books_reading_list_add_book_path, class: 'btn btn-success' %>
+    <hr>
+    <p>You have <%= @to_be_read.count %> books in your reading list:</p>
+    <ul>
+      <% @to_be_read.each do |book| %>
+        <li><%= link_to book.title, book %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  namespace :books do
+    resources :reading_list, only: [:index]
+    get 'reading_list/add_book', to: 'reading_list#add_book'
+    post 'reading_list/update_list', to: 'reading_list#update_list'
+  end
   resources :books
   resources :authors
   resources :genres
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  root 'books#index'
+  root 'books/reading_list#index'
 end
