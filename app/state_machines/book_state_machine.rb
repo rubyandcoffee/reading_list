@@ -17,14 +17,7 @@ class BookStateMachine
     Book.in_state(:tbr).count < 10
   end
 
-  # after_transition(to: :tbr) do |book, transition|
-  # end
-
-  # before_transition(from: :tbr, to: :reading) do |book, transition|
-  #   # something
-  # end
-
-  # before_transition(to: :read) do |book, transition|
-  #   # something
-  # end
+  guard_transition(to: :reading) do |order|
+    Book.in_state(:reading).count < 1
+  end
 end

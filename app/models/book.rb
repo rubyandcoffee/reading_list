@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :author
   belongs_to :genre
-  has_many :book_transitions, autosave: false
+  has_many :book_transitions, autosave: false, dependent: :destroy
 
   delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
            :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine

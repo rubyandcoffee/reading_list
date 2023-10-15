@@ -2,37 +2,57 @@
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
       <%= link_to root_path, class: 'navbar-brand' do %>
-        <h3>Reading List</h3>
+        <h3><i class="fa-solid fa-book"></i> Reading List</h3>
       <% end %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%= link_to 'Books', books_path, class: 'nav-link active' %>
-          </li>
-        </ul>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             View All
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to 'Books', books_path, class: 'dropdown-item' %></li>
+            <li>
+              <%= link_to books_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-book"></i> Books
+              <% end %>
+            </li>
             <li><hr class="dropdown-divider"></li>
-            <li><%= link_to 'Authors', authors_path, class: 'dropdown-item' %></li>
-            <li><%= link_to 'Genres', genres_path, class: 'dropdown-item' %></li>
+            <li>
+              <%= link_to authors_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-person"></i> Authors
+              <% end %>
+            </li>
+            <li>
+              <%= link_to genres_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-image"></i> Genres
+              <% end %>
+            </li>
           </ul>
         </div>
+        &nbsp;
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Create
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to 'Add Book', new_book_path, class: 'dropdown-item' %></li>
+            <li>
+              <%= link_to new_book_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-book"></i> Add Book
+              <% end %>
+            </li>
             <li><hr class="dropdown-divider"></li>
-            <li><%= link_to 'Add Author', new_author_path, class: 'dropdown-item' %></li>
-            <li><%= link_to 'Add Genre', new_genre_path, class: 'dropdown-item' %></li>
+            <li>
+              <%= link_to new_author_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-person"></i> Add author
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_genre_path, class: 'dropdown-item' do %>
+                <i class="fa-solid fa-image"></i> Add genre
+              <% end %>
+            </li>
           </ul>
         </div>
       </div>

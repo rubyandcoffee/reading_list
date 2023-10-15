@@ -22,6 +22,10 @@
   margin: 10px 0 20px 0;
 }
 
+.currently-reading {
+  font-size: smaller;
+}
+
 input {
   margin: 10px 0 20px 0;
 }
@@ -32,4 +36,12 @@ input[type=submit] {
 
 .row {
   margin-top: 10px;
+}
+
+.form-field {
+  margin: 20px 0 20px 0;
+}
+
+#book_status {
+  width: 100px;
 }

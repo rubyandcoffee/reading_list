@@ -1,7 +1,7 @@
 <h1>Editing book</h1>
 
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-12">
     <%= form_with(model: @book) do |form| %>
       <% if @book.errors.any? %>
         <div style="color: red">
@@ -14,12 +14,12 @@
         </div>
       <% end %>
       <%= render "form", book: @book, form: form %>
-      <div>
-        <%= form.label 'Status' %>
+      <div class="form-field">
+        <%= form.label 'Status', style: 'display:block;' %>
         <%= form.collection_select :status, @book.allowed_transitions, :to_s, :humanize, include_blank: true, class: 'form-select' %>
-        <p class="small-text">
-          This book is currently set to '<%= @book.current_state.humanize %>'.
-        </p>
+        <span class="small-text">
+          This book is currently set to '<%= @book.current_state.humanize %>'
+        </span>
       <div>
         <%= form.submit 'Update book', class: 'btn btn-success' %>
       </div>
