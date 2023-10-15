@@ -3,9 +3,8 @@ class Book < ApplicationRecord
   belongs_to :genre
   has_many :book_transitions, autosave: false
 
-  delegate :can_transition_to?,
-           :current_state, :history, :last_transition, :last_transition_to,
-           :transition_to!, :transition_to, :in_state?, to: :state_machine
+  delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
+           :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine
 
   include Statesman::Adapters::ActiveRecordQueries[
     transition_class: BookTransition,
@@ -14,5 +13,9 @@ class Book < ApplicationRecord
 
   def state_machine
     @state_machine ||= BookStateMachine.new(self, transition_class: BookTransition, association_name: :book_transitions)
+  end
+
+  def status
+    current_state.humanize
   end
 end

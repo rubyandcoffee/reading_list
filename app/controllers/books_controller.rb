@@ -21,7 +21,8 @@ class BooksController < ApplicationController
 
   # POST /books or /books.json
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(book_params.except(:status))
+    @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
 
     respond_to do |format|
       if @book.save
@@ -37,7 +38,9 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1 or /books/1.json
   def update
     respond_to do |format|
-      if @book.update(book_params)
+      @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
+
+      if @book.update(book_params.except(:status))
         format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @book }
       else
@@ -58,13 +61,11 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author_id, :genre_id)
+      params.require(:book).permit(:title, :author_id, :genre_id, :status)
     end
 end

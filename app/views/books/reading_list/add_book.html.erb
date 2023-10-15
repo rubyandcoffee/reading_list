@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Add book to TBR</h1>
+    <div class="row">
+      <% if Book.in_state(:unread).any? %>
+        <div class="col-md-2">
+          <%= form_with(url: books_reading_list_update_list_path) do |form| %>
+            <div>
+              <%= form.label 'Books' %>
+              <%= form.collection_select :book_id, Book.in_state(:unread), :id, :title, include_blank: true, class: 'form-select' %>
+            </div>
+            <div>
+              <%= form.submit 'Add book to TBR', class: 'btn btn-success' %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="col-md-6">
+          <p>
+            There are no books available to be added to your reading list.<br>
+            Set a book to 'unread' first.
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
