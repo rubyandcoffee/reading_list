@@ -17,6 +17,18 @@
               <%= link_to books_path, class: 'dropdown-item' do %>
                 <i class="fa-solid fa-book"></i> Books
               <% end %>
+              <%= link_to books_shopping_list_path, class: 'dropdown-item' do %>
+                - Shopping List
+              <% end %>
+              <%= link_to books_unread_path, class: 'dropdown-item' do %>
+                - Unread
+              <% end %>
+              <%= link_to books_read_path, class: 'dropdown-item' do %>
+                - Read
+              <% end %>
+              <%= link_to books_dnf_path, class: 'dropdown-item' do %>
+                - Did not finish
+              <% end %>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>

@@ -4,7 +4,7 @@
 </div>
 <div class="form-field">
   <%= form.label :author_id, style: "display: block" %>
-  <%= form.collection_select :author_id, Author.order(:full_name), :id, :full_name, include_blank: true, class: 'form-select' %>
+  <%= form.collection_select :author_id, Author.order(:forename), :id, :full_name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><%= link_to 'Add missing author', new_author_path %></span>
 </div>
 <div class="form-field">

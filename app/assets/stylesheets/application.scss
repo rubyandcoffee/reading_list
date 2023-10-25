@@ -45,3 +45,19 @@ input[type=submit] {
 #book_status {
   width: 100px;
 }
+
+.stale-book {
+  color: rgb(190, 75, 75);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.fresh-book {
+  color: rgb(141, 191, 141);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.banner {
+  width: 100%;
+}

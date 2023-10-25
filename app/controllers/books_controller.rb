@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
-        format.html { redirect_to books_url, notice: "Book was successfully created." }
+        format.html { redirect_to books_url, notice: "#{@book.title} has been added to your bookshelf" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class BooksController < ApplicationController
       @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
 
       if @book.update(book_params.except(:status))
-        format.html { redirect_to books_url, notice: "Book was successfully updated." }
+        format.html { redirect_to books_url, notice: "#{@book.title} has been updated" }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,10 +48,15 @@ class BooksController < ApplicationController
     @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
+      format.html { redirect_to books_url, notice: "Book has been deleted" }
       format.json { head :no_content }
     end
   end
+
+  def shopping_list;end
+  def unread;end
+  def read;end
+  def dnf;end
 
   private
     def set_book
