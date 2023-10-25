@@ -1,13 +1,18 @@
-<h1>Books</h1>
-
-<%= link_to "Create book", new_book_path, class: 'btn btn-success' %>
-
 <div class="row">
-  <div class="col-md-2">
+  <div class="col">
+    <%= link_to "Create book", new_book_path, class: 'btn btn-success' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <%= image_tag 'book1.png' %>
+  </div>
+  <div class="col">
+    <h3>Bookshelf</h3>
     <% if @books.any? %>
       <ul>
         <% @books.each do |book| %>
-          <li><%= link_to book.title, book %></li>
+          <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
         <% end %>
       </ul>
     <% else %>

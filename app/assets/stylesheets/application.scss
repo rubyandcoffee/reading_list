@@ -22,6 +22,10 @@
   margin: 10px 0 20px 0;
 }
 
+.currently-reading {
+  font-size: smaller;
+}
+
 input {
   margin: 10px 0 20px 0;
 }
@@ -32,4 +36,28 @@ input[type=submit] {
 
 .row {
   margin-top: 10px;
+}
+
+.form-field {
+  margin: 20px 0 20px 0;
+}
+
+#book_status {
+  width: 100px;
+}
+
+.stale-book {
+  color: rgb(190, 75, 75);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.fresh-book {
+  color: rgb(141, 191, 141);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.banner {
+  width: 100%;
 }

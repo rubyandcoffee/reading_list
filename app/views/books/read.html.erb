@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col">
+    <%= image_tag 'banner-finished.png', class: 'banner' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <% if Book.in_state(:read).any? %>
+      <ul>
+        <% Book.in_state(:read).each do |book| %>
+          <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

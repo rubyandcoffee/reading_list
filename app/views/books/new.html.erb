@@ -1,6 +1,6 @@
 <h1>New book</h1>
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-12">
     <%= form_with(model: @book) do |form| %>
       <% if @book.errors.any? %>
         <div style="color: red">
@@ -13,12 +13,12 @@
         </div>
       <% end %>
       <%= render "form", book: @book, form: form %>
-      <div>
-        <%= form.label 'Status' %>
+      <div class="form-field">
+        <%= form.label 'Status', style: 'display: block;' %>
         <%= form.collection_select :status, @book.allowed_transitions, :to_s, :humanize, include_blank: true, class: 'form-select' %>
-        <p class="small-text">
+        <span class="small-text">
           If you do not select a status, it will automatically be set to '<%= @book.current_state.humanize %>'.
-        </p>
+        </span>
       </div>
       <div>
         <%= form.submit 'Add book to shelf', class: 'btn btn-success' %>

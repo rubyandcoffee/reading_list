@@ -1,18 +1,14 @@
-<div>
+<div class="form-field">
   <%= form.label :title, style: "display: block" %>
-  <%= form.text_field :title, class: 'form-control' %>
+  <%= form.text_field :title, class: 'form-control', style: 'width: 400px;' %>
 </div>
-
-<div>
+<div class="form-field">
   <%= form.label :author_id, style: "display: block" %>
-  <%= form.collection_select :author_id, Author.order(:full_name), :id, :full_name, include_blank: true, class: 'form-select' %>
+  <%= form.collection_select :author_id, Author.order(:forename), :id, :full_name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><%= link_to 'Add missing author', new_author_path %></span>
 </div>
-
-<div>
+<div class="form-field">
   <%= form.label :genre_id, style: "display: block" %>
   <%= form.collection_select :genre_id, Genre.order(:name), :id, :name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><%= link_to 'Add missing genre', new_genre_path %></span>
 </div>
-
-  

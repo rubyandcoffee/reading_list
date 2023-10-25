@@ -1,32 +1,27 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
-  # GET /books or /books.json
   def index
-    @books = Book.all
+    @books = Book.includes(:genre).order('genres.name ASC')
   end
 
-  # GET /books/1 or /books/1.json
   def show
   end
 
-  # GET /books/new
   def new
     @book = Book.new
   end
 
-  # GET /books/1/edit
   def edit
   end
 
-  # POST /books or /books.json
   def create
     @book = Book.new(book_params.except(:status))
-    @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
+        @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
+        format.html { redirect_to books_url, notice: "#{@book.title} has been added to your bookshelf" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,13 +30,12 @@ class BooksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /books/1 or /books/1.json
   def update
     respond_to do |format|
       @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
 
       if @book.update(book_params.except(:status))
-        format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }
+        format.html { redirect_to books_url, notice: "#{@book.title} has been updated" }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,15 +44,19 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /books/1 or /books/1.json
   def destroy
     @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
+      format.html { redirect_to books_url, notice: "Book has been deleted" }
       format.json { head :no_content }
     end
   end
+
+  def shopping_list;end
+  def unread;end
+  def read;end
+  def dnf;end
 
   private
     def set_book
