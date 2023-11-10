@@ -19,19 +19,21 @@
           <%= msg %>
         </div>
       <% end %>
-      <div class="alert alert-primary">
-        <div class="row justify-content-between">
-          <div class="col">
-            Currently reading: 
-            <%= currently_reading.title %> 
-            by <%= currently_reading.author.full_name %>
-          </div>
-          <div class="col" style="text-align: right">
-            <span class="small-text"><i>(Started reading on <%= currently_reading.book_transitions.last.created_at.strftime("%d %B") %>)</i></span>
-            <span class="currently-reading"><%= link_to 'Update Status', edit_book_path(currently_reading) %></span>
+      <% if currently_reading.present? %>
+        <div class="alert alert-primary">
+          <div class="row justify-content-between">
+            <div class="col">
+              Currently reading:
+              <%= currently_reading.title %>
+              by <%= currently_reading.author.full_name %>
+            </div>
+            <div class="col" style="text-align: right">
+              <span class="small-text"><i>(Started reading on <%= currently_reading.book_transitions.last.created_at.strftime("%d %B") %>)</i></span>
+              <span class="currently-reading"><%= link_to 'Update Status', edit_book_path(currently_reading) %></span>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
