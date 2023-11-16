@@ -20,7 +20,7 @@ class GenresController < ApplicationController
 
     respond_to do |format|
       if @genre.save
-        format.html { redirect_to genres_url, notice: "#{@genre.name} has been added" }
+        format.html { redirect_to new_book_path(params[:book]), notice: "#{@genre.name} has been added" }
         format.json { render :show, status: :created, location: @genre }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,8 +32,7 @@ class GenresController < ApplicationController
   def update
     respond_to do |format|
       if @genre.update(genre_params)
-        format.html { redirect_to genres_url, notice: "#{@genre.name} has been updated" }
-        format.json { render :show, status: :ok, location: @genre }
+        format.json { render inline: "location.reload();" }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @genre.errors, status: :unprocessable_entity }
@@ -45,8 +44,7 @@ class GenresController < ApplicationController
     @genre.destroy
 
     respond_to do |format|
-      format.html { redirect_to genres_url, notice: "Genre was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { render inline: "location.reload();" }
     end
   end
 

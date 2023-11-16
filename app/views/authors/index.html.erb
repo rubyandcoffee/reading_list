@@ -1,15 +1,16 @@
 <h1>Authors</h1>
-
-<%= link_to "Create author", new_author_path, class: 'btn btn-success' %>
-
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-4">
     <div id="authors">
-      <ul>
-        <% @authors.each do |author| %>
-          <li><%= link_to author.full_name, author %></li>
-        <% end %>
-      </ul>
-    </div>
+      <% @authors.each do |author| %>
+        <p>
+          <%= link_to author.full_name, author %>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#authorModal<%= author.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+          <%= link_to author_path(author), data: { turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{author.full_name}?" } do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </p>
+      <%= render 'books/modals/authors/author_modal', author: author, id: "authorModal#{author.id}" %>
+    <% end %>
   </div>
 </div>

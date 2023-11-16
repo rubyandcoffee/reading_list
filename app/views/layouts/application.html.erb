@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/navigation' %>
+    <%= render partial: 'shared/navigation' %>
     <div class="container">
       <% flash.each do |type, msg| %>
         <div class="alert alert-success">
@@ -34,7 +34,13 @@
           </div>
         </div>
       <% end %>
-      <%= yield %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= render partial: 'shared/sidebar' %>
+        </div>
+        <div class="col-md-8">
+          <%= yield %>
+        </div>
     </div>
   </body>
 </html>
