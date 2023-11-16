@@ -20,7 +20,7 @@ class GenresController < ApplicationController
 
     respond_to do |format|
       if @genre.save
-        format.html { redirect_to genres_url, notice: "#{@genre.name} has been added" }
+        format.html { redirect_to new_book_path(params[:book]), notice: "#{@genre.name} has been added" }
         format.json { render :show, status: :created, location: @genre }
       else
         format.html { render :new, status: :unprocessable_entity }

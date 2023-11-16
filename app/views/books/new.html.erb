@@ -26,3 +26,6 @@
     <% end %>
   </div>
 </div>
+
+<%= render 'books/modals/authors/author_modal', title: 'New author', content: 'Enter author name', submit_button: 'Create author', id: 'newAuthorModal', genre: @genre, book: @book %>
+<%= render 'books/modals/genres/genre_modal', title: 'New genre', content: 'Enter genre name', submit_button: 'Create genre', id: 'newGenreModal', genre: @genre, book: @book %>

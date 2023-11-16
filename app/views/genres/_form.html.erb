@@ -16,6 +16,8 @@
     <%= form.text_field :name %>
   </div>
 
+  <%= form.hidden_field :book, value: @book %>
+
   <div>
     <%= form.submit (genre.persisted? ? 'Rename' : 'Add genre'), class: 'btn btn-success' %>
   </div>

@@ -21,6 +21,8 @@
     <%= form.text_field :surname, class: 'form-control' %>
   </div>
 
+  <%= form.hidden_field :book, value: @book %>
+
   <div>
     <%= form.submit (author.persisted? ? 'Rename' : 'Add author'), class: 'btn btn-success' %>
   </div>

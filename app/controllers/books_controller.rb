@@ -10,6 +10,8 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @author = Author.new
+    @genre = Genre.new
   end
 
   def edit

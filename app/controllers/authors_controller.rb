@@ -20,7 +20,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       if @author.save
-        format.html { redirect_to authors_url, notice: "#{@author.full_name} has been added" }
+        format.html { redirect_to new_book_path(params[:book]), notice: "#{@author.full_name} has been added" }
         format.json { render :show, status: :created, location: @author }
       else
         format.html { render :new, status: :unprocessable_entity }
