@@ -61,3 +61,14 @@ input[type=submit] {
 .banner {
   width: 100%;
 }
+
+.modal-footer {
+  border-top: 0;
+  padding-top: 0;
+  justify-content: space-evenly;
+
+  input[type=submit] {
+    margin-top: 0;
+  }
+}
+

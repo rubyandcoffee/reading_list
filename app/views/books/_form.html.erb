@@ -5,11 +5,11 @@
 <div class="form-field">
   <%= form.label :author_id, style: "display: block" %>
   <%= form.collection_select :author_id, Author.order(:forename), :id, :full_name, include_blank: true, class: 'form-select' %>
-  <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#newAuthorModal">Add missing author</a></span>
+  <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#authorModal">Add missing author</a></span>
 </div>
 <div class="form-field">
   <%= form.label :genre_id, style: "display: block" %>
   <%= form.collection_select :genre_id, Genre.order(:name), :id, :name, include_blank: true, class: 'form-select' %>
-  <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#newGenreModal">Add missing genre</a></span>
+  <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#genreModal">Add missing genre</a></span>
 </div>
 
