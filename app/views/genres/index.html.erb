@@ -3,10 +3,14 @@
 <%= link_to "Create genre", new_genre_path, class: 'btn btn-success' %>
 
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-4">
     <ul>
       <% @genres.each do |genre| %>
-        <li><%= link_to genre.name, genre %></li>
+        <li>
+          <%= link_to genre.name, genre %>
+          <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#genreModal<%= genre.id %>"><i class="fa-regular fa-pen-to-square"></i></a></span>
+        </li>
+        <%= render 'books/modals/genres/genre_modal', genre: genre, id: "genreModal#{genre.id}" %>
       <% end %>
     </ul>
   </div>
