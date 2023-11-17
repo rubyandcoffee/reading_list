@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :authors
   resources :genres
 
-  root 'books/reading_list#index'
+  root to: 'books#index'
 end
