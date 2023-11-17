@@ -7,11 +7,15 @@
   <h3>Authors</h3>
   <% Author.all.each do |author| %>
     <div class="clearfix">
-      <span class="text float-start"><%= link_to author.full_name, author %></span>
-      <%= link_to author_path(author), class: 'float-end',  data: { turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{author.full_name}?" } do %>
-        <i class="fa-solid fa-trash"></i>
-      <% end %>
-      <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#authorModal<%= author.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+      <a class="float-start" data-bs-toggle="collapse" href="#collapseAuthor<%= author.id %>">
+        <%= author.full_name %>
+      </a>
+      <div class="collapse" id="collapseAuthor<%= author.id %>">
+        <%= link_to author_path(author), class: 'float-end',  data: { turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{author.full_name}?" } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+        <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#authorModal<%= author.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+      </div>
     </div>
     <%= render 'books/modals/authors/author_modal', author: author, id: "authorModal#{author.id}" %>
   <% end %>
@@ -21,11 +25,15 @@
   <h3>Genres</h3>
   <% Genre.all.each do |genre| %>
     <div class="clearfix">
-      <span class="text float-start"><%= link_to genre.name, genre %></span>
-      <%= link_to genre_path(genre), class: 'float-end', data: { remote: true, turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{genre.name}?" } do %>
-        <i class="fa-solid fa-trash"></i>
-      <% end %>
-      <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#genreModal<%= genre.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+      <a class="float-start" data-bs-toggle="collapse" href="#collapseGenre<%= genre.id %>">
+        <%= genre.name %>
+      </a>
+      <div class="collapse" id="collapseGenre<%= genre.id %>">
+        <%= link_to genre_path(genre), class: 'float-end', data: { remote: true, turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{genre.name}?" } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+        <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#genreModal<%= genre.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+      </div>
     </div>
     <%= render 'books/modals/genres/genre_modal', genre: genre, id: "genreModal#{genre.id}" %>
   <% end %>
