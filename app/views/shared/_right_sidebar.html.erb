@@ -1,0 +1,25 @@
+<div id="right-sidebar">
+  <h5>You have <%= Book.in_state(:tbr).count %> books on your TBR list:</h5>
+  <p class="small-text add-book"><%= link_to 'Add another book', books_reading_list_add_book_path %></p>
+  <% Book.in_state(:tbr).each do |book| %>
+    <div class="card">
+      <div class="card-body">
+        <%= link_to edit_book_path(book) do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+        <% end %>
+        <h6 class="card-title">
+          <%= book.title %><br> 
+        </h6>
+        <p>
+          by <%= book.author.full_name %>
+        </p>
+        <p class="small-text">
+          <i><%= book.genre.name %></i>
+        </p>
+        <p class="card-text <%= stale?(book) ? 'stale-book' : 'fresh-book' %>">
+          Added on <%= book.book_transitions.last.created_at.strftime("%d %B") %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
