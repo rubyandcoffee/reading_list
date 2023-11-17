@@ -17,6 +17,10 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+ #bookshelf {
+  margin-top: 50px;
+ }
+
  #right-sidebar {
   h5 {
     margin-top: 20px;
@@ -124,3 +128,6 @@ input[type=submit] {
   }
 }
 
+#footer {
+  margin-top: 50px;
+}

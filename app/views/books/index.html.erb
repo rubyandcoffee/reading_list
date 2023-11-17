@@ -1,18 +1,20 @@
 <div class="row">
-  <div class="col">
-    <%= image_tag 'book1.png', style: 'height: 600px' %>
-  </div>
-  <div class="col">
+  <div class="col-md-4">
     <h3>Bookshelf</h3>
-    <% if @books.any? %>
-      <ul>
-        <% @books.each do |book| %>
-          <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>You don't have any books on your shelf!</p>
-      <p>Would you like to <%= link_to 'add one', new_book_path %>?</p>
+    <%= image_tag 'book1.png', width: '100%' %>
+  </div>
+  <div class="col-md-8" id="bookshelf">
+    <% Genre.all.order(:name).each do |genre| %>
+      <h5><%= genre.name %></h5>
+      <% if genre.books.any? %>
+        <ul>
+          <% genre.books.each do |book| %>
+            <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="small-text">There are no books in this genre! Would you like to <%= link_to 'add one', new_book_path %>?</p>
+      <% end %>
     <% end %>
   </div>
 </div>

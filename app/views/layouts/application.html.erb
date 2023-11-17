@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
     <title>Reading List</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/92656d8ae3.js" crossorigin="anonymous"></script>
@@ -46,5 +46,6 @@
         </div>
       </div>
     </div>
+    <%= render partial: 'shared/footer' %>
   </body>
 </html>
