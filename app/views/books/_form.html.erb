@@ -4,7 +4,7 @@
 </div>
 <div class="form-field">
   <%= form.label :author_id, style: 'display: block' %>
-  <%= form.collection_select :author_id, Author.order(:forename), :id, :full_name, include_blank: true, class: 'form-select' %>
+  <%= form.select :author_id, Author.order(:forename).collect {|author| [ author.full_name, author.id ] }, { include_blank: true }, { data: { controller: 'slim' }} %>
   <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#authorModal">Add missing author</a></span>
 </div>
 <div class="form-field">
