@@ -17,10 +17,6 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
- #bookshelf {
-  margin-top: 50px;
- }
-
  #right-sidebar {
   h5 {
     margin-top: 20px;
@@ -97,6 +93,10 @@ input[type=submit] {
 
 .form-field {
   margin: 20px 0 20px 0;
+}
+
+.form-control {
+  width: 200px;
 }
 
 #book_status {

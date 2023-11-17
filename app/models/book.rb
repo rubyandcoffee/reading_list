@@ -15,6 +15,16 @@ class Book < ApplicationRecord
     initial_state: :unread
   ]
 
+  # ransack_alias :author, :author_forename_or_author_surname
+
+  def self.ransackable_associations(auth_object = nil)
+    ["author"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["title"]
+  end
+
   def state_machine
     @state_machine ||= BookStateMachine.new(self, transition_class: BookTransition, association_name: :book_transitions)
   end
