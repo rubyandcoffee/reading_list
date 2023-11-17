@@ -79,6 +79,16 @@
   font-size: smaller;
 }
 
+.no-decoration a {
+  text-decoration: none;
+  color: #000;
+}
+
+.no-decoration a:hover {
+  font-weight: 600;
+  color: #245391;
+}
+
 input {
   margin: 10px 0 20px 0;
 }
