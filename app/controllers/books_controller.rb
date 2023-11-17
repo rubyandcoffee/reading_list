@@ -15,6 +15,8 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @author = Author.new
+    @genre = Genre.new
   end
 
   def create
