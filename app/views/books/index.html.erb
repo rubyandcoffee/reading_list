@@ -9,7 +9,7 @@
       <% if genre.books.any? %>
         <ul>
           <% genre.books.each do |book| %>
-            <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+            <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
           <% end %>
         </ul>
       <% else %>
