@@ -1,7 +1,7 @@
 <%= form_with(model: author) do |form| %>
   <% if author.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
+      <h2><%= pluralize(author.errors.count, 'error') %> prohibited this author from being saved:</h2>
 
       <ul>
         <% author.errors.each do |error| %>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div>
-    <%= form.label :forename, style: "display: block" %>
-    <%= form.text_field :forename, class: 'form-control' %>
+    <%= form.label :forename, style: 'display: block' %>
+    <%= form.text_field :forename, class: 'form-control', autofocus: true %>
   </div>
 
   <div>
-    <%= form.label :surname, style: "display: block" %>
+    <%= form.label :surname, style: 'display: block' %>
     <%= form.text_field :surname, class: 'form-control' %>
   </div>
 

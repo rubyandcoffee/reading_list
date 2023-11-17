@@ -1,14 +1,14 @@
 <div class="form-field">
-  <%= form.label :title, style: "display: block" %>
-  <%= form.text_field :title, class: 'form-control', style: 'width: 400px;' %>
+  <%= form.label :title, style: 'display: block' %>
+  <%= form.text_field :title, class: 'form-control', style: 'width: 400px;', autofocus: true %>
 </div>
 <div class="form-field">
-  <%= form.label :author_id, style: "display: block" %>
+  <%= form.label :author_id, style: 'display: block' %>
   <%= form.collection_select :author_id, Author.order(:forename), :id, :full_name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#authorModal">Add missing author</a></span>
 </div>
 <div class="form-field">
-  <%= form.label :genre_id, style: "display: block" %>
+  <%= form.label :genre_id, style: 'display: block' %>
   <%= form.collection_select :genre_id, Genre.order(:name), :id, :name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#genreModal">Add missing genre</a></span>
 </div>
