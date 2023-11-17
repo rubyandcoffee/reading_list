@@ -15,19 +15,24 @@
           <ul class="dropdown-menu">
             <li>
               <%= link_to books_path, class: 'dropdown-item' do %>
-                <i class="fa-solid fa-book"></i> Books
+                <span class="badge text-bg-secondary"><%= Book.all.count %></span>
+                <i class="fa-solid fa-book"></i> Books 
               <% end %>
               <%= link_to books_shopping_list_path, class: 'dropdown-item' do %>
-                - Shopping List
+                <span class="badge text-bg-info"><%= Book.in_state(:buy).count %></span>
+                Shopping List
               <% end %>
               <%= link_to books_unread_path, class: 'dropdown-item' do %>
-                - Unread
+                <span class="badge text-bg-warning"><%= Book.in_state(:unread).count %></span>
+                Unread
               <% end %>
               <%= link_to books_read_path, class: 'dropdown-item' do %>
-                - Read
+                <span class="badge text-bg-success"><%= Book.in_state(:read).count %></span>
+                Read
               <% end %>
               <%= link_to books_dnf_path, class: 'dropdown-item' do %>
-                - Did not finish
+                <span class="badge text-bg-danger"><%= Book.in_state(:dnf).count %></span>
+                Did not finish
               <% end %>
             </li>
           </ul>
