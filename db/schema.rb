@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_14_135723) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_18_110717) do
   create_table "authors", force: :cascade do |t|
     t.string "forename"
     t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gender"
+    t.string "nationality"
   end
 
   create_table "book_transitions", force: :cascade do |t|

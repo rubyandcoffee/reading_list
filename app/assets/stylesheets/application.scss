@@ -17,6 +17,38 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+ html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+ .left-sidebar {
+  color: #82888d;
+
+  .btn {
+    color: #fff;
+  }
+
+  a {
+    color: #82888d;
+  }
+
+  #authors {
+    h3 {
+      margin-top: 30px;
+    }
+  }
+ }
+
  #right-sidebar {
   h5 {
     margin-top: 20px;
@@ -35,10 +67,6 @@
   margin-bottom: 0;
  }
 
- #main-content {
-  padding-left: 5%;
- }
-
  .float-end {
   padding-left: 5px;
  }
@@ -48,10 +76,6 @@
  }
 
  #authors, #genres {
-  h3 {
-    margin: 10px 0 15px 0;
-  }
-
   .text {
     a {
       text-decoration: none;
@@ -64,12 +88,6 @@
   }
  }
 
- #genres {
-  h3 {
-    margin-top: 30px;
-  }
- }
-
 .small-text {
   font-size: smaller;
   margin: 10px 0 20px 0;
@@ -79,7 +97,7 @@
   font-size: smaller;
 }
 
-.no-decoration a {
+a.no-decoration {
   text-decoration: none;
   color: #000;
 }
@@ -89,24 +107,43 @@
   color: #245391;
 }
 
-input {
-  margin: 10px 0 20px 0;
-}
-
-input[type=submit] {
-  margin-top: 25px;
-}
-
 .row {
   margin-top: 10px;
 }
 
-.form-field {
-  margin: 20px 0 20px 0;
+form {
+  input[type=submit] {
+    margin-top: 25px;
+  }
+  
+  .search-button {
+    margin-bottom: 25px;
+  }
 }
 
-.form-control {
-  width: 200px;
+.modal {
+  .modal-content {
+    .modal-body {
+      form {
+        input, select {
+          margin: 10px 0 20px 0;
+
+          .form-control {
+            margin-bottom: 34px;
+          }
+        }
+      }
+    }
+    .modal-footer {
+      border-top: 0;
+      padding-top: 0;
+      justify-content: space-evenly;
+
+      input[type=submit] {
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 #book_status {
@@ -126,16 +163,6 @@ input[type=submit] {
 
 .banner {
   width: 100%;
-}
-
-.modal-footer {
-  border-top: 0;
-  padding-top: 0;
-  justify-content: space-evenly;
-
-  input[type=submit] {
-    margin-top: 0;
-  }
 }
 
 #footer {

@@ -1,0 +1,34 @@
+<%= search_form_for @q do |f| %>
+  <div class="row row-cols-lg-auto g-7 align-items-center">
+    <div class="col-12">
+      <%= f.label :title_cont, 'Title' %>
+      <%= f.search_field :title_cont, class: 'form-control' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :author_forename_or_author_surname_cont, 'Author' %>
+      <%= f.search_field :author_forename_or_author_surname_cont, class: 'form-control' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :author_nationality_eq, 'Nationality' %>
+      <%= f.select :author_nationality_eq, Author.nationalities, { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :author_gender_eq, 'Gender' %>
+      <%= f.select :author_gender_eq, ['Female', 'Male'], { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :genre_name_eq, 'Genre' %>
+      <%= f.select :genre_name_eq, Genre.all.collect(&:name), { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :current_state, 'Status' %>
+      <%= f.select :current_state, BookStateMachine.states.collect {|s| [s.humanize, s]}, { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.submit 'Search', class: 'btn btn-success' %>
+    </div>
+    <div class="col-12">
+      <%= link_to 'Reset', books_path %>
+    </div>
+  </div>
+<% end %>

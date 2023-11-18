@@ -15,10 +15,23 @@ class Book < ApplicationRecord
     initial_state: :unread
   ]
 
-  # ransack_alias :author, :author_forename_or_author_surname
+  scope :current_state, -> (state) do
+    if state == 'unread'
+      # because "pending" won't exist in the database as it's the default state
+      left_outer_joins(:book_transitions).where(book_transitions: {to_state: nil})
+    else
+      # else return all the requested "states" (but only the most recent)
+      # most_recent: true is very important here for obvious reasons
+      joins(:book_transitions).where(book_transitions: {most_recent: true}).where(book_transitions: {to_state: state})
+    end
+  end
+
+  def self.ransackable_scopes(auth_object = nil)
+    ['current_state']
+  end
 
   def self.ransackable_associations(auth_object = nil)
-    ["author"]
+    ["author", "genre"]
   end
 
   def self.ransackable_attributes(auth_object = nil)

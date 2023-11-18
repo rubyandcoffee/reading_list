@@ -21,9 +21,19 @@
     <%= form.text_field :surname, class: 'form-control' %>
   </div>
 
+  <div>
+    <%= form.label :gender, style: 'display: block' %>
+    <%= form.select :gender, ['Female', 'Male'], { include_blank: true }, class: 'form-select' %>
+  </div>
+
+  <div>
+    <%= form.label :nationality, style: 'display: block' %>
+    <%= form.select :nationality, options_for_select(Author.nationalities, selected: form.object.nationality), { include_blank: true }, { class: 'form-select' } %>
+  </div>
+
   <%= form.hidden_field :book, value: @book %>
 
   <div class="modal-footer">
-    <%= form.submit (author.persisted? ? 'Rename' : 'Add author'), class: 'btn btn-success' %>
+    <%= form.submit (author.persisted? ? 'Update' : 'Add author'), class: 'btn btn-success' %>
   </div>
 <% end %>

@@ -12,6 +12,10 @@ class BookTransition < ApplicationRecord
 
   after_destroy :update_most_recent, if: :most_recent?
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["book_id"]
+  end
+
   private
 
   def update_most_recent

@@ -3,6 +3,8 @@ class GenresController < ApplicationController
 
   def index
     @genres = Genre.order('name ASC')
+    @q = Genre.ransack(params[:q])
+    @genre = @q.result(distinct: true).last
   end
 
   def show
