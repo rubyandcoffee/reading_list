@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-12">
+    <% if @books.any? %>
+      <div id="yearly-goals-header">
+        <h3>You are reading <%= pluralize(@books.count, 'book') %> this year</h3>
+        <ul>
+          <% @books.order(:title).each do |book| %>
+            <li>
+              <strong><%= book.title %></strong> by <%= book.author.full_name %>
+              <% if book.rating.present? %>
+                <% book.rating.times do |rate| %>
+                  <i class="fa-solid fa-star"></i>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <hr>
+      <div id="yearly-goals-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Statistics</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <%= pie_chart @books.joins(:genre).group(:name).count, colors: ["#977B95", "#898DA5", "#85A1A9", "#A1E6CC", "#313633", "#88589E", "#CB9BB7", "#E2C2C5"] %>
+            <div class="small-text">Genre</div>
+          </div>
+          <div class="col-md-4">
+            <%= pie_chart @books.joins(:author).group(:gender).count, colors: ["#EB4F74", "#25465D"] %>
+            <div class="small-text">Gender</div>
+          </div>
+          <div class="col-md-4">
+            <%= pie_chart @books.joins(:author).group(:nationality).count, colors: ["#CC8D7A", "#E28F58", "#E7A855", "#ECCC5B", "#5D748D", "#E4834A", "#4188E2"] %>
+            <div class="small-text">Nationality</div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

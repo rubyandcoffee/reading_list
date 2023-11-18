@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result.paginate(page: params[:page], per_page: 20)
+    @books = @q.result.order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def show
@@ -62,6 +62,10 @@ class BooksController < ApplicationController
   def unread;end
   def read;end
   def dnf;end
+
+  def yearly_goals
+    @books = Book.in_state(:yearly_goal)
+  end
 
   private
     def set_book
