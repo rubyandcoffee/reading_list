@@ -2,9 +2,15 @@
   <div class="col-md-12">
     <% if @books.any? %>
       <div id="yearly-goals-header">
+        <div class="row">
+          <div class="col-md-12 pull-right">
+            <div class="small-text"><%= @books.count %> results</div>
+            <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+          </div>
+        </div>
         <h3>You are reading <%= pluralize(@books.count, 'book') %> this year</h3>
         <ul>
-          <% @books.order(:title).each do |book| %>
+          <% @books.each do |book| %>
             <li>
               <strong><%= book.title %></strong> by <%= book.author.full_name %>
               <% if book.rating.present? %>

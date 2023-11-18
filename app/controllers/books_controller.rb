@@ -64,7 +64,7 @@ class BooksController < ApplicationController
   def dnf;end
 
   def yearly_goals
-    @books = Book.in_state(:yearly_goal)
+    @books = Book.in_state(:yearly_goal).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   private
