@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result(distinct: true) || Book.all
+    @books = @q.result.includes(:author, :genre)
   end
 
   def show

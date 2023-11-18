@@ -18,11 +18,11 @@ class Book < ApplicationRecord
   # ransack_alias :author, :author_forename_or_author_surname
 
   def self.ransackable_associations(auth_object = nil)
-    ["author"]
+    ["author", "genre"]
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["title"]
+    ["title", "author_id", "genre_id"]
   end
 
   def state_machine
