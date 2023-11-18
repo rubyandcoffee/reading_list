@@ -19,6 +19,7 @@ gem 'ransack'
 gem 'nationality', '~> 1.0.7'
 gem 'will_paginate', '~> 4.0'
 gem 'will_paginate-bootstrap-style'
+gem "chartkick"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

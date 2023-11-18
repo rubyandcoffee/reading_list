@@ -30,6 +30,12 @@ body {
   flex: 1 0 auto;
 }
 
+nav {
+  h3 {
+    color: #2d2828
+  }
+}
+
 .footer {
   flex-shrink: 0;
 }
@@ -194,4 +200,18 @@ form {
       border-radius: var(--bs-border-radius)
     }
   }
+}
+
+#yearly-goals-header {
+  margin-bottom: 50px;
+}
+
+#yearly-goals-footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.card {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
