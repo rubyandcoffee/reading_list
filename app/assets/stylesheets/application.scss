@@ -17,6 +17,14 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+ #left-sidebar {
+  #authors {
+    h3 {
+      margin-top: 30px;
+    }
+  }
+ }
+
  #right-sidebar {
   h5 {
     margin-top: 20px;
@@ -89,29 +97,48 @@
   color: #245391;
 }
 
-input {
-  margin: 10px 0 20px 0;
-}
-
-input[type=submit] {
-  margin-top: 25px;
-}
-
 .row {
   margin-top: 10px;
 }
 
-.form-field {
-  margin: 20px 0 20px 0;
+form {
+  .form-control {
+    width: 200px;
+    margin-bottom: 34px;
+  }
+
+  input {
+    margin: 10px 0 20px 0;
+  }
+  
+  input[type=submit] {
+    margin-top: 25px;
+  }
+  
+  .search-button {
+    margin-bottom: 25px;
+  }
 }
 
-.form-control {
-  width: 200px;
-  margin-bottom: 34px;
-}
+.modal {
+  .modal-content {
+    .modal-body {
+      form {
+        input, select {
+          margin: 20px 0 20px 0;
+        }
+      }
+    }
+    .modal-footer {
+      border-top: 0;
+      padding-top: 0;
+      justify-content: space-evenly;
 
-.search-button {
-  margin-bottom: 25px;
+      input[type=submit] {
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 #book_status {
@@ -131,16 +158,6 @@ input[type=submit] {
 
 .banner {
   width: 100%;
-}
-
-.modal-footer {
-  border-top: 0;
-  padding-top: 0;
-  justify-content: space-evenly;
-
-  input[type=submit] {
-    margin-top: 0;
-  }
 }
 
 #footer {

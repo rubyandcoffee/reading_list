@@ -15,8 +15,6 @@ class Book < ApplicationRecord
     initial_state: :unread
   ]
 
-  # ransack_alias :author, :author_forename_or_author_surname
-
   def self.ransackable_associations(auth_object = nil)
     ["author", "genre"]
   end

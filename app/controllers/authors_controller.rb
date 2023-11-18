@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
 
   def index
-    @authors = Author.order('forename ASC')
+    @authors = Author.order('LOWER(forename)')
   end
 
   def show
@@ -54,6 +54,6 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:forename, :surname)
+      params.require(:author).permit(:forename, :gender, :nationality, :surname)
     end
 end

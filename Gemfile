@@ -16,6 +16,7 @@ gem 'statesman', '~> 10.0.0'
 gem "bootstrap"
 gem "sassc-rails"
 gem 'ransack'
+gem 'nationality', '~> 1.0.7'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
