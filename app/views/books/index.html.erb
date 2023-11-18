@@ -10,7 +10,7 @@
       <div class="col-md-6">
         <h3>Bookshelf</h3>
       </div>
-      <div class="col-md-6 pagination-with-count">
+      <div class="col-md-6 pull-right">
         <div class="small-text"><%= @books.count %> results</div>
         <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
       </div>
@@ -18,7 +18,7 @@
     <% if @books.any? %>
       <ul>
         <% @books.each do |book| %>
-          <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+          <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>) <% if book.rating.present? %><% book.rating.times do |rate| %><i class="fa-solid fa-star"></i><% end %><% end %></li>
         <% end %>
       </ul>
     <% else %>
