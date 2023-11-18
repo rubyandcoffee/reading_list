@@ -4,9 +4,11 @@
   <% Book.in_state(:tbr).each do |book| %>
     <div class="card">
       <div class="card-body">
-        <%= link_to edit_book_path(book) do %>
-          <i class="fa-regular fa-pen-to-square"></i>
-        <% end %>
+        <div class="pull-right">
+          <%= link_to edit_book_path(book) do %>
+            <i class="fa-regular fa-pen-to-square"></i>
+          <% end %>
+        </div>
         <h6 class="card-title">
           <%= book.title %><br> 
         </h6>

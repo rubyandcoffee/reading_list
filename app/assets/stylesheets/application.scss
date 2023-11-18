@@ -172,11 +172,26 @@ form {
   margin-top: 50px;
 }
 
-.pagination-with-count {
+.pull-right {
   display: flex;
   justify-content: flex-end;
 
   .small-text {
     padding-right: 10px;
+  }
+}
+
+#edit-book {
+  .ss-main {
+    width: 300px;
+  }
+  .form-field {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .form-control, .form-select {
+      border: var(--bs-border-width) solid #dee2e6;
+      border-radius: var(--bs-border-radius)
+    }
   }
 }
