@@ -1,0 +1,22 @@
+<%= search_form_for @q do |f| %>
+  <div class="row row-cols-lg-auto g-7 align-items-center">
+    <div class="col-12">
+      <%= f.label :forename_or_surname_cont, 'Author' %>
+      <%= f.search_field :forename_or_surname_cont, class: 'form-control' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :nationality_eq, 'Nationality' %>
+      <%= f.select :nationality_eq, Author.nationalities, { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.label :gender_eq, 'Gender' %>
+      <%= f.select :gender_eq, ['Female', 'Male'], { include_blank: true }, class: 'form-select' %>
+    </div>
+    <div class="col-12">
+      <%= f.submit 'Search', class: 'btn btn-success search-button' %>
+    </div>
+    <div class="col-12">
+      <%= link_to 'Reset', authors_path %>
+    </div>
+  </div>
+<% end %>
