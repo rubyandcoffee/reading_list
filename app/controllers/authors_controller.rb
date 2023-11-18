@@ -2,7 +2,9 @@ class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
 
   def index
-    @authors = Author.order('LOWER(forename)')
+    @q = Author.ransack(params[:q])
+    @q.sorts = 'forename asc' if @q.sorts.empty?
+    @authors = @q.result
   end
 
   def show

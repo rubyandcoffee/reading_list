@@ -1,16 +1,34 @@
-<h1>Genres</h1>
 <div class="row">
-  <div class="col-md-4">
-    <div id="genres">
-      <% @genres.each do |genre| %>
-        <p>
-          <%= link_to genre.name, genre %>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#genreModal<%= genre.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
-          <%= link_to genre_path(genre), data: { turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{genre.name}?" } do %>
+  <div class="col-md-3 left-sidebar">
+    <%= render partial: 'shared/left_sidebar' %>
+    <% @genres.each do |genre| %>
+      <div class="clearfix">
+        <a class="float-start no-decoration" data-bs-toggle="collapse" href="#collapseGenre<%= genre.id %>">
+          <%= genre.name %>
+          <span class="badge rounded-pill text-bg-primary"><%= genre.books.count %></span>
+        </a>
+        <div class="collapse" id="collapseGenre<%= genre.id %>">
+          <%= link_to genre_path(genre), class: 'float-end', data: { remote: true, turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{genre.name}?" } do %>
             <i class="fa-solid fa-trash"></i>
+            <a href="#" class="float-end no-decoration" data-bs-toggle="modal" data-bs-target="#genreModal<%= genre.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
           <% end %>
-          <%= render 'books/modals/genres/genre_modal', genre: genre, id: "genreModal#{genre.id}" %>
-        </p>
+        </div>
+      </div>
+      <%= render 'books/modals/genres/genre_modal', genre: genre, id: "genreModal#{genre.id}" %>
+    <% end %>
+  </div>
+  <div class="col-md-9">
+    <div id="genres">
+      <h3>Genres</h3>
+      <% if params[:q].nil? %>
+        <p>Search on the left to filter books by genre</p>
+      <% else %>
+        <p><%= @genre.books.count %> results:</p>
+        <% @genre.books.each do |book| %>
+          <p>
+            <%= link_to book.title, book %>
+          </p>
+        <% end %>
       <% end %>
     </div>
   </div>

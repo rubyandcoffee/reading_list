@@ -17,7 +17,31 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
- #left-sidebar {
+ html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+ .left-sidebar {
+  color: #82888d;
+
+  .btn {
+    color: #fff;
+  }
+
+  a {
+    color: #82888d;
+  }
+
   #authors {
     h3 {
       margin-top: 30px;
@@ -43,10 +67,6 @@
   margin-bottom: 0;
  }
 
- #main-content {
-  padding-left: 5%;
- }
-
  .float-end {
   padding-left: 5px;
  }
@@ -56,10 +76,6 @@
  }
 
  #authors, #genres {
-  h3 {
-    margin: 10px 0 15px 0;
-  }
-
   .text {
     a {
       text-decoration: none;
@@ -72,12 +88,6 @@
   }
  }
 
- #genres {
-  h3 {
-    margin-top: 30px;
-  }
- }
-
 .small-text {
   font-size: smaller;
   margin: 10px 0 20px 0;
@@ -87,7 +97,7 @@
   font-size: smaller;
 }
 
-.no-decoration a {
+a.no-decoration {
   text-decoration: none;
   color: #000;
 }
@@ -102,15 +112,6 @@
 }
 
 form {
-  .form-control {
-    width: 200px;
-    margin-bottom: 34px;
-  }
-
-  input {
-    margin: 10px 0 20px 0;
-  }
-  
   input[type=submit] {
     margin-top: 25px;
   }
@@ -125,7 +126,11 @@ form {
     .modal-body {
       form {
         input, select {
-          margin: 20px 0 20px 0;
+          margin: 10px 0 20px 0;
+
+          .form-control {
+            margin-bottom: 34px;
+          }
         }
       }
     }
