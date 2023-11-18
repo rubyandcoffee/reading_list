@@ -20,18 +20,21 @@
  html, body {
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
 }
+
 .container {
   flex: 1 0 auto;
 }
+
 .footer {
   flex-shrink: 0;
 }
 
- .left-sidebar {
+.left-sidebar {
   color: #82888d;
 
   .btn {
@@ -47,9 +50,9 @@ body {
       margin-top: 30px;
     }
   }
- }
+}
 
- #right-sidebar {
+#right-sidebar {
   h5 {
     margin-top: 20px;
   }
@@ -167,4 +170,13 @@ form {
 
 #footer {
   margin-top: 50px;
+}
+
+.pagination-with-count {
+  display: flex;
+  justify-content: flex-end;
+
+  .small-text {
+    padding-right: 10px;
+  }
 }

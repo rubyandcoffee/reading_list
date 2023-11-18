@@ -7,8 +7,8 @@
       <div class="col-md-6">
         <h3>Authors</h3>
       </div>
-      <div class="col-md-6" style="display: flex; justify-content: flex-end">
-        <div class="small-text" style="padding-right: 10px;"><%= @authors.count %> results</div>
+      <div class="col-md-6 pagination-with-count">
+        <div class="small-text"><%= @authors.count %> results</div>
         <%= will_paginate @authors, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
       </div>
     </div>
