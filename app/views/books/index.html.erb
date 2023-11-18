@@ -6,7 +6,16 @@
     <%= image_tag 'book1.png', width: '100%' %>
   </div>
   <div class="col-md-7">
-    <h3>Bookshelf</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Bookshelf</h3>
+      </div>
+      <div class="col-md-6">
+        <div style="float: inline-end">
+          <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+        </div>
+      </div>
+    </div>
     <% if @books.any? %>
       <p><%= @books.count %> results:</p>
       <ul>

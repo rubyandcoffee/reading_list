@@ -18,18 +18,28 @@
     <% end %>
   </div>
   <div class="col-md-9">
-    <div id="genres">
-      <h3>Genres</h3>
-      <% if params[:q].nil? %>
-        <p>Search on the left to filter books by genre</p>
-      <% else %>
-        <p><%= @genre.books.count %> results:</p>
-        <% @genre.books.each do |book| %>
-          <p>
-            <%= link_to book.title, book %>
-          </p>
-        <% end %>
-      <% end %>
+    <div class="row">
+      <div class="col-md-12" style="display: flex; justify-content: flex-end">
+        <div class="small-text" style="padding-right: 10px;"><%= @books.count %> results</div>
+        <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div id="genres">
+          <% if params[:q].nil? %>
+            <h3>Genres</h3>
+            <p>Search on the left to filter books by genre</p>
+          <% else %>
+            <h3><%= @genre.name %></h3>
+            <ul>
+              <% @books.each do |book| %>
+                <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
