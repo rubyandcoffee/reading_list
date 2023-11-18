@@ -6,9 +6,16 @@
     <%= image_tag 'book1.png', width: '100%' %>
   </div>
   <div class="col-md-7">
-    <h3>Bookshelf</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Bookshelf</h3>
+      </div>
+      <div class="col-md-6 pagination-with-count">
+        <div class="small-text"><%= @books.count %> results</div>
+        <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      </div>
+    </div>
     <% if @books.any? %>
-      <p><%= @books.count %> results:</p>
       <ul>
         <% @books.each do |book| %>
           <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>

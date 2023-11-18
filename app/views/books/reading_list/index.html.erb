@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8">
     <h1>TBR</h1>
-    <h3>You have <%= @to_be_read.count %> books on your TBR list:</h3>
+    <h3>You have <%= pluralize(@to_be_read.count, 'book') %> on your TBR list:</h3>
   </div>
   <div class="col-md-4" style="text-align: right">
     <%= link_to 'Add another book', books_reading_list_add_book_path, class: 'btn btn-success' %>
