@@ -2,13 +2,22 @@
   <%= form.label :title, style: 'display: block' %>
   <%= form.text_field :title, class: 'form-control', style: 'width: 400px;', autofocus: true %>
 </div>
-<div class="form-field">
+<div class="form-field" style="width: 300px">
   <%= form.label :author_id, style: 'display: block' %>
-  <%= form.select :author_id, Author.order(:forename).collect {|author| [ author.full_name, author.id ] }, { include_blank: true }, { data: { controller: 'slim' }} %>
+  <%= form.select :author_id, Author.order(:forename).collect { |author| [ author.full_name, author.id ] }, { include_blank: true }, { data: { controller: 'slim' } } %>
   <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#authorModal">Add missing author</a></span>
 </div>
 <div class="form-field">
   <%= form.label :genre_id, style: 'display: block' %>
   <%= form.collection_select :genre_id, Genre.order(:name), :id, :name, include_blank: true, class: 'form-select' %>
   <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#genreModal">Add missing genre</a></span>
+</div>
+<div class="form-field">
+  <%= form.label :series_id, style: 'display: block;' %>
+  <%= form.select :series_id, Series.all.sort_by { |series| series.author.forename }.collect { |series| [series.name, series.id] }, include_blank: true %>
+  <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#seriesModal">Add missing series</a></span>
+</div>
+<div class="form-field">
+  <%= form.label :series_position, style: 'display: block;' %>
+  <%= form.text_field :series_position %>
 </div>

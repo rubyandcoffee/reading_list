@@ -2,15 +2,12 @@
   <div class="col-md-3 left-sidebar">
     <%= render partial: 'shared/left_sidebar' %>
   </div>
-  <div class="col-md-2">
-    <%= image_tag 'book1.png', width: '100%' %>
-  </div>
-  <div class="col-md-7">
+  <div class="col-md-9">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <h3>Bookshelf</h3>
       </div>
-      <div class="col-md-8 pull-right">
+      <div class="col-md-9 pull-right">
         <div class="small-text"><%= @books.count %> results</div>
         <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
       </div>

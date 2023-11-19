@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :authors
   namespace :books do
     resources :reading_list, only: [:index]
     get 'reading_list/add_book', to: 'reading_list#add_book'
@@ -9,9 +10,10 @@ Rails.application.routes.draw do
   get 'books/unread', to: 'books#unread'
   get 'books/read', to: 'books#read'
   get 'books/dnf', to: 'books#dnf'
+
   resources :books
-  resources :authors
   resources :genres
+  resources :series
 
   root to: 'books#index'
 end

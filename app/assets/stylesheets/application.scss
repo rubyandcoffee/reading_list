@@ -36,6 +36,15 @@ nav {
   }
 }
 
+.series-data {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.series-books {
+  margin-left: 20px;
+}
+
 .footer {
   flex-shrink: 0;
 }
@@ -153,6 +162,11 @@ form {
       }
     }
   }
+}
+
+.book-series {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 #book_status {

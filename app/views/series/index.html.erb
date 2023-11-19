@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3>Book Series</h3>
+  </div>
+  <div class="col-md-6 pull-right">
+    <%= link_to 'New series', new_series_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="book-series accordion">
+      <% @series.includes(:author).each do |series| %>
+        <div class="accordion-item" id="seriesAccordion">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= series.id %>">
+              <div class="series-data"><%= series.name %> by <%= series.author.full_name %></div>
+              <% if completed_series?(series) %>
+                <span class="badge bg-success">
+                  Completed
+                  <span class="visually-hidden">All books in this series have been read</span>
+                </span>
+              <% end %>
+            </button>
+          </h2>
+          <div id="collapse<%= series.id %>" class="accordion-collapse collapse" data-bs-parent="#seriesAccordion">
+            <div class="accordion-body series-books">
+              <% series.books.order(:series_position).each do |book| %>
+                <p>
+                  <strong><%= book.series_position %>.</strong>
+                  <%= book.title %>
+                  <span class="badge rounded-pill <%= state_klass(book) %>">
+                    <%= book.current_state.humanize %>
+                    <span class="visually-hidden"><%= book.current_state.humanize %></span>
+                  </span>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
