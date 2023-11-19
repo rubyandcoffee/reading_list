@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_174432) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_19_173300) do
   create_table "authors", force: :cascade do |t|
     t.string "forename"
     t.string "surname"
@@ -39,8 +39,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_174432) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating"
+    t.integer "series_id"
+    t.integer "series_position"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["genre_id"], name: "index_books_on_genre_id"
+    t.index ["series_id"], name: "index_books_on_series_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -49,7 +52,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_174432) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "series", force: :cascade do |t|
+    t.string "name"
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_series_on_author_id"
+  end
+
   add_foreign_key "book_transitions", "books"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "genres"
+  add_foreign_key "books", "series"
+  add_foreign_key "series", "authors"
 end

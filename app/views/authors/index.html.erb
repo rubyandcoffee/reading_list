@@ -25,11 +25,11 @@
               <div id="collapse<%= author.id %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <div style="display: flex; justify-content: flex-end">
-                      <%= link_to author_path(author), class: 'no-decoration', data: { remote: true, turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{author.full_name}?" } do %>
-                        <i class="fa-solid fa-trash"></i>
-                        &nbsp;<a href="#" class="no-decoration" data-bs-toggle="modal" data-bs-target="#authorModal<%= author.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
-                      <% end %>
-                    </div>
+                    <%= link_to author_path(author), class: 'no-decoration', data: { remote: true, turbo_method: :delete, turbo_confirm: "Are you sure you wish to delete #{author.full_name}?" } do %>
+                      <i class="fa-solid fa-trash"></i>
+                      &nbsp;<a href="#" class="no-decoration" data-bs-toggle="modal" data-bs-target="#authorModal<%= author.id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <% end %>
+                  </div>
                   <p><%= author.gender %> - <%= author.nationality %></p>
                   <p>
                     You have <span class="badge text-bg-primary"><%= pluralize(author.books.count, 'book') %></span> written by this author
