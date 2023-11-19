@@ -16,10 +16,17 @@
             <%= link_to 'Genres', genres_path, class: 'nav-link' %>
           </div>
           <div class="nav-item">
-            <%= link_to 'Yearly Goals', books_yearly_goals_path, class: 'nav-link' %>
+            <%= link_to 'Series', series_index_path, class: 'nav-link' %>
           </div>
           <div class="nav-item">
-            <%= link_to 'Series', series_index_path, class: 'nav-link' %>
+            <%= link_to books_yearly_goals_path, class: 'nav-link' do %>
+              <i class="fa-solid fa-bullseye"></i> Yearly Goals
+            <% end %>
+          </div>
+          <div class="nav-item">
+            <%= link_to books_generator_path, class: 'nav-link' do %>
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generator
+            <% end %>
           </div>
         </ul>
       </div>

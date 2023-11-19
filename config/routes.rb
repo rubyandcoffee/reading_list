@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'books/unread', to: 'books#unread'
   get 'books/read', to: 'books#read'
   get 'books/dnf', to: 'books#dnf'
+  get 'books/generator', to: 'books#generator'
 
   resources :books
   resources :genres
