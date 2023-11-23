@@ -67,6 +67,11 @@ class BooksController < ApplicationController
     @books = Book.in_state(:yearly_goal).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
+  def generator
+    book = Book.pluck(:id).sample
+    @book = Book.find(book)
+  end
+
   private
     def set_book
       @book = Book.find(params[:id])

@@ -36,6 +36,16 @@ nav {
   }
 }
 
+.book-generator {
+  margin-top: 20%;
+
+  i {
+    font-size: 6rem;
+    color: #8300ff;
+    margin-bottom: 30px;
+  }
+}
+
 .series-data {
   margin-left: 20px;
   margin-right: 20px;
@@ -113,6 +123,10 @@ nav {
 
 .currently-reading {
   font-size: smaller;
+}
+
+.currently-reading-banner {
+  line-height: normal;
 }
 
 a.no-decoration {

@@ -36,6 +36,7 @@ class AuthorsController < ApplicationController
       if @author.update(author_params)
         format.json { render inline: "location.reload();" }
       else
+        # TODO: This will return an error and isn't handled properly
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
