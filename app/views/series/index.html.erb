@@ -32,6 +32,11 @@
                     <%= book.current_state.humanize %>
                     <span class="visually-hidden"><%= book.current_state.humanize %></span>
                   </span>
+                  <% if book.rating.present? %>
+                    <% book.rating.times do |rate| %>
+                      <i class="fa-solid fa-star"></i>
+                    <% end %>
+                  <% end %>
                 </p>
               <% end %>
             </div>
