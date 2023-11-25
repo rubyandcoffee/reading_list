@@ -16,11 +16,6 @@
           <% @books.each do |book| %>
             <li>
               <strong><%= book.title %></strong> by <%= book.author.full_name %>
-              <% if book.rating.present? %>
-                <% book.rating.times do |rate| %>
-                  <i class="fa-solid fa-star"></i>
-                <% end %>
-              <% end %>
             </li>
           <% end %>
         </ul>
