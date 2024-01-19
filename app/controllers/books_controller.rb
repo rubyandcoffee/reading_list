@@ -68,7 +68,7 @@ class BooksController < ApplicationController
   end
 
   def generator
-    book = Book.pluck(:id).sample
+    book = Book.in_state(:yearly_goal).pluck(:id).sample
     @book = Book.find(book)
   end
 
@@ -78,6 +78,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :author_id, :genre_id, :status, :rating, :series_id, :series_position)
+      params.require(:book).permit(:title, :length, :author_id, :genre_id, :status, :rating, :series_id, :series_position)
     end
 end

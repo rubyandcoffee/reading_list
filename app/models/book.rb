@@ -36,7 +36,7 @@ class Book < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["title"]
+    ["title", "length"]
   end
 
   def state_machine
@@ -45,5 +45,27 @@ class Book < ApplicationRecord
 
   def status
     current_state.humanize
+  end
+
+  def short?
+    length == 'Short'
+  end
+
+  def medium?
+    length == 'Medium'
+  end
+
+  def long?
+    length == 'Long'
+  end
+
+  def short_yearly_goal_count
+    where
+  end
+
+  def medium_yearly_goal_count
+  end
+
+  def long_yearly_goal_count
   end
 end

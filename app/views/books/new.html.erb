@@ -12,6 +12,10 @@
   <% end %>
   <%= render 'form', book: @book, form: form %>
   <div class="form-field">
+    <%= form.label :length, style: 'display: block' %>
+    <%= form.select :length, ['Short', 'Medium', 'Long'], include_blank: true, class: 'form-select' %>
+  </div>
+  <div class="form-field">
     <%= form.label 'Status', style: 'display: block;' %>
     <%= form.collection_select :status, @book.allowed_transitions, :to_s, :humanize, include_blank: true, class: 'form-select' %>
     <span class="small-text">

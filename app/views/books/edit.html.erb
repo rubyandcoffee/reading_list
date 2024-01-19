@@ -19,6 +19,10 @@
         This book is currently set to '<%= @book.current_state.humanize %>'
       </span>
     </div>
+    <div class="form-field">
+      <%= form.label :length, style: 'display: block' %>
+      <%= form.select :length, ['Short', 'Medium', 'Long'], include_blank: true, class: 'form-select' %>
+    </div>
     <% if @book.in_state?(:read) %>
       <div class="form-field">
         <%= form.label 'Rating', style: 'display: block' %>
