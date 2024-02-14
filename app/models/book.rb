@@ -58,14 +58,4 @@ class Book < ApplicationRecord
   def long?
     length == 'Long'
   end
-
-  def short_yearly_goal_count
-    where
-  end
-
-  def medium_yearly_goal_count
-  end
-
-  def long_yearly_goal_count
-  end
 end

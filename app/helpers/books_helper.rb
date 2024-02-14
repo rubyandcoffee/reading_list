@@ -26,7 +26,7 @@ module BooksHelper
   end
 
   def yearly_goals_count(length)
-    Book.current_state('yearly_goal').where(length: length).count
+    Book.where(length: length, yearly_goal: DateTime.now.year).count
   end
 
   private
