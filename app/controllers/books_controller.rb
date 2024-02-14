@@ -64,11 +64,11 @@ class BooksController < ApplicationController
   def dnf;end
 
   def yearly_goals
-    @books = Book.in_state(:yearly_goal).order(:title).paginate(page: params[:page], per_page: 20)
+    @books = Book.where(yearly_goal: DateTime.now.year).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def generator
-    book = Book.pluck(:id).sample
+    book = Book.where(yearly_goal: DateTime.now.year).pluck(:id).sample
     @book = Book.find(book)
   end
 
@@ -78,6 +78,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :author_id, :genre_id, :status, :rating, :series_id, :series_position)
+      params.require(:book).permit(:title, :length, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :yearly_goal)
     end
 end

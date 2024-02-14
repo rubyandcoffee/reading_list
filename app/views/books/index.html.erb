@@ -15,7 +15,18 @@
     <% if @books.any? %>
       <ul>
         <% @books.each do |book| %>
-          <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>) <% if book.rating.present? %><% book.rating.times do |rate| %><i class="fa-solid fa-star"></i><% end %><% end %></li>
+          <li>
+            <%= link_to book.title, edit_book_path(book) %>
+            by
+            <%= link_to book.author.full_name %>
+            (<%= book.current_state %>)
+            <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length %></span>
+            <% if book.rating.present? %>
+              <% book.rating.times do |rate| %>
+                <i class="fa-solid fa-star"></i>
+              <% end %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     <% else %>

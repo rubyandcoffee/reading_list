@@ -11,8 +11,22 @@ module BooksHelper
     end
   end
 
+  def length_klass(book)
+    if book.short?
+      'light'
+    elsif book.medium?
+      'secondary'
+    elsif book.long?
+      'dark'
+    end
+  end
+
   def completed_series?(series)
     series.books.map(&:current_state).all?('read')
+  end
+
+  def yearly_goals_count(length)
+    Book.where(length: length, yearly_goal: DateTime.now.year).count
   end
 
   private
