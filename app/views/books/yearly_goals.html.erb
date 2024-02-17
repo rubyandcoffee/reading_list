@@ -26,14 +26,17 @@
             </span>
           <% end %>
         </p>
-        <ul>
-          <% @books.each do |book| %>
-            <li>
-              <%= link_to book.title, book_path(book) %> by <%= book.author.full_name %>
-              <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length %></span>
-            </li>
-          <% end %>
-        </ul>
+        <% @books.each do |book| %>
+          <div>
+            <% if book.current_state == 'read' %>
+              <i class="fa-regular fa-square-check"></i>
+            <% else %>
+              <i class="fa-regular fa-square"></i>
+            <% end %>
+            <%= link_to book.title, book_path(book) %> by <%= book.author.full_name %>
+            <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length %></span>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <hr>

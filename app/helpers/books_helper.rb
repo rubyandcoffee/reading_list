@@ -36,7 +36,8 @@ module BooksHelper
       'buy' => 'bg-danger',
       'read' => 'bg-success',
       'tbr' => 'bg-warning',
-      'reading' => 'bg-primary'
+      'reading' => 'bg-primary',
+      'unread' => 'bg-info'
     }
   end
 end
