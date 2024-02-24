@@ -13,16 +13,16 @@
       <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
       <% if @books.any? %>
         <p>
-          This includes <%= yearly_goals_count('Short') %> short books,
-          <%= yearly_goals_count('Medium') %> medium books and
-          <%= yearly_goals_count('Long') %> long books.
+          This includes <%= Book.filter_by_length('Short').count %> short books,
+          <%= Book.filter_by_length('Medium').count %> medium books and
+          <%= Book.filter_by_length('Long').count %> long books.
         </p>
         <p>
-          <% if yearly_goals_count('Long') > 4 %>
+          <% if Book.filter_by_length('Long').count > 4 %>
             <span class="small-text">
               <span class="badge rounded-pill text-bg-danger">Warning</span>
               You're reading too many long books to achieve your goal.
-              Consider replacing <%= yearly_goals_count('Long') - 4 %> of them with shorter books.
+              Consider replacing <%= Book.filter_by_length('Long').count - 4 %> of them with shorter books.
             </span>
           <% end %>
         </p>
@@ -34,7 +34,7 @@
               <i class="fa-regular fa-square"></i>
             <% end %>
             <%= link_to book.title, book_path(book) %> by <%= book.author.full_name %>
-            <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length %></span>
+            <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.total_pages %></span>
           </div>
         <% end %>
       <% end %>

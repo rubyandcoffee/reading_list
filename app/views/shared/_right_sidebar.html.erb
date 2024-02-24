@@ -21,7 +21,7 @@
         <p class="card-text <%= stale?(book) ? 'stale-book' : 'fresh-book' %>">
           Added on <%= book.book_transitions.last.created_at.strftime("%d %B") %>
         </p>
-        <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length %></span>
+        <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
       </div>
     </div>
   <% end %>
