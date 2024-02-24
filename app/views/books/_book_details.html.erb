@@ -1,0 +1,9 @@
+<div>
+  <% if book.current_state == 'read' %>
+    <i class="fa-regular fa-square-check"></i>
+  <% else %>
+    <i class="fa-regular fa-square"></i>
+  <% end %>
+  <%= link_to book.title, edit_book_path(book) %> by <%= book.author.full_name %>
+  <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
+</div>

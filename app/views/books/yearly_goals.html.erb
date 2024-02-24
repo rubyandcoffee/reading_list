@@ -26,15 +26,14 @@
             </span>
           <% end %>
         </p>
-        <% @books.each do |book| %>
-          <div>
-            <% if book.current_state == 'read' %>
-              <i class="fa-regular fa-square-check"></i>
-            <% else %>
-              <i class="fa-regular fa-square"></i>
+        <% Date::MONTHNAMES.each do |month| %>
+          <div class="monthly-books">
+            <% if @books.where(monthly_goal: month).any? %>
+              <h3><%= month.nil? ? 'Undecided' : month %></h3>
+              <% @books.where(monthly_goal: month).each do |book| %>
+                <%= render partial: 'book_details', locals: { book: book } %>
+              <% end %>
             <% end %>
-            <%= link_to book.title, book_path(book) %> by <%= book.author.full_name %>
-            <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.total_pages %></span>
           </div>
         <% end %>
       <% end %>

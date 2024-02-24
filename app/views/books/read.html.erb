@@ -8,7 +8,7 @@
     <% if Book.in_state(:read).any? %>
       <ul>
         <% Book.in_state(:read).each do |book| %>
-          <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (Finished in <%= book.last_transition.updated_at.strftime('%b %Y') %>)</li>
+          <li><%= link_to book.title, edit_book_path %> by <%= link_to book.author.full_name %> (Finished in <%= book.last_transition.updated_at.strftime('%b %Y') %>)</li>
         <% end %>
       </ul>
     <% end %>

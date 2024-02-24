@@ -27,7 +27,7 @@
               <% series.books.order(:series_position).each do |book| %>
                 <p>
                   <strong><%= book.series_position %>.</strong>
-                  <%= link_to book.title, book_path(book) %>
+                  <%= link_to book.title, edit_book_path(book) %>
                   <span class="badge rounded-pill <%= state_klass(book) %>">
                     <%= book.current_state.humanize %>
                     <span class="visually-hidden"><%= book.current_state.humanize %></span>
