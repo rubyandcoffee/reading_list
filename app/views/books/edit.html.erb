@@ -27,8 +27,15 @@
       <%= form.radio_button :yearly_goal, nil %>
     </div>
     <div class="form-field">
-      <%= form.label :length, style: 'display: block' %>
-      <%= form.select :length, ['Short', 'Medium', 'Long'], include_blank: true, class: 'form-select' %>
+      <%= form.label :monthly_goal, 'What month do you plan to read this?', style: 'display: block' %>
+      <%= form.select :monthly_goal, Date::MONTHNAMES, class: 'form-control', style: 'width: 200px;' %>
+      <span class="small-text">
+        OPTIONAL: You only need to fill this in if you plan to read the book this year
+      </span>
+    </div>
+    <div class="form-field">
+      <%= form.label :total_pages, style: 'display: block' %>
+      <%= form.number_field :total_pages %>
     </div>
     <% if @book.in_state?(:read) %>
       <div class="form-field">

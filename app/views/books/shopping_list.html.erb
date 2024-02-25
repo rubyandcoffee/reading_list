@@ -8,7 +8,7 @@
     <% if Book.in_state(:buy).any? %>
       <ul>
         <% Book.in_state(:buy).each do |book| %>
-          <li><%= link_to book.title, book %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
+          <li><%= link_to book.title, edit_book_path %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
         <% end %>
       </ul>
     <% end %>

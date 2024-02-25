@@ -17,7 +17,7 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
- html, body {
+html, body {
   height: 100%;
 }
 
@@ -59,6 +59,10 @@ nav {
   margin-left: 20px;
 }
 
+.monthly-books {
+  margin-top: 20px;
+}
+
 .footer {
   flex-shrink: 0;
 }
@@ -78,6 +82,16 @@ nav {
     h3 {
       margin-top: 30px;
     }
+  }
+
+  .search-button {
+    margin-right: 10px;
+  }
+
+  .search-and-reset {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
   }
 }
 

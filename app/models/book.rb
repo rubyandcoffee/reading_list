@@ -27,6 +27,11 @@ class Book < ApplicationRecord
     end
   end
 
+  scope :long_books, -> { where('total_pages >= ?', 400) }
+  scope :medium_books, -> { where('total_pages >= ? AND total_pages < ?', 200, 400) }
+  scope :short_books, -> { where('total_pages < ?', 200) }
+  scope :this_year, -> { where(yearly_goal: DateTime.now.year) }
+
   def self.ransackable_scopes(auth_object = nil)
     ['current_state']
   end
@@ -36,7 +41,7 @@ class Book < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["title", "length"]
+    ["title", "total_pages"]
   end
 
   def state_machine
@@ -48,14 +53,36 @@ class Book < ApplicationRecord
   end
 
   def short?
-    length == 'Short'
+    total_pages && total_pages < 200
   end
 
   def medium?
-    length == 'Medium'
+    total_pages && total_pages >= 200 && total_pages < 400
   end
 
   def long?
-    length == 'Long'
+    total_pages && total_pages >= 400
+  end
+
+  def length_in_words
+    if long?
+      'Long'
+    elsif medium?
+      'Medium'
+    elsif short?
+      'Short'
+    else
+      'Length undefined'
+    end
+  end
+
+  def self.filter_by_length(length)
+    books = Book.this_year
+
+    {
+      'Short' => books.short_books,
+      'Medium' => books.medium_books,
+      'Long' => books.long_books
+    }.fetch(length)
   end
 end

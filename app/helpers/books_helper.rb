@@ -18,6 +18,8 @@ module BooksHelper
       'secondary'
     elsif book.long?
       'dark'
+    else
+      'light'
     end
   end
 
@@ -25,8 +27,11 @@ module BooksHelper
     series.books.map(&:current_state).all?('read')
   end
 
-  def yearly_goals_count(length)
-    Book.where(length: length, yearly_goal: DateTime.now.year).count
+  def time_to_read(book)
+    return unless book.total_pages.present?
+
+    in_minutes = book.total_pages * 1.5
+    in_hours = (in_minutes / 60).round
   end
 
   private
@@ -36,7 +41,8 @@ module BooksHelper
       'buy' => 'bg-danger',
       'read' => 'bg-success',
       'tbr' => 'bg-warning',
-      'reading' => 'bg-primary'
+      'reading' => 'bg-primary',
+      'unread' => 'bg-info'
     }
   end
 end
