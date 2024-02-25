@@ -17,6 +17,7 @@
           <%= Book.filter_by_length('Medium').count %> medium books and
           <%= Book.filter_by_length('Long').count %> long books.
         </p>
+        <p>If you read for 2 hours per day, you could read approximately 60 hours in a month.</p>
         <p>
           <% if Book.filter_by_length('Long').count > 4 %>
             <span class="small-text">
@@ -29,7 +30,7 @@
         <% Date::MONTHNAMES.each do |month| %>
           <div class="monthly-books">
             <% if @books.where(monthly_goal: month).any? %>
-              <h3><%= month.nil? ? 'Undecided' : month %></h3>
+              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @books.where(monthly_goal: month).map{ |b| time_to_read(b) }.compact.sum %> hours total)</h3>
               <% @books.where(monthly_goal: month).each do |book| %>
                 <%= render partial: 'book_details', locals: { book: book } %>
               <% end %>
