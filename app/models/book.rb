@@ -3,10 +3,13 @@ class Book < ApplicationRecord
   belongs_to :genre
   belongs_to :series, optional: true
   has_many :book_transitions, autosave: false, dependent: :destroy
+  has_many :book_goals, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true
   validates :author_id, presence: true
   validates :genre_id, presence: true
+
+  accepts_nested_attributes_for :book_goals, reject_if: ->(attributes){ attributes['book_id'].blank? }, allow_destroy: true
 
   delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
            :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine
@@ -30,14 +33,13 @@ class Book < ApplicationRecord
   scope :long_books, -> { where('total_pages >= ?', 400) }
   scope :medium_books, -> { where('total_pages >= ? AND total_pages < ?', 200, 400) }
   scope :short_books, -> { where('total_pages < ?', 200) }
-  scope :this_year, -> { where(yearly_goal: DateTime.now.year) }
 
   def self.ransackable_scopes(auth_object = nil)
     ['current_state']
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["author", "genre"]
+    ["author", "genre", "book_goal"]
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -77,7 +79,7 @@ class Book < ApplicationRecord
   end
 
   def self.filter_by_length(length)
-    books = Book.this_year
+    books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year })
 
     {
       'Short' => books.short_books,

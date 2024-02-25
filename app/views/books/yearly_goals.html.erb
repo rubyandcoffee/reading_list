@@ -29,10 +29,10 @@
         </p>
         <% Date::MONTHNAMES.each do |month| %>
           <div class="monthly-books">
-            <% if @books.where(monthly_goal: month).any? %>
-              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @books.where(monthly_goal: month).map{ |b| time_to_read(b) }.compact.sum %> hours total)</h3>
-              <% @books.where(monthly_goal: month).each do |book| %>
-                <%= render partial: 'book_details', locals: { book: book } %>
+            <% if @book_goals.where(month: month).any? %>
+              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @book_goals.where(month: month).map{ |goal| time_to_read(goal.book) }.compact.sum %> hours total)</h3>
+              <% @book_goals.where(month: month).each do |book_goal| %>
+                <%= render partial: 'book_details', locals: { book: book_goal.book } %>
               <% end %>
             <% end %>
           </div>
