@@ -63,6 +63,15 @@ class BooksController < ApplicationController
   def read;end
   def dnf;end
 
+  def import
+    return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
+    return redirect_to request.referer, notice: 'Only CSV files allowed' unless params[:file].content_type == 'text/csv'
+
+    CsvImportService.new.import_book(params[:file])
+
+    redirect_to request.referer, notice: 'Successfully imported books'
+  end
+
   def yearly_goals
     @books = Book.where(yearly_goal: DateTime.now.year).order(:title).paginate(page: params[:page], per_page: 20)
   end
