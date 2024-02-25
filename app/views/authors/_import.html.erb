@@ -1,4 +1,11 @@
 <%= form_tag import_authors_path, method: :post, multipart: true do %>
-  <%= file_field_tag :file, accept: ".csv" %>
-  <%= submit_tag '⚙️ Import' %>
+  <h3>Upload CSV</h3>
+  <div class="form-field">
+    <%= file_field_tag :file, accept: '.csv' %>
+  </div>
+  <div class="form-field">
+    <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+      <i class="fa-solid fa-upload"></i> Import authors
+    <% end %>
+  </div>
 <% end %>
