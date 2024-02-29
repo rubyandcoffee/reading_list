@@ -26,10 +26,11 @@
       <% end %>
     </div>
     <% if @book.book_goals.any? %>
-        <%= link_to_add_association 'Add another month', form, :book_goals, data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
-      <% else %>
-        <%= link_to_add_association "Are you reading it this year?", form, :book_goals, class: 'new-goal', data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
-      <% end %>
+      <%= link_to_add_association 'Add another month', form, :book_goals, data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
+    <% else %>
+      <%= link_to_add_association "Are you reading it this year?", form, :book_goals, class: 'new-goal', data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
+    <% end %>
+
     <div class="form-field">
       <%= form.label :total_pages, style: 'display: block' %>
       <%= form.number_field :total_pages %>

@@ -15,23 +15,15 @@
     <%= form.label :total_pages, style: 'display: block' %>
     <%= form.number_field :total_pages %>
   </div>
-  <% @book.book_goals.each do |goal| %>
-    <%= form.fields_for :book_goals, goal do |goal_fields| %>
-      <div class="form-field">
-        <%= goal_fields.label :year, 'Do you plan on reading it this year?' %><br>
-        <%= goal_fields.label :year, 'Yes', value: DateTime.now.year  %>
-        <%= goal_fields.radio_button :year, DateTime.now.year %>
-        <%= goal_fields.label :year, 'No', value: nil %>
-        <%= goal_fields.radio_button :year, nil %>
-      </div>
-      <div class="form-field">
-        <%= goal_fields.label :month, 'What month do you plan to read this?', style: 'display: block' %>
-        <%= goal_fields.select :month, Date::MONTHNAMES, class: 'form-control', style: 'width: 200px;' %>
-        <span class="small-text">
-          OPTIONAL: You only need to fill this in if you plan to read the book this year
-        </span>
-      </div>
+  <div class="book_goals">
+    <%= form.fields_for :book_goals do |book_goal| %>
+      <%= render 'book_goal_fields', f: book_goal %>
     <% end %>
+  </div>
+  <% if @book.book_goals.any? %>
+    <%= link_to_add_association 'Add another month', form, :book_goals, data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
+  <% else %>
+    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, class: 'new-goal', data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
   <% end %>
   <div class="form-field">
     <%= form.label 'Status', style: 'display: block;' %>
