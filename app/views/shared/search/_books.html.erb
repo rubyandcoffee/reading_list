@@ -20,10 +20,6 @@
       <%= f.label :genre_name_eq, 'Genre' %>
       <%= f.select :genre_name_eq, Genre.all.collect(&:name), { include_blank: true }, class: 'form-select' %>
     </div>
-    <%# <div class="col-12">
-      <%#= f.label :total_pages_eq, 'Length' %>
-      <%#= f.select :length_eq, ['Short', 'Medium', 'Long'], { include_blank: true }, class: 'form-select' %>
-    <%# </div> %>
     <div class="col-12">
       <%= f.label :current_state, 'Status' %>
       <%= f.select :current_state, BookStateMachine.states.collect {|s| [s.humanize, s]}, { include_blank: true }, class: 'form-select' %>

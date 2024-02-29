@@ -1,0 +1,24 @@
+<div class="nested-fields">
+  <%= f.hidden_field :_destroy %>
+  <% if @book.book_goals.none? %>
+    <div class="form-field">
+      <%= f.label :month, 'What month do you plan to read this?', style: 'display: block' %>
+      <%= f.select :month, Date::MONTHNAMES, class: 'form-control', style: 'width: 200px;' %>
+      <%= link_to_remove_association f do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+      <span class="small-text">
+        OPTIONAL: You only need to fill this in if you plan to read the book this year
+      </span>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <%= f.label :month, '', style: 'display: block' %>
+      <%= f.select :month, Date::MONTHNAMES, class: 'form-control', style: 'width: 200px;' %>
+      <%= link_to_remove_association f do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :year, value: DateTime.now.year %>
+</div>

@@ -5,3 +5,8 @@ import "popper"
 import "bootstrap"
 import "chartkick"
 import "Chart.bundle"
+import "@nathanvda/cocoon"
+
+$(".new-goal").on('click', function() {
+  $('.new-goal').text('Add another month');
+});

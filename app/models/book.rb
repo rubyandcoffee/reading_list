@@ -9,7 +9,7 @@ class Book < ApplicationRecord
   validates :author_id, presence: true
   validates :genre_id, presence: true
 
-  accepts_nested_attributes_for :book_goals, reject_if: ->(attributes){ attributes['book_id'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :book_goals, allow_destroy: true
 
   delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
            :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine
