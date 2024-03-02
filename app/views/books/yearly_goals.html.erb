@@ -5,19 +5,15 @@
         <div class="col-md-6">
           <h3>Yearly Goals</h3>
         </div>
-        <div class="col-md-6 pull-right">
-          <div class="small-text"><%= @books.count %> results</div>
-          <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-        </div>
       </div>
       <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
       <% if @books.any? %>
         <p>
           This includes <%= Book.filter_by_length('Short').count %> short books,
           <%= Book.filter_by_length('Medium').count %> medium books and
-          <%= Book.filter_by_length('Long').count %> long books.
+          <%= Book.filter_by_length('Long').count %> long books.<br>
+          If you read for 2 hours per day, you could read approximately 60 hours in a month.
         </p>
-        <p>If you read for 2 hours per day, you could read approximately 60 hours in a month.</p>
         <p>
           <% if Book.filter_by_length('Long').count > 4 %>
             <span class="small-text">
