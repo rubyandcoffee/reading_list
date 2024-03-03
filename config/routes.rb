@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   get 'books/yearly_goals', to: 'books#yearly_goals'
-  get 'books/shopping_list', to: 'books#shopping_list'
-  get 'books/unread', to: 'books#unread'
-  get 'books/read', to: 'books#read'
-  get 'books/dnf', to: 'books#dnf'
+  get 'books/buy', to: 'books#buy'
   get 'books/generator', to: 'books#generator'
 
   namespace :books do
