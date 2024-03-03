@@ -58,10 +58,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def shopping_list;end
-  def unread;end
-  def read;end
-  def dnf;end
+  def buy
+    @books = Book.in_state(:buy).all
+  end
 
   def import
     return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
