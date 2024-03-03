@@ -1,6 +1,8 @@
 <div>
   <% if book.current_state == 'read' %>
     <i class="fa-regular fa-square-check"></i>
+  <% elsif book.current_state == 'dnf' %>
+    <i class="fa-solid fa-poo"></i>
   <% else %>
     <i class="fa-regular fa-square"></i>
   <% end %>

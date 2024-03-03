@@ -137,6 +137,7 @@ nav {
 .small-text {
   font-size: smaller;
   margin: 10px 0 20px 0;
+  display: block;
 }
 
 .currently-reading {
@@ -168,6 +169,11 @@ form {
   
   .search-button {
     margin-bottom: 25px;
+  }
+
+  .form-field {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 

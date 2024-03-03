@@ -8,6 +8,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "jquery" %>
     <script src="https://kit.fontawesome.com/92656d8ae3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.6.0/slimselect.css" integrity="sha512-ijXMfMV6D0xH0UfHpPnqrwbw9cjd4AbjtWbdfVd204tXEtJtvL3TTNztvqqr9AbLcCiuNTvqHL5c9v2hOjdjpA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -22,15 +23,15 @@
       <% end %>
       <% if currently_reading.present? %>
         <div class="alert alert-primary">
-          <div class="row justify-content-between">
-            <div class="col currently-reading-banner">
+          <div class="row justify-content-between currently-reading-banner">
+            <div class="col">
               Currently reading:
               <%= currently_reading.title %>
               by <%= currently_reading.author.full_name %>
-            </div>
-            <div class="col" style="text-align: right">
-              <span class="small-text"><i>(Started reading on <%= currently_reading.book_transitions.last.created_at.strftime("%d %B") %>)</i></span>
-              <span class="currently-reading"><%= link_to 'Update Status', edit_book_path(currently_reading) %></span>
+              <span class="small-text">
+                <i>(Started reading on <%= currently_reading.book_transitions.last.created_at.strftime("%d %B") %>)</i>
+                <%= link_to 'Update Status', edit_book_path(currently_reading) %>
+              </span>
             </div>
           </div>
         </div>

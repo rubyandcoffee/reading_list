@@ -51,6 +51,15 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def import
+    return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
+    return redirect_to request.referer, notice: 'Only CSV files allowed' unless params[:file].content_type == 'text/csv'
+
+    CsvImportService.new.import_author(params[:file])
+
+    redirect_to request.referer, notice: 'Successfully imported author'
+  end
+
   private
     def set_author
       @author = Author.find(params[:id])

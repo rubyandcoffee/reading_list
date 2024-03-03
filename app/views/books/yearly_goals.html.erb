@@ -5,19 +5,15 @@
         <div class="col-md-6">
           <h3>Yearly Goals</h3>
         </div>
-        <div class="col-md-6 pull-right">
-          <div class="small-text"><%= @books.count %> results</div>
-          <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-        </div>
       </div>
       <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
       <% if @books.any? %>
         <p>
           This includes <%= Book.filter_by_length('Short').count %> short books,
           <%= Book.filter_by_length('Medium').count %> medium books and
-          <%= Book.filter_by_length('Long').count %> long books.
+          <%= Book.filter_by_length('Long').count %> long books.<br>
+          If you read for 2 hours per day, you could read approximately 60 hours in a month.
         </p>
-        <p>If you read for 2 hours per day, you could read approximately 60 hours in a month.</p>
         <p>
           <% if Book.filter_by_length('Long').count > 4 %>
             <span class="small-text">
@@ -29,10 +25,10 @@
         </p>
         <% Date::MONTHNAMES.each do |month| %>
           <div class="monthly-books">
-            <% if @books.where(monthly_goal: month).any? %>
-              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @books.where(monthly_goal: month).map{ |b| time_to_read(b) }.compact.sum %> hours total)</h3>
-              <% @books.where(monthly_goal: month).each do |book| %>
-                <%= render partial: 'book_details', locals: { book: book } %>
+            <% if @book_goals.where(month: month).any? %>
+              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @book_goals.where(month: month).map{ |goal| time_to_read(goal.book) }.compact.sum %> hours total)</h3>
+              <% @book_goals.where(month: month).each do |book_goal| %>
+                <%= render partial: 'book_details', locals: { book: book_goal.book } %>
               <% end %>
             <% end %>
           </div>

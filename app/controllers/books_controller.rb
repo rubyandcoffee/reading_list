@@ -63,12 +63,22 @@ class BooksController < ApplicationController
   def read;end
   def dnf;end
 
+  def import
+    return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
+    return redirect_to request.referer, notice: 'Only CSV files allowed' unless params[:file].content_type == 'text/csv'
+
+    CsvImportService.new.import_book(params[:file])
+
+    redirect_to request.referer, notice: 'Successfully imported books'
+  end
+
   def yearly_goals
-    @books = Book.where(yearly_goal: DateTime.now.year).order(:title).paginate(page: params[:page], per_page: 20)
+    @book_goals = BookGoal.this_year
+    @books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year}).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def generator
-    book = Book.where(yearly_goal: DateTime.now.year).pluck(:id).sample
+    book = BookGoal.where(year: DateTime.now.year).pluck(:book_id).sample
     @book = Book.find(book)
   end
 
@@ -78,6 +88,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :yearly_goal, :monthly_goal)
+      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, book_goals_attributes: [:id, :month, :year, :_destroy])
     end
 end
