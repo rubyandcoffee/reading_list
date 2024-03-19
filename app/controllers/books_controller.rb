@@ -3,7 +3,9 @@ class BooksController < ApplicationController
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result.order(:title).paginate(page: params[:page], per_page: 20)
+
+    @per_page = params[:per_page] || 10
+    @books = @q.result.order(:title).paginate(page: params[:page], per_page: @per_page)
   end
 
   def show
@@ -80,6 +82,17 @@ class BooksController < ApplicationController
     book = BookGoal.where(year: DateTime.now.year).pluck(:book_id).sample
     @book = Book.find(book)
   end
+
+  # def paginate
+  #   unless params[:per_page].present?
+  #     params[:per_page] = 20 #default
+  #   end
+  #   if params[:search].present?
+  #     ModelName.where(query: params[:search]).paginate(:page => params[:page], :per_page => params[:per_page])
+  #   else
+  #     ModelName.all.paginate(:page => params[:page], :per_page => params[:per_page])
+  #   end
+  # end
 
   private
     def set_book

@@ -9,7 +9,8 @@
       </div>
       <div class="col-md-9 pull-right">
         <div class="small-text"><%= @books.count %> results</div>
-        <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+        <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, class: 'paginate-books' %>
+        <%= select_tag :per_page, options_for_select([10,20,50], @per_page), class: 'select_per_page' %>
       </div>
     </div>
     <% if @books.any? %>

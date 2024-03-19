@@ -4,7 +4,8 @@ class AuthorsController < ApplicationController
   def index
     @q = Author.ransack(params[:q])
     @q.sorts = 'forename asc' if @q.sorts.empty?
-    @authors = @q.result.paginate(page: params[:page], per_page: 20)
+    @per_page = params[:per_page] || 10
+    @authors = @q.result.paginate(page: params[:page], per_page: @per_page)
   end
 
   def show

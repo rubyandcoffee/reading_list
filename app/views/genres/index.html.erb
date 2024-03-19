@@ -22,7 +22,8 @@
       <% if params[:q].present? %>
         <div class="col-md-12 pull-right">
           <div class="small-text"><%= @books.count %> results</div>
-          <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+          <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, class: 'paginate-books' %>
+          <%= select_tag :per_page, options_for_select([10,20,50], @per_page), class: 'select_per_page' %>
         </div>
       <% end %>
     </div>
@@ -34,11 +35,9 @@
             <p>Search on the left to filter books by genre</p>
           <% else %>
             <h3><%= @genre.name %></h3>
-            <ul>
-              <% @books.each do |book| %>
-                <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.current_state %>)</li>
-              <% end %>
-            </ul>
+            <% @books.each do |book| %>
+              <%= render partial: 'books/book_details', locals: { book: book } %>
+            <% end %>
           <% end %>
         </div>
       </div>

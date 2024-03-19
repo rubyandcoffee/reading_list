@@ -5,7 +5,8 @@ class GenresController < ApplicationController
     @genres = Genre.order('name ASC')
     @q = Genre.ransack(params[:q])
     @genre = @q.result(distinct: true).last
-    @books = @genre.books.order(:title).paginate(page: params[:page], per_page: 20)
+    @per_page = params[:per_page] || 5
+    @books = @genre.books.order(:title).paginate(page: params[:page], per_page: @per_page)
   end
 
   def show
