@@ -24,7 +24,9 @@ module BooksHelper
   end
 
   def completed_series?(series)
-    series.books.map(&:current_state).all?('read')
+    books_in_series = series.books.count
+    total = series.books.current_state('read').count + series.books.current_state('dnf').count
+    total == books_in_series
   end
 
   def time_to_read(book)
