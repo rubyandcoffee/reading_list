@@ -93,7 +93,7 @@ class BooksController < ApplicationController
   end
 
   def generator
-    book = BookGoal.where(year: DateTime.now.year).pluck(:book_id).sample
+    book = BookGoal.includes(book: :book_transitions).where(year: DateTime.now.year, book: { book_transitions: { to_state: 'unread', most_recent: true }}).pluck(:book_id).sample
     @book = Book.find(book)
   end
 

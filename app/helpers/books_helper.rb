@@ -11,6 +11,10 @@ module BooksHelper
     end
   end
 
+  def checkbox_icon(book)
+    checkbox_klasses.fetch(book.current_state)
+  end
+
   def length_klass(book)
     if book.short?
       'light'
@@ -44,7 +48,19 @@ module BooksHelper
       'read' => 'bg-success',
       'tbr' => 'bg-warning',
       'reading' => 'bg-primary',
-      'unread' => 'bg-info'
+      'unread' => 'bg-info',
+      'dnf' => 'bg-primary'
+    }
+  end
+
+  def checkbox_klasses
+    {
+      'buy' => 'fa-regular fa-square',
+      'read' => 'fa-regular fa-square-check',
+      'dnf' => 'fa-solid fa-poo',
+      'tbr' => 'fa-regular fa-square',
+      'reading' => 'fa-regular fa-square',
+      'unread' => 'fa-regular fa-square'
     }
   end
 end
