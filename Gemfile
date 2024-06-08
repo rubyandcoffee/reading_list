@@ -21,6 +21,7 @@ gem "chartkick"
 gem 'ransack_memory'
 gem 'jquery-rails'
 gem 'cocoon'
+gem 'wicked_pdf'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -55,6 +56,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'wkhtmltopdf-binary'
 end
 
 group :test do

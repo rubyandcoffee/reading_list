@@ -62,6 +62,22 @@ class BooksController < ApplicationController
     @books = Book.in_state(:buy).all
   end
 
+  def export
+    @books = Book.in_state(:buy).all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        # Rails 7
+        # https://github.com/mileszs/wicked_pdf/issues/1005
+        render pdf: "Your Shopping List #{Date.current.strftime('%d/%m/%Y')}", # filename
+               template: "books/shopping_list/buy",
+               formats: [:html],
+               disposition: :inline
+      end
+    end
+  end
+
   def import
     return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
     return redirect_to request.referer, notice: 'Only CSV files allowed' unless params[:file].content_type == 'text/csv'

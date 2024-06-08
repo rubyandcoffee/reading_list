@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'books/yearly_goals', to: 'books#yearly_goals'
   get 'books/buy', to: 'books#buy'
   get 'books/generator', to: 'books#generator'
+  get 'books/export', to: 'books#export'
 
   namespace :books do
     resources :reading_list, only: [:index]
