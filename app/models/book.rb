@@ -25,7 +25,8 @@ class Book < ApplicationRecord
       left_outer_joins(:book_transitions).where(book_transitions: {to_state: nil})
     else
       # else return all the requested "states" (but only the most recent)
-      # most_recent: true is very important here for obvious reasons
+      # most_recent: true is very important here as we only want to return
+      # a book's most recent state.
       joins(:book_transitions).where(book_transitions: {most_recent: true}).where(book_transitions: {to_state: state})
     end
   end

@@ -1,63 +1,73 @@
 <div class="row">
   <div class="col-md-12">
-    <div id="yearly-goals-header">
-      <div class="row">
-        <div class="col-md-6">
-          <h3>Yearly Goals</h3>
-        </div>
-      </div>
-      <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
-      <% if @books.any? %>
-        <p>
-          This includes <%= Book.filter_by_length('Short').count %> short books,
-          <%= Book.filter_by_length('Medium').count %> medium books and
-          <%= Book.filter_by_length('Long').count %> long books.<br>
-          If you read for 2 hours per day, you could read approximately 60 hours in a month.
-        </p>
-        <p>
-          <% if Book.filter_by_length('Long').count > 4 %>
-            <span class="small-text">
-              <span class="badge rounded-pill text-bg-danger">Warning</span>
-              You're reading too many long books to achieve your goal.
-              Consider replacing <%= Book.filter_by_length('Long').count - 4 %> of them with shorter books.
-            </span>
-          <% end %>
-        </p>
-        <% Date::MONTHNAMES.each do |month| %>
-          <div class="monthly-books">
-            <% if @book_goals.where(month: month).any? %>
-              <h3><%= month.nil? ? 'Undecided' : month %> (<%= @book_goals.where(month: month).map{ |goal| time_to_read(goal.book) }.compact.sum %> hours total)</h3>
-              <% @book_goals.where(month: month).each do |book_goal| %>
-                <%= render partial: 'book_details', locals: { book: book_goal.book } %>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-    <hr>
-    <% if @books.any? %>
-      <div id="yearly-goals-footer">
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Statistics</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <%= pie_chart @books.joins(:genre).group(:name).count, colors: ["#977B95", "#898DA5", "#85A1A9", "#A1E6CC", "#313633", "#88589E", "#CB9BB7", "#E2C2C5"] %>
-            <div class="small-text">Genre</div>
-          </div>
-          <div class="col-md-4">
-            <%= pie_chart @books.joins(:author).group(:gender).count, colors: ["#EB4F74", "#25465D"] %>
-            <div class="small-text">Gender</div>
-          </div>
-          <div class="col-md-4">
-            <%= pie_chart @books.joins(:author).group(:nationality).count, colors: ["#CC8D7A", "#E28F58", "#E7A855", "#ECCC5B", "#5D748D", "#E4834A", "#4188E2"] %>
-            <div class="small-text">Nationality</div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <h3>Yearly Goals</h3>
   </div>
 </div>
+<% if @books.any? %>
+  <div class="row" id="yearly-goals-header">
+    <div class="col-md-6">
+      <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
+      <p>
+        This includes <%= @books.filter_by_length('Short').count %> short books,
+        <%= @books.filter_by_length('Medium').count %> medium books and
+        <%= @books.filter_by_length('Long').count %> long books.
+      </p>
+      <p>
+        You have already read <%= @books.current_state('read').count %> books this year (not including dnf),<br>
+        <%= @books.count - @books.current_state('read').count %> left to go.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <p>The recommendation is that for each month, you read each of the following:</p>
+      <ul>
+        <li>A book by Philippa Gregory (long)</li>
+        <li>A book that's been on the bookshelf for years (medium)</li>
+        <li>A short book OR an audiobook</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% Date::MONTHNAMES.each do |month| %>
+        <div class="monthly-books">
+          <% if @book_goals.where(month: month).any? %>
+            <h3><%= month.nil? ? 'Undecided' : month %> (<%= @book_goals.where(month: month).map{ |goal| time_to_read(goal.book) }.compact.sum %> hours total)</h3>
+            <% @book_goals.where(month: month).each do |book_goal| %>
+              <%= render partial: 'book_details', locals: { book: book_goal.book } %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @books.any? %>
+        <div id="yearly-goals-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Statistics</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <%= pie_chart @books.joins(:genre).group(:name).count, colors: ["#977B95", "#898DA5", "#85A1A9", "#A1E6CC", "#313633", "#88589E", "#CB9BB7", "#E2C2C5"] %>
+              <div class="small-text">Genre</div>
+            </div>
+            <div class="col-md-4">
+              <%= pie_chart @books.joins(:author).group(:gender).count, colors: ["#EB4F74", "#25465D"] %>
+              <div class="small-text">Gender</div>
+            </div>
+            <div class="col-md-4">
+              <%= pie_chart @books.joins(:author).group(:nationality).count, colors: ["#CC8D7A", "#E28F58", "#E7A855", "#ECCC5B", "#5D748D", "#E4834A", "#4188E2"] %>
+              <div class="small-text">Nationality</div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <p>You have no yearly goals yet.</p>
+  <p>To create one, you must set the month/year of the book(s) that you intend to read.</p>
+<% end %>
