@@ -18,7 +18,7 @@
           <li>
             <%= link_to book.title, edit_book_path(book) %>
             by
-            <%= link_to book.author.full_name %>
+            <%= link_to book.author.full_name, author_path(book.author) %>
             <span class="badge text-<%= state_klass(book) %>"><%= book.current_state %></span>
             <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
             <% if book.rating.present? %>

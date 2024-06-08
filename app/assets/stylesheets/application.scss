@@ -267,3 +267,10 @@ form {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.remove-btn {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+}

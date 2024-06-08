@@ -1,12 +1,42 @@
-<div class="d-inline-block">
-  <%= link_to "Update author", edit_author_path(@author), class: 'btn btn-primary' %>
-</div>
-<div class="d-inline-block">
-  <%= button_to "Remove author", @genre, method: :delete, class: 'btn btn-danger' %>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <div class="d-inline-block">
+      <%= link_to 'Update author', edit_author_path(@author), class: 'btn btn-primary' %>
+    </div>
+    <div class="d-inline-block">
+      <%= button_to 'Remove author', @genre, method: :delete, class: 'btn btn-danger' %>
+    </div>
+    <hr>
+    <h1><%= @author.full_name %></h1>
+    <h3><%= @author.nationality %></h3>
+  </div>
 </div>
 
 <div class="row">
-  <div class="col-md-2">
-    <%= render @author %>
+  <div class="col-md-12">
+    <h3>Books by this author: (<%= @author.books.count %>)</h3>
+    <div class="row">
+      <% @author.books.each do |book| %>
+        <div class="col">
+          <div class="card" style="width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= book.title %>
+              </h5>
+              <p class="card-text">
+                <strong>Genre:</strong> <%= link_to book.genre.name, book.genre %><br>
+                <strong>Currently on shelf:</strong> <%= book.status %>
+              </p>
+              <div class="d-inline-block">
+                <%= link_to 'Edit', edit_book_path(book) %>
+              </div>
+              <div class="d-inline-block">
+                <%= button_to 'Remove', book, method: :delete, class: 'remove-btn' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
