@@ -1,5 +1,8 @@
 <%= form_tag import_authors_path, method: :post, multipart: true do %>
-  <h3>Upload CSV</h3>
+  <h3>
+    Upload CSV
+    <a href="#" class="float-end no-decoration" data-bs-toggle="modal" data-bs-target="#authorCsvModal"><i class="fa-regular fa-question"></i></a>
+  </h3>
   <div class="form-field">
     <%= file_field_tag :file, accept: '.csv' %>
   </div>
@@ -9,3 +12,4 @@
     <% end %>
   </div>
 <% end %>
+<%= render 'books/modals/authors/author_csv_modal', id: "authorCsvModal" %>
