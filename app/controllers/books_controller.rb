@@ -59,11 +59,11 @@ class BooksController < ApplicationController
   end
 
   def buy
-    @books = Book.in_state(:buy).all
+    @books = Book.where(purchased: false)
   end
 
   def export
-    @books = Book.in_state(:buy).all
+    @books = Book.where(purchased: false)
 
     respond_to do |format|
       format.html

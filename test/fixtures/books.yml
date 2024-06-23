@@ -4,8 +4,10 @@ one:
   title: MyString
   author: one
   genre: one
+  purchased: true
 
 two:
   title: MyString
   author: two
   genre: two
+  purchased: true

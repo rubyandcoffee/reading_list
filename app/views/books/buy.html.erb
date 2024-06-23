@@ -1,5 +1,10 @@
-<h3 class="float-end"><%= link_to 'Export as pdf', books_export_path(format: :pdf), class: 'btn btn-primary' %></h3>
-
+<div class="row">
+  <div class="col-md-12">
+    <h3>Yearly Goals</h3>
+    <span class="float-end"><%= link_to 'Export as pdf', books_export_path(format: :pdf), class: 'btn btn-primary' %></span>
+  </div>
+</div>
+<p>If a book is checked, it means it has already been read.</p>
 <% @books.each do |book| %>
   <%= render partial: 'book_details', locals: { book: book } %>
 <% end %>
