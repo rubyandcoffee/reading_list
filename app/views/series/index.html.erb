@@ -29,7 +29,7 @@
                   <i class="<%= checkbox_icon(book) %>"></i>
                   <strong><%= book.series_position.ordinalize %></strong>
                   <%= link_to book.title, edit_book_path(book) %>
-                  <% if book.status == 'Buy' %>
+                  <% if !book.purchased? %>
                     <span class="badge rounded-pill bg-danger">
                       <%= book.current_state.humanize %>
                       <span class="visually-hidden"><%= book.current_state.humanize %></span>

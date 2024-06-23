@@ -44,7 +44,6 @@ module BooksHelper
 
   def state_klasses
     {
-      'buy' => 'bg-danger',
       'read' => 'bg-success',
       'tbr' => 'bg-warning',
       'reading' => 'bg-primary',
@@ -55,7 +54,6 @@ module BooksHelper
 
   def checkbox_klasses
     {
-      'buy' => 'fa-regular fa-square',
       'read' => 'fa-regular fa-square-check',
       'dnf' => 'fa-solid fa-poo',
       'tbr' => 'fa-regular fa-square',
