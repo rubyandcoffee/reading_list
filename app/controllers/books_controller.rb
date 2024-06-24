@@ -71,7 +71,8 @@ class BooksController < ApplicationController
         # Rails 7
         # https://github.com/mileszs/wicked_pdf/issues/1005
         render pdf: "Your Shopping List #{Date.current.strftime('%d/%m/%Y')}", # filename
-               template: "books/shopping_list/buy",
+               template: "books/shopping_list/printable",
+               layout: 'pdf',
                formats: [:html],
                disposition: :inline
       end
