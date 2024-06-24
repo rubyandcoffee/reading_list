@@ -3,4 +3,12 @@
   <%= link_to book.title, edit_book_path(book) %> by <%= book.author.full_name %>
   <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
   <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= time_to_read(book) %> hours</span>
+  <% if book.rental.present? %>
+    <span class="rental-text">
+      Rental
+      <% if book.rental.borrowed_from == 'Northwich Library' %>
+        due on <%= (book.rental.borrowed_date + 3.weeks).strftime("%d %B") %>
+      <% end %>
+    </span>
+  <% end %>
 </div>

@@ -1,0 +1,34 @@
+<div class="nested-fields">
+  <%= f.hidden_field :_destroy %>
+  <% if @book.outstanding_rental? %>
+    <p class="rental-text">
+      This book is currently being rented from <%= @book.rental.borrowed_from %>.
+    </p>
+    <% if @book.rental.borrowed_from == 'Northwich Library' %>
+      <p class="rental-text">
+        It is due to be returned on <%= (@book.rental.borrowed_date + 3.weeks).strftime('%d %B') %>
+      </p>
+    <% end %>
+    <div class="form-field">
+      <%= f.label :returned_date, "If you have returned this rental, when was this?", style: "display: block" %>
+      <%= f.datetime_field :returned_date %>
+      <%= link_to_remove_association f do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+      <span class="small-text">(optional)</span>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <%= f.label :borrowed_from, 'Who did you borrow this from?', style: 'display: block' %>
+      <%= f.select :borrowed_from, ['Northwich Library', 'Laura', 'Mum'], class: 'f-control', style: 'width: 200px;' %>
+    <div>
+    <div class="form-field">
+      <%= f.label :borrowed_date, style: "display: block" %>
+      <%= f.datetime_field :borrowed_date %>
+      <%= link_to_remove_association f do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :year, value: DateTime.now.year %>
+</div>
