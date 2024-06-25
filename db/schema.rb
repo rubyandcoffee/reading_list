@@ -63,14 +63,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_172909) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "loaners", force: :cascade do |t|
+    t.string "name"
+    t.string "week_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rentals", force: :cascade do |t|
     t.integer "book_id", null: false
-    t.string "borrowed_from"
-    t.datetime "borrowed_date"
-    t.datetime "returned_date"
+    t.integer "loaner_id", null: false
+    t.datetime "loan_date"
+    t.datetime "return_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_rentals_on_book_id"
+    t.index ["loaner_id"], name: "index_rentals_on_loaner_id"
   end
 
   create_table "series", force: :cascade do |t|
@@ -87,5 +95,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_172909) do
   add_foreign_key "books", "genres"
   add_foreign_key "books", "series"
   add_foreign_key "rentals", "books"
+  add_foreign_key "rentals", "loaners"
   add_foreign_key "series", "authors"
 end

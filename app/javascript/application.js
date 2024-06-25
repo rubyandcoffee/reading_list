@@ -13,11 +13,11 @@ $(".new-goal").on('click', function() {
 });
 
 $('.rentals').on('cocoon:after-insert', function() {
-  $('.max-one-association').addClass('hidden');
+  $('.new-rental').addClass('hidden');
 });
 
 $('.rentals').on('cocoon:after-remove', function() {
-  $('.max-one-association').removeClass('hidden');
+  $('.new-rental').removeClass('hidden');
 });
 
 $('.book_goals').on('cocoon:after-remove', function() {

@@ -2,12 +2,12 @@
 
 one:
   book: one
-  borrowed_from: MyString
-  borrowed_date: 2024-06-24 18:29:09
-  returned_date: 2024-06-24 18:29:09
+  loaner: one
+  loan_date: 2024-06-24 18:29:09
+  return_date: 2024-06-24 18:29:09
 
 two:
   book: two
-  borrowed_from: MyString
-  borrowed_date: 2024-06-24 18:29:09
-  returned_date: 2024-06-24 18:29:09
+  loaner: two
+  loan_date: 2024-06-24 18:29:09
+  return_date: 2024-06-24 18:29:09

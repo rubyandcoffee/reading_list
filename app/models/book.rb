@@ -11,7 +11,6 @@ class Book < ApplicationRecord
   validates :genre_id, presence: true
 
   accepts_nested_attributes_for :book_goals, :rental, allow_destroy: true
-  # accepts_nested_attributes_for :rentals, allow_destroy: true
 
   delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
            :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine
@@ -58,7 +57,7 @@ class Book < ApplicationRecord
   end
 
   def outstanding_rental?
-    rental && rental.returned_date.nil?
+    rental && rental.return_date.nil?
   end
 
   def short?

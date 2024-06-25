@@ -6,8 +6,8 @@
   <% if book.rental.present? %>
     <span class="rental-text">
       Rental
-      <% if book.rental.borrowed_from == 'Northwich Library' %>
-        due on <%= (book.rental.borrowed_date + 3.weeks).strftime("%d %B") %>
+      <% if book.rental.loaner.week_duration.present? %>
+        due on <%= (book.rental.loan_date + rental.loaner.week_duration.weeks).strftime("%d %B") %>
       <% end %>
     </span>
   <% end %>

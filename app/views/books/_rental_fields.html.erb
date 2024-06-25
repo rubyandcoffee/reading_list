@@ -2,16 +2,16 @@
   <%= f.hidden_field :_destroy %>
   <% if @book.outstanding_rental? %>
     <p class="rental-text">
-      This book is currently being rented from <%= @book.rental.borrowed_from %>.
+      This book is currently being rented from <%= @book.rental.loaner.name %>.
     </p>
-    <% if @book.rental.borrowed_from == 'Northwich Library' %>
+    <% if @book.rental.loaner.week_duration.present? %>
       <p class="rental-text">
-        It is due to be returned on <%= (@book.rental.borrowed_date + 3.weeks).strftime('%d %B') %>
+        It is due to be returned on <%= (@book.rental.loaner.week_duration.weeks).strftime('%d %B') %>
       </p>
     <% end %>
     <div class="form-field">
-      <%= f.label :returned_date, "If you have returned this rental, when was this?", style: "display: block" %>
-      <%= f.datetime_field :returned_date %>
+      <%= f.label :return_date, "If you have returned this rental, when was this?", style: "display: block" %>
+      <%= f.datetime_field :return_date %>
       <%= link_to_remove_association f do %>
         <i class="fa-solid fa-xmark"></i>
       <% end %>
@@ -19,12 +19,12 @@
     </div>
   <% else %>
     <div class="form-field">
-      <%= f.label :borrowed_from, 'Who did you borrow this from?', style: 'display: block' %>
-      <%= f.select :borrowed_from, ['Northwich Library', 'Laura', 'Mum'], class: 'f-control', style: 'width: 200px;' %>
+      <%= f.label :loaner_id, 'Who did you borrow this from?', style: 'display: block' %>
+      <%= f.select :loaner_id, Loaner.all, class: 'form-control', style: 'width: 200px;' %>
     <div>
     <div class="form-field">
-      <%= f.label :borrowed_date, style: "display: block" %>
-      <%= f.datetime_field :borrowed_date %>
+      <%= f.label :loan_date, style: "display: block" %>
+      <%= f.datetime_field :loan_date %>
       <%= link_to_remove_association f do %>
         <i class="fa-solid fa-xmark"></i>
       <% end %>
