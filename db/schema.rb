@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_172909) do
 
   create_table "loaners", force: :cascade do |t|
     t.string "name"
-    t.string "week_duration"
+    t.integer "week_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

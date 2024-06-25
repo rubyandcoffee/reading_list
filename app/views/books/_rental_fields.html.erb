@@ -1,6 +1,6 @@
 <div class="nested-fields">
   <%= f.hidden_field :_destroy %>
-  <% if @book.outstanding_rental? %>
+  <% if @book.rental && @book.outstanding_rental? %>
     <p class="rental-text">
       This book is currently being rented from <%= @book.rental.loaner.name %>.
     </p>
@@ -20,7 +20,7 @@
   <% else %>
     <div class="form-field">
       <%= f.label :loaner_id, 'Who did you borrow this from?', style: 'display: block' %>
-      <%= f.select :loaner_id, Loaner.all, class: 'form-control', style: 'width: 200px;' %>
+      <%= f.select :loaner_id, Loaner.all.collect { |loaner| [ loaner.name, loaner.id ] }, class: 'form-control', style: 'width: 200px;' %>
     <div>
     <div class="form-field">
       <%= f.label :loan_date, style: "display: block" %>
