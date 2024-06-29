@@ -18,6 +18,14 @@
         <p class="small-text">
           <i><%= book.genre.name %></i>
         </p>
+        <p class="rental-text">
+          <% if book.rental.present? %>
+            Rental
+            <% if book.rental.loaner.week_duration.present? %>
+              due on <%= (book.rental.loaner.week_duration.weeks).strftime("%d %B") %>
+            <% end %>
+          <% end %>
+        </p>
         <p class="card-text <%= stale?(book) ? 'stale-book' : 'fresh-book' %>">
           Added on <%= book.book_transitions.last.created_at.strftime("%d %B") %>
         </p>

@@ -11,27 +11,6 @@
     </div>
   <% end %>
   <%= render 'form', book: @book, form: form %>
-  <div class="form-field">
-    <%= form.label :total_pages, style: 'display: block' %>
-    <%= form.number_field :total_pages %>
-  </div>
-  <div class="book_goals">
-    <%= form.fields_for :book_goals do |book_goal| %>
-      <%= render 'book_goal_fields', f: book_goal %>
-    <% end %>
-  </div>
-  <% if @book.book_goals.any? %>
-    <%= link_to_add_association 'Add another month', form, :book_goals, data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
-  <% else %>
-    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, class: 'new-goal', data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
-  <% end %>
-  <div class="form-field">
-    <%= form.label 'Status', style: 'display: block;' %>
-    <%= form.collection_select :status, @book.allowed_transitions, :to_s, :humanize, include_blank: true, class: 'form-select' %>
-    <span class="small-text">
-      If you do not select a status, it will automatically be set to '<%= @book.current_state.humanize %>'.
-    </span>
-  </div>
   <div>
     <%= form.submit 'Add book to shelf', class: 'btn btn-success' %>
   </div>
