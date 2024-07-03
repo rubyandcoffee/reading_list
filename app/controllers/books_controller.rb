@@ -104,6 +104,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :loan_date, :return_date])
+      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :purchased, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :loan_date, :return_date])
     end
 end
