@@ -10,10 +10,6 @@ class Author < ApplicationRecord
     ["books"]
   end
 
-  def self.nationalities
-    Nationality::Nationality.default_option("british")
-  end
-
   def full_name
     forename + ' ' + surname
   end

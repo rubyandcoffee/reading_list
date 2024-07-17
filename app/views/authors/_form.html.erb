@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :nationality, style: 'display: block' %>
-    <%= form.select :nationality, options_for_select(Author.nationalities, selected: form.object.nationality), { include_blank: true }, { class: 'form-select' } %>
+    <%= form.select :nationality, options_for_select(Nationality::Nationality.default_option('british'), selected: form.object.nationality), { include_blank: true }, { class: 'form-select' } %>
   </div>
 
   <%= form.hidden_field :book, value: @book %>
