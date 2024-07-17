@@ -71,7 +71,8 @@ class BooksController < ApplicationController
         # Rails 7
         # https://github.com/mileszs/wicked_pdf/issues/1005
         render pdf: "Your Shopping List #{Date.current.strftime('%d/%m/%Y')}", # filename
-               template: "books/shopping_list/buy",
+               template: "books/shopping_list/printable",
+               layout: 'pdf',
                formats: [:html],
                disposition: :inline
       end
@@ -103,6 +104,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, book_goals_attributes: [:id, :month, :year, :_destroy])
+      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :purchased, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :loan_date, :return_date])
     end
 end
