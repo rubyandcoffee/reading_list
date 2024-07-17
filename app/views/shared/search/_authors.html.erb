@@ -6,7 +6,7 @@
     </div>
     <div class="col-12">
       <%= f.label :nationality_eq, 'Nationality' %>
-      <%= f.select :nationality_eq, Author.nationalities, { include_blank: true }, class: 'form-select' %>
+      <%= f.select :nationality_eq, Author.pluck(:nationality).uniq, { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12">
       <%= f.label :gender_eq, 'Gender' %>
