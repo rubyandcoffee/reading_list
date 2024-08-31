@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result.order(:title).paginate(page: params[:page], per_page: 20)
+    @books = @q.result(distinct: true).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def show
@@ -12,14 +12,14 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @book.build_rental
-    @author = Author.new
-    @genre = Genre.new
+    @book.build_author unless @book.author
+    @book.build_genre unless @book.genre
   end
 
   def edit
-    @author = Author.new
-    @genre = Genre.new
-    @book.build_rental unless @book.rental
+    if rental_params_present?
+      @book.build_rental unless @book.rental
+    end
   end
 
   def create
