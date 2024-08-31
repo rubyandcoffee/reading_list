@@ -46,22 +46,20 @@
   <%= form.radio_button :purchased, false, style: 'margin-left: 5px;' %>
 </div>
 <div class="form-field">
-  <div class="book_goals">
-    <%= form.fields_for :book_goals do |book_goal| %>
-      <%= render 'book_goal_fields', f: book_goal %>
-    <% end %>
-  </div>
-  <% if @book.book_goals.any? %>
-    <%= link_to_add_association 'Add another month', form, :book_goals, data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
-  <% else %>
-    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, class: 'new-goal', data: { association_insertion_node: '.book_goals', association_insertion_method: :append } %>
+  <%= form.fields_for :book_goals do |book_goal| %>
+    <%= render 'book_goal_fields', f: book_goal %>
   <% end %>
+  <% if @book.book_goals.any? %>
+    <%= link_to_add_association 'Add another month', form, :book_goals, id: 'add-goal', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
+  <% else %>
+    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, id: 'add-goal', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
+  <% end %>
+  <div id="book-goals"></div>
 </div>
-<div class="form-field rentals">
+<div class="form-field">
   <%= form.fields_for :rental do |rental| %>
     <%= render 'rental_fields', f: rental %>
   <% end %>
-  <div class="max-one-association">
-    <%= link_to_add_association "Are you renting this book?", form, :rental, force_non_association_create: true, class: 'new-rental', data: { association_insertion_node: '.rentals', association_insertion_method: :append } %>
-  </div>
+  <%= link_to_add_association "Are you renting this book?", form, :rental, force_non_association_create: true, id: 'add-rental', data: { association_insertion_node: '#rentals', association_insertion_method: :append } %>
+  <div id="rentals"></div>
 </div>

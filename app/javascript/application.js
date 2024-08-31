@@ -7,19 +7,37 @@ import "chartkick"
 import "Chart.bundle"
 import "@nathanvda/cocoon"
 
-$(".new-goal").on('click', function() {
-  $('.new-goal').text('Add another month');
-  $('.new-goal').addClass('hidden');
-});
+$(document).ready(function() {
+  let $rentals = $('#rentals');
+  let $bookGoals = $('#book-goals');
+  let $addRental = $('#add-rental');
+  let $addGoal = $('#add-goal');
 
-$('.rentals').on('cocoon:after-insert', function() {
-  $('.new-rental').addClass('hidden');
-});
+  function showOrHideNewLink(linkName, container) {
+    if ($(container).is(':visible')) {
+      $(linkName).hide();
+    } else {
+      $(linkName).show();
+    }
+  }
 
-$('.rentals').on('cocoon:after-remove', function() {
-  $('.new-rental').removeClass('hidden');
-});
+  $rentals.on('cocoon:after-insert', function() {
+    showOrHideNewLink($addRental, $('.rental'));
+  });
 
-$('.book_goals').on('cocoon:after-remove', function() {
-  $('.new-goal').removeClass('hidden');
+  $rentals.on('cocoon:after-remove', function() {
+    showOrHideNewLink($addRental, $('.rental'));
+  });
+
+  $bookGoals.on('cocoon:after-insert', function() {
+    $addGoal.text('Add another month');
+  });
+
+  $bookGoals.on('cocoon:after-remove', function() {
+    if ($('.book-goal').length === 0) {
+      $addGoal.text('Are you reading it this year?');
+    }
+  });
+
+  showOrHideNewLink($addRental, $('.rental'));
 });
