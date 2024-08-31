@@ -36,4 +36,12 @@ document.addEventListener('turbo:load', () => {
   $('#remove-rental').on('click', function() {
     $('#book_rental_attributes_loaner_id').val('')
   })
+
+  $('#book_status').change(function() {
+    if ($(this).val() === 'read') {
+      $('#rating').show();
+    } else {
+      $('#rating').hide();
+    }
+  });
 });
