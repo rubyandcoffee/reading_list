@@ -50,9 +50,9 @@
     <%= render 'book_goal_fields', f: book_goal %>
   <% end %>
   <% if @book.book_goals.any? %>
-    <%= link_to_add_association 'Add another month', form, :book_goals, id: 'add-goal', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
+    <%= link_to_add_association 'Add another month', form, :book_goals, id: 'add-goal', class: 'btn btn-sm btn-outline-primary', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
   <% else %>
-    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, id: 'add-goal', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
+    <%= link_to_add_association "Are you reading it this year?", form, :book_goals, id: 'add-goal', class: 'btn btn-sm btn-outline-success', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
   <% end %>
   <div id="book-goals"></div>
 </div>
@@ -60,6 +60,7 @@
   <%= form.fields_for :rental do |rental| %>
     <%= render 'rental_fields', f: rental %>
   <% end %>
-  <%= link_to_add_association "Are you renting this book?", form, :rental, force_non_association_create: true, id: 'add-rental', data: { association_insertion_node: '#rentals', association_insertion_method: :append } %>
-  <div id="rentals"></div>
+  <% unless @book.rental&.persisted? %>
+    <a href="#" id="show-rental-form">Are you renting this book?</a>
+  <% end %>
 </div>

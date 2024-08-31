@@ -7,37 +7,33 @@ import "chartkick"
 import "Chart.bundle"
 import "@nathanvda/cocoon"
 
-$(document).ready(function() {
-  let $rentals = $('#rentals');
+document.addEventListener('turbo:load', () => {
   let $bookGoals = $('#book-goals');
-  let $addRental = $('#add-rental');
   let $addGoal = $('#add-goal');
 
-  function showOrHideNewLink(linkName, container) {
-    if ($(container).is(':visible')) {
-      $(linkName).hide();
-    } else {
-      $(linkName).show();
-    }
-  }
-
-  $rentals.on('cocoon:after-insert', function() {
-    showOrHideNewLink($addRental, $('.rental'));
-  });
-
-  $rentals.on('cocoon:after-remove', function() {
-    showOrHideNewLink($addRental, $('.rental'));
-  });
-
   $bookGoals.on('cocoon:after-insert', function() {
-    $addGoal.text('Add another month');
+    $addGoal
+      .text('Add another month')
+      .removeClass('btn-outline-success')
+      .addClass('btn-outline-primary');
   });
 
   $bookGoals.on('cocoon:after-remove', function() {
     if ($('.book-goal').length === 0) {
-      $addGoal.text('Are you reading it this year?');
+      $addGoal
+        .text('Are you reading it this year?')
+        .removeClass('btn-outline-primary')
+        .addClass('btn-outline-success');
     }
   });
 
-  showOrHideNewLink($addRental, $('.rental'));
+  $('#show-rental-form').on('click', function(e) {
+    e.preventDefault();
+    $('#rental-form').toggle();
+    $(this).toggle();
+  });
+
+  $('#remove-rental').on('click', function() {
+    $('#book_rental_attributes_loaner_id').val('')
+  })
 });

@@ -11,6 +11,7 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.build_rental
     @author = Author.new
     @genre = Genre.new
   end
@@ -18,10 +19,15 @@ class BooksController < ApplicationController
   def edit
     @author = Author.new
     @genre = Genre.new
+    @book.build_rental unless @book.rental
   end
 
   def create
     @book = Book.new(book_params.except(:status))
+
+    if rental_params_present?
+      @book.build_rental(book_params[:rental])
+    end
 
     respond_to do |format|
       if @book.save
@@ -104,6 +110,11 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :purchased, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :loan_date, :return_date])
+      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :purchased, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
     end
+
+  def rental_params_present?
+    rental_params = params.dig(:book, :rental)
+    rental_params && rental_params.values.any?(&:present?)
+  end
 end

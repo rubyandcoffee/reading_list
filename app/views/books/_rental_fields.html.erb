@@ -1,34 +1,24 @@
-<div class="nested-fields rental">
-  <%= f.hidden_field :_destroy %>
-  <% if @book.rental && @book.outstanding_rental? %>
+<div class="nested-fields">
+  <% if @book.rental&.persisted? && @book.rental.active? %>
     <p class="rental-text">
       This book is currently being rented from <%= @book.rental.loaner.name %>.
     </p>
-    <% if @book.rental.loaner.week_duration.present? %>
-      <p class="rental-text">
-        It is due to be returned on <%= (@book.rental.loaner.week_duration.weeks).strftime('%d %B') %>
-      </p>
-    <% end %>
+    <p class="rental-text">
+      It is due to be returned soon
+    </p>
     <div class="form-field">
-      <%= f.label :return_date, "If you have returned this rental, when was this?", style: "display: block" %>
-      <%= f.datetime_field :return_date %>
-      <%= link_to_remove_association f do %>
-        <i class="fa-solid fa-xmark"></i>
-      <% end %>
-      <span class="small-text">(optional)</span>
+      <%= f.label :active, 'Status' %>
+      <%= f.select :active, options_for_select([['Outstanding', true], ['Returned to loaner', false]]) %>
     </div>
+  <% elsif @book.rental&.persisted? %>
+    <p>This book was borrowed from <%= @book.rental.loaner.name %></p>
   <% else %>
-    <div class="form-field">
-      <%= f.label :loaner_id, 'Who did you borrow this from?', style: 'display: block' %>
-      <%= f.select :loaner_id, Loaner.all.collect { |loaner| [ loaner.name, loaner.id ] }, class: 'form-control', style: 'width: 200px;' %>
-    <div>
-    <div class="form-field">
-      <%= f.label :loan_date, style: "display: block" %>
-      <%= f.datetime_field :loan_date %>
-      <%= link_to_remove_association f do %>
-        <i class="fa-solid fa-xmark"></i>
+    <div id="rental-form" class="form-field hidden">
+      <%= f.label :loaner_id %>
+      <%= f.collection_select(:loaner_id, Loaner.all, :id, :name, prompt: true) %>
+      <%= button_tag(type: 'button', id: 'remove-rental', class: 'btn btn-sm btn-outline-warning') do %>
+        Reset Rental
       <% end %>
     </div>
   <% end %>
-  <%= f.hidden_field :year, value: DateTime.now.year %>
 </div>

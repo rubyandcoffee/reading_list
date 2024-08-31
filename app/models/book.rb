@@ -56,10 +56,6 @@ class Book < ApplicationRecord
     current_state.humanize
   end
 
-  def outstanding_rental?
-    rental && rental.return_date.nil?
-  end
-
   def short?
     total_pages && total_pages < 200
   end
