@@ -23,12 +23,13 @@ class Book < ApplicationRecord
   scope :current_state, -> (state) do
     if state == 'unread'
       # because "pending" won't exist in the database as it's the default state
-      left_outer_joins(:book_transitions).where(book_transitions: {to_state: nil})
+      left_outer_joins(:book_transitions)
+        .where('book_transitions.to_state IS NULL OR book_transitions.to_state = ?', 'unread')
     else
       # else return all the requested "states" (but only the most recent)
       # most_recent: true is very important here as we only want to return
       # a book's most recent state.
-      joins(:book_transitions).where(book_transitions: {most_recent: true}).where(book_transitions: {to_state: state})
+      joins(:book_transitions).where(book_transitions: {most_recent: true, to_state: state})
     end
   end
 
