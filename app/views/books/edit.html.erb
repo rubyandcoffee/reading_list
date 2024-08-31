@@ -13,13 +13,11 @@
     <% end %>
 
     <%= render 'form', book: @book, form: form %>
-  
-    <% if @book.in_state?(:read) %>
-      <div class="form-field">
-        <%= form.label 'Rating', style: 'display: block' %>
-        <%= form.select :rating, 1..5, class: 'form-select' %>
-      </div>
-    <% end %>
+
+    <div id="rating" class="form-field hidden">
+      <%= form.label 'Rating', style: 'display: block' %>
+      <%= form.select :rating, 1..5, class: 'form-select' %>
+    </div>
     <%= form.submit 'Update book', class: 'btn btn-success' %>
   <% end %>
 </div>
