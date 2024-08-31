@@ -2,7 +2,7 @@
   <div class="row row-cols-lg-auto g-7 align-items-center">
     <div class="col-12">
       <%= f.label :books_genre_name_eq, 'Genre' %>
-      <%= f.select :books_genre_name_eq, Genre.all.collect(&:name), { include_blank: true }, class: 'form-select' %>
+      <%= f.select :books_genre_name_eq, Genre.order(:name).collect(&:name), { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12 search-and-reset">
       <%= f.submit 'Search', class: 'btn btn-success search-button' %>

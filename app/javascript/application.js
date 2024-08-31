@@ -7,6 +7,33 @@ import "chartkick"
 import "Chart.bundle"
 import "@nathanvda/cocoon"
 
-$(".new-goal").on('click', function() {
-  $('.new-goal').text('Add another month');
+document.addEventListener('turbo:load', () => {
+  let $bookGoals = $('#book-goals');
+  let $addGoal = $('#add-goal');
+
+  $bookGoals.on('cocoon:after-insert', function() {
+    $addGoal
+      .text('Add another month')
+      .removeClass('btn-outline-success')
+      .addClass('btn-outline-primary');
+  });
+
+  $bookGoals.on('cocoon:after-remove', function() {
+    if ($('.book-goal').length === 0) {
+      $addGoal
+        .text('Are you reading it this year?')
+        .removeClass('btn-outline-primary')
+        .addClass('btn-outline-success');
+    }
+  });
+
+  $('#show-rental-form').on('click', function(e) {
+    e.preventDefault();
+    $('#rental-form').toggle();
+    $(this).toggle();
+  });
+
+  $('#remove-rental').on('click', function() {
+    $('#book_rental_attributes_loaner_id').val('')
+  })
 });
