@@ -12,14 +12,14 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @book.build_rental
-    @author = Author.new
-    @genre = Genre.new
+    @book.build_author unless @book.author
+    @book.build_genre unless @book.genre
   end
 
   def edit
-    @author = Author.new
-    @genre = Genre.new
-    @book.build_rental unless @book.rental
+    if rental_params_present?
+      @book.build_rental unless @book.rental
+    end
   end
 
   def create
