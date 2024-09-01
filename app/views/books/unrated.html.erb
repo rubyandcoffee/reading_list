@@ -2,7 +2,7 @@
 <% @books.sort_by { |b| b.author.surname }.each do |book| %>
   <p>
     <%= book.title %> by <%= book.author.full_name %>
-    <% if book.current_state == 'read' %>
+    <% if book.status == 'read' %>
       (read)
     <% end %>
   </p>

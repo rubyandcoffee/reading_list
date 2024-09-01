@@ -30,12 +30,12 @@
 <h4>Reading Details</h4>
 <div class="form-field">
   <%= form.label 'Status', style: 'display: block;' %>
-  <%= form.collection_select :status, @book.allowed_transitions, :to_s, :humanize, include_blank: true, class: 'form-select' %>
+  <%= form.collection_select :status, Book::STATUSES, :to_s, :humanize, include_blank: true, class: 'form-select' %>
   <span class="small-text">
     <% if book.new_record? %>
-      If you do not select a status, it will automatically be set to '<%= @book.current_state.humanize %>'.
+      If you do not select a status, it will automatically be set to '<%= @book.status %>'.
     <% else %>
-      This book is currently set to '<%= @book.current_state.humanize %>'
+      This book is currently set to '<%= @book.status %>'
     <% end %>
   </span>
 </div>

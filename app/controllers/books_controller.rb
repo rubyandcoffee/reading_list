@@ -29,7 +29,6 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
         format.html { redirect_to books_url, notice: "#{@book.title} has been added to your bookshelf" }
         format.json { render :show, status: :created, location: @book }
       else
@@ -41,9 +40,7 @@ class BooksController < ApplicationController
 
   def update
     respond_to do |format|
-      @book.state_machine.transition_to!(book_params[:status]) if book_params[:status].present?
-
-      if @book.update(book_params.except(:status))
+      if @book.update(book_params)
         format.html { redirect_to books_url, notice: "#{@book.title} has been updated" }
         format.json { render :show, status: :ok, location: @book }
       else
@@ -66,7 +63,7 @@ class BooksController < ApplicationController
   end
 
   def unrated
-    @books = Book.current_state('read').where(rating: nil)
+    @books = Book.where(status: 'read', rating: nil)
   end
   def update_rating
     if @book.update(rating: params[:rating])
@@ -110,7 +107,7 @@ class BooksController < ApplicationController
   end
 
   def generator
-    book = Book.includes(:book_transitions).where(book_transitions: { to_state: 'unread', most_recent: true }).pluck(:book_id).sample
+    book = Book.where(status: 'unread').pluck(:id).sample
     @book = Book.find(book)
   end
 

@@ -1,6 +1,6 @@
 <div id="right-sidebar">
-  <h5>You have <%= Book.in_state(:tbr).count %> books on your TBR list:</h5>
-  <% Book.in_state(:tbr).each do |book| %>
+  <h5>You have <%= Book.where(status: 'tbr').count %> books on your TBR list:</h5>
+  <% Book.where(status: 'tbr').includes(:genre, :author, :rental).each do |book| %>
     <div class="card">
       <div class="card-body">
         <div class="pull-right">
@@ -24,9 +24,6 @@
               due on <%= (book.rental.loaner.week_duration.weeks).strftime("%d %B") %>
             <% end %>
           <% end %>
-        </p>
-        <p class="card-text <%= stale?(book) ? 'stale-book' : 'fresh-book' %>">
-          Added on <%= book.book_transitions.last.created_at.strftime("%d %B") %>
         </p>
         <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
       </div>
