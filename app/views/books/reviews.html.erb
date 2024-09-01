@@ -1,0 +1,70 @@
+<h3 class="text-center" style="margin-top: 20px; margin-bottom: 50px;">Top 3 book reviews</h3>
+<% if @books.any? %>
+  <h4>
+    <i class="fa-regular fa-thumbs-up"></i>
+    5 Star Reviews
+    <% 5.times do |_| %>
+      <i class="fa-solid fa-star"></i>
+    <% end %>
+  </h4>
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Genres</h5>
+      <ol>
+        <% RatingService.rate_records(Genre, 5, 'genres.*').each do |genre| %>
+          <li><%= genre.name %></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-md-4">
+      <h5>Nationalities</h5>
+      <ol>
+        <% RatingService.rate_records(Author, 5, 'authors.nationality').each do |author| %>
+          <li><%= author.nationality %></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-md-4">
+      <h5>Authors</h5>
+      <ol>
+        <% RatingService.rate_records(Author, 5, 'authors.*').each do |author| %>
+          <li><%= author.forename %> <%= author.surname %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+  <hr>
+  <h4>
+    <i class="fa-regular fa-thumbs-down"></i>
+    1 Star Reviews
+    <i class="fa-solid fa-star"></i>
+  </h4>
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Genres</h5>
+      <ol>
+        <% RatingService.rate_records(Genre, 1, 'genres.*').each do |genre| %>
+          <li><%= genre.name %></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-md-4">
+      <h5>Nationalities</h5>
+      <ol>
+        <% RatingService.rate_records(Author, 1, 'authors.nationality').each do |author| %>
+          <li><%= author.nationality %></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-md-4">
+      <h5>Authors</h5>
+      <ol>
+        <% RatingService.rate_records(Author, 1, 'authors.*').each do |author| %>
+          <li><%= author.forename %> <%= author.surname %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+<% else %>
+  <p>You have no reviews. Please add some.</p>
+<% end %>

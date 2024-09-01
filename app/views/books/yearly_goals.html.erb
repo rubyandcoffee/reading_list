@@ -13,8 +13,8 @@
         <%= @books.filter_by_length('Long').count %> long books.
       </p>
       <p>
-        You have already read <%= @books.current_state('read').count %> books this year (not including dnf),<br>
-        <%= @books.count - @books.current_state('read').count %> left to go.
+        You have already read <%= @books.where(status: 'read').count %> books this year (not including dnf),<br>
+        <%= @books.count - @books.where(status: 'read').count %> left to go.
       </p>
     </div>
     <div class="col-md-6">

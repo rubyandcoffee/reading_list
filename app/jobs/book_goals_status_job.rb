@@ -7,8 +7,8 @@ class BookGoalsStatusJob < ApplicationJob
     current_month = Date::MONTHNAMES[DateTime.current.month]
     BookGoal.where(month: current_month, year: current_year).each do |goal|
       book = goal.book
-      if book.current_state == 'unread'
-        book.transition_to(:tbr)
+      if book.status == 'unread'
+        book.update_attribute(:status, 'tbr')
       end
     end
   end

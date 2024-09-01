@@ -31,8 +31,8 @@
                   <%= link_to book.title, edit_book_path(book) %>
                   <% if !book.purchased? %>
                     <span class="badge rounded-pill bg-danger">
-                      <%= book.current_state.humanize %>
-                      <span class="visually-hidden"><%= book.current_state.humanize %></span>
+                      <%= book.status %>
+                      <span class="visually-hidden"><%= book.status %></span>
                     </span>
                   <% end %>
                   <% if book.rating.present? %>
