@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'books/buy', to: 'books#buy'
   get 'books/generator', to: 'books#generator'
   get 'books/export', to: 'books#export'
+  get 'books/unrated', to: 'books#unrated'
   post 'books/remove_from_shelf/:id', to: 'books#remove_from_shelf'
 
   resources :genres
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       post :import
+    end
+    member do
+      patch 'update_rating'
     end
   end
 

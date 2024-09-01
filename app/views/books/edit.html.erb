@@ -16,7 +16,7 @@
 
     <div id="rating" class="form-field hidden">
       <%= form.label 'Rating', style: 'display: block' %>
-      <%= form.select :rating, 1..5, class: 'form-select' %>
+      <%= form.select :rating, (1..5).to_a, { include_blank: true }, { class: 'form-select' } %>
     </div>
     <%= form.submit 'Update book', class: 'btn btn-success' %>
   <% end %>

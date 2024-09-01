@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy, remove_from_shelf ]
+  before_action :set_book, only: %i[ show edit update destroy remove_from_shelf update_rating ]
 
   def index
     @q = Book.ransack(params[:q])
@@ -63,6 +63,19 @@ class BooksController < ApplicationController
 
   def buy
     @books = Book.where(purchased: false)
+  end
+
+  def unrated
+    @books = Book.current_state('read').where(rating: nil)
+  end
+  def update_rating
+    if @book.update(rating: params[:rating])
+      flash[:notice] = "Rating updated"
+      render json: { rating: @book.rating }, status: :ok
+    else
+      flash[:notice] = 'Failed to update rating'
+      render json: { error: 'Failed to update rating' }, status: :unprocessable_entity
+    end
   end
 
   def export
