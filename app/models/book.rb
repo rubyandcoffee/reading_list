@@ -2,9 +2,9 @@ class Book < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :author
-  belongs_to :genre
   belongs_to :series, optional: true
   has_many :book_goals, dependent: :destroy
+  has_and_belongs_to_many :genres
   has_one :rental, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_01_113903) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_01_201805) do
   create_table "authors", force: :cascade do |t|
     t.string "forename"
     t.string "surname"
@@ -29,22 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_113903) do
     t.index ["book_id"], name: "index_book_goals_on_book_id"
   end
 
-  create_table "book_transitions", force: :cascade do |t|
-    t.string "to_state", null: false
-    t.text "metadata", default: "{}"
-    t.integer "sort_key", null: false
-    t.integer "book_id", null: false
-    t.boolean "most_recent", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id", "most_recent"], name: "index_book_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["book_id", "sort_key"], name: "index_book_transitions_parent_sort", unique: true
-  end
-
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.integer "author_id", null: false
-    t.integer "genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating"
@@ -53,11 +40,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_113903) do
     t.integer "total_pages"
     t.boolean "purchased", default: true
     t.datetime "deleted_at"
-    t.string "status", default: "unread"
+    t.string "status", default: "Unread"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
-    t.index ["genre_id"], name: "index_books_on_genre_id"
     t.index ["series_id"], name: "index_books_on_series_id"
+  end
+
+  create_table "books_genres", id: false, force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "genre_id", null: false
+    t.index ["book_id"], name: "index_books_genres_on_book_id"
+    t.index ["genre_id"], name: "index_books_genres_on_genre_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -93,9 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_113903) do
   end
 
   add_foreign_key "book_goals", "books"
-  add_foreign_key "book_transitions", "books"
   add_foreign_key "books", "authors"
-  add_foreign_key "books", "genres"
   add_foreign_key "books", "series"
   add_foreign_key "rentals", "books"
   add_foreign_key "rentals", "loaners"
