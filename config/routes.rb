@@ -4,12 +4,6 @@ Rails.application.routes.draw do
   get 'books/generator', to: 'books#generator'
   get 'books/export', to: 'books#export'
 
-  namespace :books do
-    resources :reading_list, only: [:index]
-    get 'reading_list/add_book', to: 'reading_list#add_book'
-    post 'reading_list/update_list', to: 'reading_list#update_list'
-  end
-
   resources :genres
 
   resources :authors do
