@@ -23,12 +23,6 @@ module BooksHelper
     end
   end
 
-  def completed_series?(series)
-    books_in_series = series.books.count
-    total = series.books.where(status: 'read').count + series.books.where(status: 'dnf').count
-    total == books_in_series
-  end
-
   def time_to_read(book)
     return unless book.total_pages.present?
 

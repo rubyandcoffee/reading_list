@@ -2,7 +2,8 @@ class SeriesController < ApplicationController
   before_action :set_series, only: %i[ show edit update destroy ]
 
   def index
-    @series = Series.all
+    series = Series.includes(:author)
+    @sorted_series = series.sort_by { |books| Series.completed?(books) ? 0 : 1 }
   end
 
   def show
