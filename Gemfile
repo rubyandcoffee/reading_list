@@ -10,7 +10,6 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 gem "redis", "~> 4.0"
-gem 'statesman', '~> 10.0.0'
 gem "bootstrap"
 gem "sassc-rails"
 gem 'ransack'

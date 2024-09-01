@@ -21,16 +21,15 @@
           <%= msg %>
         </div>
       <% end %>
-      <% if currently_reading.present? %>
+      <% if Book.where(status: 'reading').any? %>
         <div class="alert alert-primary">
           <div class="row justify-content-between currently-reading-banner">
             <div class="col">
               Currently reading:
-              <%= currently_reading.title %>
-              by <%= currently_reading.author.full_name %>
+              <%= Book.where(status: 'reading').last.title %>
+              by <%= Book.where(status: 'reading').last.author.full_name %>
               <span class="small-text">
-                <i>(Started reading on <%= currently_reading.book_transitions.last.created_at.strftime("%d %B") %>)</i>
-                <%= link_to 'Update Status', edit_book_path(currently_reading) %>
+                <%= link_to 'Update Status', edit_book_path(Book.where(status: 'reading').last) %>
               </span>
             </div>
           </div>

@@ -4,7 +4,6 @@ class Book < ApplicationRecord
   belongs_to :author
   belongs_to :genre
   belongs_to :series, optional: true
-  has_many :book_transitions, autosave: false, dependent: :destroy
   has_many :book_goals, dependent: :destroy
   has_one :rental, dependent: :destroy
 
@@ -14,49 +13,18 @@ class Book < ApplicationRecord
 
   accepts_nested_attributes_for :book_goals, :rental, allow_destroy: true
 
-  delegate :can_transition_to?, :current_state, :history, :last_transition, :last_transition_to,
-           :transition_to!, :transition_to, :in_state?, :allowed_transitions, to: :state_machine
-
-  include Statesman::Adapters::ActiveRecordQueries[
-    transition_class: BookTransition,
-    initial_state: :unread
-  ]
-
-  scope :current_state, -> (state) do
-    if state == 'unread'
-      # because "pending" won't exist in the database as it's the default state
-      left_outer_joins(:book_transitions)
-        .where('book_transitions.to_state IS NULL OR book_transitions.to_state = ?', 'unread')
-    else
-      # else return all the requested "states" (but only the most recent)
-      # most_recent: true is very important here as we only want to return
-      # a book's most recent state.
-      joins(:book_transitions).where(book_transitions: {most_recent: true, to_state: state})
-    end
-  end
-
   scope :long_books, -> { where('total_pages >= ?', 400) }
   scope :medium_books, -> { where('total_pages >= ? AND total_pages < ?', 200, 400) }
   scope :short_books, -> { where('total_pages < ?', 200) }
 
-  def self.ransackable_scopes(auth_object = nil)
-    %w[current_state]
-  end
+  STATUSES = %w[unread read dnf reading tbr]
 
   def self.ransackable_associations(auth_object = nil)
-    ["author", "genre", "book_goal"]
+    %w[author genre book_goal]
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[title total_pages]
-  end
-
-  def state_machine
-    @state_machine ||= BookStateMachine.new(self, transition_class: BookTransition, association_name: :book_transitions)
-  end
-
-  def status
-    current_state.humanize
+    %w[title total_pages status]
   end
 
   def short?

@@ -1,20 +1,14 @@
 module BooksHelper
-  def stale?(book)
-    if book.book_transitions.any?
-      book.book_transitions.last.created_at < 1.month.ago
-    end
-  end
-
   def state_klass(book)
-    if state_klasses.include?(book.current_state)
-      state_klasses.fetch(book.current_state)
+    if state_klasses.include?(book.status)
+      state_klasses.fetch(book.status)
     else
       'hidden'
     end
   end
 
   def checkbox_icon(book)
-    checkbox_klasses.fetch(book.current_state)
+    checkbox_klasses.fetch(book.status)
   end
 
   def length_klass(book)
@@ -31,7 +25,7 @@ module BooksHelper
 
   def completed_series?(series)
     books_in_series = series.books.count
-    total = series.books.current_state('read').count + series.books.current_state('dnf').count
+    total = series.books.where(status: 'read').count + series.books.where(status: 'dnf').count
     total == books_in_series
   end
 

@@ -93,4 +93,25 @@ document.addEventListener('turbo:load', () => {
       }
     });
   });
+
+  $('.rating-option').on('click', function(e) {
+    e.preventDefault();
+    let bookId = $(this).data('book-id');
+    let newRating = $(this).data('rating');
+
+    console.log('book is: ' + bookId);
+    console.log('rating is: ' + newRating);
+
+    $.ajax({
+      url: `/books/${bookId}/update_rating`,
+      type: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify({ rating: newRating }),
+      success: function(data) {
+        location.reload();
+      },
+    });
+  });
 });
