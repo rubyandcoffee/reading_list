@@ -24,7 +24,10 @@
                 <%= book.title %>
               </h5>
               <p class="card-text">
-                <strong>Genre:</strong> <%= link_to book.genre.name, book.genre %><br>
+                <strong>Genres:</strong>
+                <% book.genres.each do |genre| %>
+                  <%= link_to genre.name, genre %>
+                <% end %><br>
                 <strong>Currently on shelf:</strong> <%= book.status %>
               </p>
               <div class="d-inline-block">

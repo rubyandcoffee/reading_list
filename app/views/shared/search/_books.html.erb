@@ -14,11 +14,11 @@
     </div>
     <div class="col-12">
       <%= f.label :author_gender_eq, 'Gender' %>
-      <%= f.select :author_gender_eq, ['Female', 'Male'], { include_blank: true }, class: 'form-select' %>
+      <%= f.select :author_gender_eq, %w[Female Male], { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12">
-      <%= f.label :genre_name_eq, 'Genre' %>
-      <%= f.select :genre_name_eq, Genre.all.collect(&:name), { include_blank: true }, class: 'form-select' %>
+      <%= f.label :genres_name_eq, 'Genre' %>
+      <%= f.select :genres_name_eq, Genre.pluck(:name).uniq, { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12">
       <%= f.label :status, 'Status' %>

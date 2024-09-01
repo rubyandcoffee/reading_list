@@ -284,3 +284,12 @@ form {
   text-decoration: underline;
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
 }
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox .form-check-input {
+  margin-right: 8px; /* Space between checkbox and label */
+}

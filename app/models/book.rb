@@ -9,7 +9,6 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :author_id, presence: true
-  validates :genre_id, presence: true
 
   accepts_nested_attributes_for :book_goals, :rental, allow_destroy: true
 
@@ -20,7 +19,7 @@ class Book < ApplicationRecord
   STATUSES = %w[unread read dnf reading tbr]
 
   def self.ransackable_associations(auth_object = nil)
-    %w[author genre book_goal]
+    %w[author genres book_goal]
   end
 
   def self.ransackable_attributes(auth_object = nil)
