@@ -46,7 +46,6 @@ def create_genres
   end
 end
 
-# Method to create books
 def create_books
   books_data = [
     { title: "The Old Man and the Sea", author: Author.find_by_surname("Hemingway"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 127 },
@@ -61,7 +60,6 @@ def create_books
   end
 end
 
-# Create Loaners
 def create_loaners
   loaners_data = [
     { name: "Library" },
