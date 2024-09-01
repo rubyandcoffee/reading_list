@@ -14,7 +14,7 @@
 
     <%= render 'form', book: @book, form: form %>
 
-    <div id="rating" class="form-field hidden">
+    <div id="rating" class="form-field <% 'hidden' unless @book.status === 'read' %>" style="width: 60px;">
       <%= form.label 'Rating', style: 'display: block' %>
       <%= form.select :rating, (1..5).to_a, { include_blank: true }, { class: 'form-select' } %>
     </div>
