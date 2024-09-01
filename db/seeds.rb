@@ -1,6 +1,5 @@
 # db/seeds.rb
 
-# Method to create authors
 def create_authors
   authors_data = [
     { forename: "Ernest", surname: "Hemingway", gender: "Male", nationality: "American" },
@@ -29,24 +28,36 @@ def create_series
   end
 end
 
+def create_genres
+  genres = [
+    'Action',
+    'Adventure',
+    'Literary Fiction',
+    'Fantasy',
+    'Horror',
+    'Mystery',
+    'Romance',
+    'Sci-Fi',
+    'Thriller'
+  ]
+
+  genres.each do |genre_name|
+    Genre.find_or_create_by(name: genre_name)
+  end
+end
+
 # Method to create books
 def create_books
   books_data = [
-    { title: "The Old Man and the Sea", author_surname: "Hemingway" },
-    { title: "Pride and Prejudice", author_surname: "Austen" },
-    { title: "War and Peace", author_surname: "Tolstoy" },
-    { title: "Harry Potter and the Philosopher's Stone", author_surname: "Rowling" },
-    { title: "Adventures of Huckleberry Finn", author_surname: "Twain" }
+    { title: "The Old Man and the Sea", author: Author.find_by_surname("Hemingway"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 127 },
+    { title: "Pride and Prejudice", author: Author.find_by_surname("Austen"), genre: Genre.find_by(name: 'Romance'), total_pages: 350 },
+    { title: "War and Peace", author: Author.find_by_surname("Tolstoy"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 1350 },
+    { title: "Harry Potter and the Philosopher's Stone", author: Author.find_by_surname("Rowling"), genre: Genre.find_by(name: 'Fantasy'), total_pages: 223 },
+    { title: "Adventures of Huckleberry Finn", author: Author.find_by_surname("Twain"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 350 }
   ]
 
   books_data.each do |book|
-    author = Author.find_by(surname: book[:author_surname])
-
-    if author
-      Book.create!(title: book[:title], author_id: author.id)
-    else
-      puts "Author not found for book: #{book[:title]}"
-    end
+    Book.create!(book)
   end
 end
 
@@ -63,14 +74,13 @@ def create_loaners
   end
 end
 
-# Method to create rentals
 def create_rentals
   rentals_data = [
     { book_id: Book.find_by(title: "The Old Man and the Sea").id, loaner_id: Loaner.first.id },
-    { book_id: Book.find_by(title: "Pride and Prejudice").id, loaner_id: Loaner.first.id },
-    { book_id: Book.find_by(title: "War and Peace").id, loaner_id: Loaner.first.id },
+    { book_id: Book.find_by(title: "Pride and Prejudice").id, loaner_id: Loaner.second.id },
+    { book_id: Book.find_by(title: "War and Peace").id, loaner_id: Loaner.third.id },
     { book_id: Book.find_by(title: "Harry Potter and the Philosopher's Stone").id, loaner_id: Loaner.first.id },
-    { book_id: Book.find_by(title: "Adventures of Huckleberry Finn").id, loaner_id: Loaner.first.id }
+    { book_id: Book.find_by(title: "Adventures of Huckleberry Finn").id, loaner_id: Loaner.second.id }
   ]
 
   rentals_data.each do |rental|
@@ -78,11 +88,8 @@ def create_rentals
   end
 end
 
-# Method to create series
-
-
-# Run the methods to seed data
 create_authors
+create_genres
 create_books
 create_loaners
 create_rentals
