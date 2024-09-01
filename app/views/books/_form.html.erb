@@ -39,6 +39,9 @@
     <% end %>
   </span>
 </div>
+<div class="form-field <%= 'hidden' unless @book.rental.present? && !@book.purchased %>" id="remove-from-shelf">
+  <button class="soft-delete-book btn btn-sm btn-outline-info" data-book-id="<%= @book.id %>">Remove from shelf</button>
+</div>
 <div class="form-field" style="display: flex">
   <%= form.label :purchased, 'Owned', style: 'display: block;' %>
   <%= form.radio_button :purchased, true, style: 'margin-left: 5px;' %>

@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :author
   belongs_to :genre
   belongs_to :series, optional: true
