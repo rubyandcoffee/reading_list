@@ -1,9 +1,11 @@
 <h3>My Shopping List</h3>
+<ul>
 <% @books.sort_by { |b| b.author.surname }.each do |book| %>
-  <p>
+  <li style="margin-bottom: 10px;">
     <%= book.title %> by <%= book.author.full_name %>
-    <% if book.current_state == 'read' %>
+    <% if book.status == 'read' %>
       (read)
     <% end %>
-  </p>
+  </li>
 <% end %>
+</ul>

@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
   get 'books/yearly_goals', to: 'books#yearly_goals'
+  get 'books/reviews', to: 'books#reviews'
   get 'books/buy', to: 'books#buy'
   get 'books/generator', to: 'books#generator'
   get 'books/export', to: 'books#export'
-
-  namespace :books do
-    resources :reading_list, only: [:index]
-    get 'reading_list/add_book', to: 'reading_list#add_book'
-    post 'reading_list/update_list', to: 'reading_list#update_list'
-  end
+  get 'books/unrated', to: 'books#unrated'
+  post 'books/remove_from_shelf/:id', to: 'books#remove_from_shelf'
 
   resources :genres
 
@@ -21,6 +18,9 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       post :import
+    end
+    member do
+      patch 'update_rating'
     end
   end
 

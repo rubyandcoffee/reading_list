@@ -6,6 +6,7 @@ class CsvImportService
       # map the CSV columns to your database columns
       book_hash = {}
       book_hash[:title] = row['Title']
+      book_hash[:status] = row['Status']
       book_hash[:author_id] = row['Author ID']
       book_hash[:genre_id] = row['Genre ID']
       book_hash[:rating] = row['Rating']
