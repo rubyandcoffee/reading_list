@@ -6,7 +6,8 @@ def create_authors
     { forename: "Jane", surname: "Austen", gender: "Female", nationality: "British" },
     { forename: "Leo", surname: "Tolstoy", gender: "Male", nationality: "Russian" },
     { forename: "J.K.", surname: "Rowling", gender: "Female", nationality: "British" },
-    { forename: "Mark", surname: "Twain", gender: "Male", nationality: "American" }
+    { forename: "Mark", surname: "Twain", gender: "Male", nationality: "American" },
+    { forename: "Stephanie", surname: "Garber", gender: "Female", nationality: "American" },
   ]
 
   authors_data.each do |author|
@@ -16,11 +17,9 @@ end
 
 def create_series
   series_data = [
-    { title: "The Old Man and the Sea", series_name: nil },
-    { title: "Pride and Prejudice", series_name: "Jane Austen Collection" },
-    { title: "War and Peace", series_name: nil },
-    { title: "Harry Potter and the Philosopher's Stone", series_name: "Harry Potter Series" },
-    { title: "Adventures of Huckleberry Finn", series_name: nil }
+    { name: "Jane Austen Collection", author: Author.find_by(forename: "Jane", surname: "Austen") },
+    { name: "Harry Potter Series", author: Author.find_by(forename: "J.K.", surname: "Rowling") },
+    { name: "Caravel Series", author: Author.find_by(forename: 'Stephanie', surname: 'Garber') },
   ]
 
   series_data.each do |series|
@@ -48,11 +47,8 @@ end
 
 def create_books
   books_data = [
-    { title: "The Old Man and the Sea", author: Author.find_by_surname("Hemingway"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 127 },
-    { title: "Pride and Prejudice", author: Author.find_by_surname("Austen"), genre: Genre.find_by(name: 'Romance'), total_pages: 350 },
-    { title: "War and Peace", author: Author.find_by_surname("Tolstoy"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 1350 },
-    { title: "Harry Potter and the Philosopher's Stone", author: Author.find_by_surname("Rowling"), genre: Genre.find_by(name: 'Fantasy'), total_pages: 223 },
-    { title: "Adventures of Huckleberry Finn", author: Author.find_by_surname("Twain"), genre: Genre.find_by(name: 'Literary Fiction'), total_pages: 350 }
+    { title: "Caravel", author: Author.find_by_surname("Garber"), genre: Genre.find_by(name: 'Fantasy'), series: Series.find_by(name: 'Caravel Series'), total_pages: 223 },
+    { title: "Adventures of Huckleberry Finn", author: Author.find_by_surname("Twain"), genre: Genre.find_by(name: 'Literary Fiction'), series: nil, total_pages: 350 }
   ]
 
   books_data.each do |book|
