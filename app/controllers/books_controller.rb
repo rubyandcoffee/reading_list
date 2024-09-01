@@ -111,6 +111,10 @@ class BooksController < ApplicationController
     @book = Book.find(book)
   end
 
+  def reviews
+    @books = Book.where.not(rating: nil)
+  end
+
   def remove_from_shelf
     if @book.destroy
       render json: { message: 'Book removed from shelf', redirect_url: books_path }, status: :ok
