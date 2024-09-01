@@ -1,6 +1,6 @@
 # Project Name
 
-A Ruby on Rails application for [describe your application's purpose, e.g., "managing a library of books", "tracking personal expenses", etc.].
+A Ruby on Rails application for managing your library and tracking your reading goals.
 
 ## Table of Contents
 
@@ -17,11 +17,12 @@ A Ruby on Rails application for [describe your application's purpose, e.g., "man
 
 ## Features
 
-- Manage books and authors
+- Manage books, authors, genres, and series
 - Search functionality using Ransack
-- User authentication and authorization
-- Export data to PDF using Wicked PDF
-- Paginate results with will_paginate
+- Export your book shopping list to PDF using Wicked PDF
+- Add ratings to your books
+- Track your reading goals
+- Track the individual status of each of your books
 
 ## Getting Started
 
@@ -34,7 +35,6 @@ Make sure you have the following installed on your system:
 - Ruby 3.2.2
 - Rails 7.0.8.4
 - SQLite3
-- Redis
 
 You can manage your Ruby versions using [chruby](https://github.com/postmodern/chruby).
 
@@ -43,8 +43,8 @@ You can manage your Ruby versions using [chruby](https://github.com/postmodern/c
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
+    git clone https://github.com/rubyandcoffee/reading_list.git
+    cd reading_list
     ```
 
 2. Install dependencies:
@@ -67,11 +67,17 @@ Start the Rails server:
 rails server
 ```
 
+Alternatively you can build and run in docker:
+```sh
+docker build -t reading_list .
+docker run -p 3000:3000 reading_list
+```
 Open your browser and navigate to `http://localhost:3000`.
 
 ## Usage
 
-Describe how to use the application, including any important functionality and navigation.
+You can easily navigate the application using the navigation bar at the top.
+Filter your books in the search bar at the left, and see your TBR list on the right.
 
 ## Running Tests
 
@@ -79,12 +85,6 @@ To run tests, simply run:
 
 ```sh
 rails test
-```
-
-Or if you're using RSpec:
-
-```sh
-rspec
 ```
 
 ## Deployment
@@ -104,13 +104,3 @@ We welcome contributions! Please follow these steps to contribute:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.# README
-
-A reading list to track your current book inventory, book statuses, yearly reading goals, book shopping list, and much more.
-
-You can also filter by author, genre, status and much more.
-
-#### Build it
-`docker build -t reading_list .`
-
-#### Run it
-`docker run -p 3000:3000 reading_list`
