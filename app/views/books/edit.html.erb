@@ -20,6 +20,10 @@
     </div>
     <%= form.submit 'Update book', class: 'btn btn-success' %>
   <% end %>
+
+  <div class="form-field">
+    <button class="delete-book btn btn-outline-danger" data-book-id="<%= @book.id %>">Permanently delete</button>
+  </div>
 </div>
 <%= render 'books/modals/authors/author_modal', author: @book.author, id: 'authorModal' %>
 <%= render 'books/modals/genres/genre_modal', genre: @book.genre, id: 'genreModal' %>

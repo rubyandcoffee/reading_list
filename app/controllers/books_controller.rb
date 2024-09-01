@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[ show edit update destroy, remove_from_shelf ]
 
   def index
     @q = Book.ransack(params[:q])
@@ -17,9 +17,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    if rental_params_present?
-      @book.build_rental unless @book.rental
-    end
+    @book.build_rental(loaner: Loaner.first) unless @book.rental
   end
 
   def create
@@ -56,11 +54,10 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
-
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book has been deleted" }
-      format.json { head :no_content }
+    if @book.really_destroy!
+      render json: { message: 'Book deleted successfully' }, status: :ok
+    else
+      render json: { message: 'Error deleting book' }, status: :unprocessable_entity
     end
   end
 
@@ -96,12 +93,20 @@ class BooksController < ApplicationController
 
   def yearly_goals
     @book_goals = BookGoal.this_year
-    @books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year}).order(:title).paginate(page: params[:page], per_page: 20)
+    @books = Book.with_deleted.joins(:book_goals).where(book_goals: { year: DateTime.now.year}).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def generator
     book = Book.includes(:book_transitions).where(book_transitions: { to_state: 'unread', most_recent: true }).pluck(:book_id).sample
     @book = Book.find(book)
+  end
+
+  def remove_from_shelf
+    if @book.destroy
+      render json: { message: 'Book removed from shelf', redirect_url: books_path }, status: :ok
+    else
+      render json: { message: 'Error removing book' }, status: :unprocessable_entity
+    end
   end
 
   private

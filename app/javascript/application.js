@@ -8,6 +8,19 @@ import "Chart.bundle"
 import "@nathanvda/cocoon"
 
 document.addEventListener('turbo:load', () => {
+  function getCSRFToken() {
+    return $('meta[name="csrf-token"]').attr('content');
+  }
+
+  // Set up AJAX with CSRF token
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!settings.crossDomain) {
+        xhr.setRequestHeader('X-CSRF-Token', getCSRFToken());
+      }
+    }
+  });
+
   let $bookGoals = $('#book-goals');
   let $addGoal = $('#add-goal');
 
@@ -40,8 +53,44 @@ document.addEventListener('turbo:load', () => {
   $('#book_status').change(function() {
     if ($(this).val() === 'read') {
       $('#rating').show();
+      $('#remove-from-shelf').hide();
+    } else if ($(this).val() === 'dnf') {
+      $('#remove-from-shelf').show();
     } else {
       $('#rating').hide();
+      $('#remove-from-shelf').hide();
     }
+  });
+
+  $('.delete-book').on('click', function() {
+    var bookId = $(this).data('book-id');
+    $.ajax({
+      url: '/books/' + bookId,
+      type: 'DELETE',
+      success: function (result) {
+        // Handle success (e.g., remove the button or row from the page)
+        alert('Book deleted successfully');
+      },
+      error: function (xhr, status, error) {
+        // Handle error
+        alert('Error deleting book: ' + error);
+      }
+    });
+  });
+
+  $('.soft-delete-book').on('click', function() {
+    let bookId = $(this).data('book-id');
+    $.ajax({
+      url: '/books/remove_from_shelf/' + bookId,
+      type: 'POST',
+      success: function (result) {
+        // Handle success (e.g., remove the button or row from the page)
+        alert('Book removed from shelf');
+      },
+      error: function (xhr, status, error) {
+        // Handle error
+        alert('Error removing book: ' + error);
+      }
+    });
   });
 });

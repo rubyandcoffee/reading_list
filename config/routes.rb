@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'books/buy', to: 'books#buy'
   get 'books/generator', to: 'books#generator'
   get 'books/export', to: 'books#export'
+  post 'books/remove_from_shelf/:id', to: 'books#remove_from_shelf'
 
   resources :genres
 

@@ -22,6 +22,7 @@ gem 'ransack_memory'
 gem 'jquery-rails'
 gem 'cocoon'
 gem 'wicked_pdf'
+gem 'paranoia', '~> 2.2'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
