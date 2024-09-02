@@ -12,7 +12,6 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @book.build_rental
-    @book.build_author unless @book.author
   end
 
   def edit
@@ -51,9 +50,11 @@ class BooksController < ApplicationController
 
   def destroy
     if @book.really_destroy!
-      render json: { message: 'Book deleted successfully' }, status: :ok
+      flash[:notice] = 'Book deleted successfully'
+      redirect_to books_path
     else
-      render json: { message: 'Error deleting book' }, status: :unprocessable_entity
+      flash[:alert] = 'Error deleting book'
+      redirect_to books_path
     end
   end
 

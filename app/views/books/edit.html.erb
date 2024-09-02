@@ -22,7 +22,7 @@
   <% end %>
 
   <div class="form-field">
-    <button class="delete-book btn btn-outline-danger" data-book-id="<%= @book.id %>">Permanently delete</button>
+    <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
   </div>
 </div>
 <%= render 'books/modals/authors/author_modal', author: @book.author, id: 'authorModal' %>
