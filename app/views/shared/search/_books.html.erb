@@ -21,8 +21,8 @@
       <%= f.select :genres_name_eq, Genre.pluck(:name).uniq, { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12">
-      <%= f.label :status, 'Status' %>
-      <%= f.select :status, Book::STATUSES, { include_blank: true }, class: 'form-select' %>
+      <%= f.label :status_eq, 'Status' %>
+      <%= f.select :status_eq, Book::STATUSES, { include_blank: true }, class: 'form-select' %>
     </div>
     <div class="col-12 search-and-reset">
       <%= f.submit 'Search', class: 'btn btn-success search-button' %>
