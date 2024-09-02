@@ -51,7 +51,7 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <%= pie_chart @books.joins(:genre).group(:name).count, colors: ["#977B95", "#898DA5", "#85A1A9", "#A1E6CC", "#313633", "#88589E", "#CB9BB7", "#E2C2C5"] %>
+              <%= pie_chart @books.joins(:genres).group('genres.name').count, colors: ["#977B95", "#898DA5", "#85A1A9", "#A1E6CC", "#313633", "#88589E", "#CB9BB7", "#E2C2C5"] %>
               <div class="small-text">Genre</div>
             </div>
             <div class="col-md-4">
