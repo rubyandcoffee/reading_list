@@ -15,7 +15,7 @@
   <% else %>
     <div id="rental-form" class="form-field hidden">
       <%= f.label :loaner_id %>
-      <%= f.collection_select(:loaner_id, Loaner.all, :id, :name, prompt: true) %>
+      <%= f.collection_select(:loaner_id, Loaner.all, :id, :name, include_blank: true) %>
       <%= button_tag(type: 'button', id: 'remove-rental', class: 'btn btn-sm btn-outline-warning') do %>
         Reset Rental
       <% end %>

@@ -11,6 +11,7 @@ class Book < ApplicationRecord
   validates :author_id, presence: true
 
   accepts_nested_attributes_for :book_goals, :rental, allow_destroy: true
+  accepts_nested_attributes_for :rental, allow_destroy: true, reject_if: :all_blank
 
   scope :long_books, -> { where('total_pages >= ?', 400) }
   scope :medium_books, -> { where('total_pages >= ? AND total_pages < ?', 200, 400) }

@@ -19,11 +19,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params.except(:status))
-
-    if rental_params_present?
-      @book.build_rental(book_params[:rental])
-    end
+    @book = Book.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -131,9 +127,4 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
     end
-
-  def rental_params_present?
-    rental_params = params.dig(:book, :rental)
-    rental_params && rental_params.values.any?(&:present?)
-  end
 end
