@@ -26,5 +26,5 @@
   </div>
 </div>
 <%= render 'books/modals/authors/author_modal', author: @book.author, id: 'authorModal' %>
-<%= render 'books/modals/genres/genre_modal', genre: @book.genre, id: 'genreModal' %>
+<%= render 'books/modals/genres/genre_modal', genre: Genre.new, id: 'genreModal' %>
 <%= render 'books/modals/series/series_modal', series: Series.new, id: "seriesModal" %>
