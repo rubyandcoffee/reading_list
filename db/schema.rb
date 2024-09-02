@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_201805) do
     t.integer "total_pages"
     t.boolean "purchased", default: true
     t.datetime "deleted_at"
-    t.string "status", default: "Unread"
+    t.string "status", default: "unread"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
     t.index ["series_id"], name: "index_books_on_series_id"

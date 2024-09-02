@@ -13,7 +13,6 @@ class BooksController < ApplicationController
     @book = Book.new
     @book.build_rental
     @book.build_author unless @book.author
-    @book.build_genre unless @book.genre
   end
 
   def edit
