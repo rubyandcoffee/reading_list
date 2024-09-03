@@ -62,33 +62,15 @@ document.addEventListener('turbo:load', () => {
     }
   });
 
-  $('.delete-book').on('click', function() {
-    var bookId = $(this).data('book-id');
-    $.ajax({
-      url: '/books/' + bookId,
-      type: 'DELETE',
-      success: function (result) {
-        // Handle success (e.g., remove the button or row from the page)
-        alert('Book deleted successfully');
-      },
-      error: function (xhr, status, error) {
-        // Handle error
-        alert('Error deleting book: ' + error);
-      }
-    });
-  });
-
   $('.soft-delete-book').on('click', function() {
     let bookId = $(this).data('book-id');
     $.ajax({
       url: '/books/remove_from_shelf/' + bookId,
       type: 'POST',
       success: function (result) {
-        // Handle success (e.g., remove the button or row from the page)
         alert('Book removed from shelf');
       },
       error: function (xhr, status, error) {
-        // Handle error
         alert('Error removing book: ' + error);
       }
     });
@@ -98,9 +80,6 @@ document.addEventListener('turbo:load', () => {
     e.preventDefault();
     let bookId = $(this).data('book-id');
     let newRating = $(this).data('rating');
-
-    console.log('book is: ' + bookId);
-    console.log('rating is: ' + newRating);
 
     $.ajax({
       url: `/books/${bookId}/update_rating`,

@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result(distinct: true).order(:title).paginate(page: params[:page], per_page: 20)
+    @books = @q.result(distinct: true).includes(:genres, :author).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def show
@@ -12,8 +12,6 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @book.build_rental
-    @book.build_author unless @book.author
-    @book.build_genre unless @book.genre
   end
 
   def edit
@@ -21,11 +19,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params.except(:status))
-
-    if rental_params_present?
-      @book.build_rental(book_params[:rental])
-    end
+    @book = Book.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -52,9 +46,11 @@ class BooksController < ApplicationController
 
   def destroy
     if @book.really_destroy!
-      render json: { message: 'Book deleted successfully' }, status: :ok
+      flash[:notice] = 'Book deleted successfully'
+      redirect_to books_path
     else
-      render json: { message: 'Error deleting book' }, status: :unprocessable_entity
+      flash[:alert] = 'Error deleting book'
+      redirect_to books_path
     end
   end
 
@@ -129,11 +125,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :genre_id, :status, :rating, :series_id, :series_position, :purchased, book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
+      params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
     end
-
-  def rental_params_present?
-    rental_params = params.dig(:book, :rental)
-    rental_params && rental_params.values.any?(&:present?)
-  end
 end

@@ -7,7 +7,10 @@
           by <%= link_to @book.author.full_name, @book.author %>
         </h5>
         <p class="card-text">
-          <strong>Genre:</strong> <%= link_to @book.genre.name, @book.genre %><br>
+          <strong>Genres:</strong>
+          <% book.genres.each do |genre| %>
+            <%= link_to genre.name, genre %><br>
+          <% end %>
           <strong>Currently on shelf:</strong> <%= @book.status %>
         </p>
         <div class="d-inline-block">

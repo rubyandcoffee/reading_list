@@ -15,7 +15,9 @@
           by <%= book.author.full_name %>
         </p>
         <p class="small-text">
-          <i><%= book.genre.name %></i>
+          <% book.genres.each do |genre| %>
+            <i><%= genre.name %></i>
+          <% end %>
         </p>
         <p class="rental-text">
           <% if book.rental.present? %>
