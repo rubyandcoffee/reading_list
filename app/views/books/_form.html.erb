@@ -39,43 +39,39 @@
     <div class="form-field">
       <%= form.label 'Status', style: 'display: block;' %>
       <%= form.collection_select :status, Book::STATUSES, :to_s, :humanize, include_blank: true, class: 'form-select' %>
-      <span class="small-text">
-    <% if book.new_record? %>
-      If you do not select a status, it will automatically be set to '<%= @book.status %>'.
-    <% else %>
-      This book is currently set to '<%= @book.status %>'
-    <% end %>
-  </span>
     </div>
     <div class="form-field <%= 'hidden' unless @book.rental.present? && !@book.purchased %>" id="remove-from-shelf">
-      <button class="soft-delete-book btn btn-sm btn-outline-info" data-book-id="<%= @book.id %>">Remove from shelf</button>
+      <button id="soft-delete-book" class="btn btn-sm btn-outline-info" data-book-id="<%= @book.id %>">Remove from shelf</button>
     </div>
-    <div class="form-field" style="display: flex">
-      <%= form.label :purchased, 'Owned', style: 'display: block;' %>
-      <%= form.radio_button :purchased, true, style: 'margin-left: 5px;' %>
-      <%= form.label :purchased, 'Need to purchase', style: 'display: block; margin-left: 10px;' %>
-      <%= form.radio_button :purchased, false, style: 'margin-left: 5px;' %>
-    </div>
+    <hr>
     <div class="form-field">
+      <h6>Are you reading it this year?</h6>
       <%= form.fields_for :book_goals do |book_goal| %>
         <%= render 'book_goal_fields', f: book_goal %>
       <% end %>
       <% if @book.book_goals.any? %>
         <%= link_to_add_association 'Add another month', form, :book_goals, id: 'add-goal', class: 'btn btn-sm btn-outline-primary', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
       <% else %>
-        <%= link_to_add_association "Are you reading it this year?", form, :book_goals, id: 'add-goal', class: 'btn btn-sm btn-outline-success', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
+        <%= link_to_add_association 'Add month', form, :book_goals, id: 'add-goal', class: 'btn btn-sm btn-outline-success', data: { association_insertion_node: '#book-goals', association_insertion_method: :append } %>
       <% end %>
       <div id="book-goals"></div>
+    </div>
+    <hr>
+    <div class="form-field">
+      <%= form.check_box :purchased, { style: 'margin-right: 5px;' } %>
+      <%= form.label :purchased, 'Purchased' %>
+      <span class="small-text">Remember to uncheck this if you don't own it yet</span>
     </div>
     <div class="form-field">
       <%= form.fields_for :rental do |rental| %>
         <%= render 'rental_fields', f: rental %>
       <% end %>
       <% unless @book.rental&.persisted? %>
-        <a href="#" id="show-rental-form">Are you renting this book?</a>
+        <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-primary">Are you renting this book?</a>
       <% end %>
     </div>
-    <div id="rating" class="form-field <% 'hidden' unless @book.status === 'read' %>">
+    <div id="rating" class="form-field <%= 'hidden' unless @book.status === 'read' %>">
+      <hr>
       <%= form.label :rating, 'Rating' %>
       <div class="rating-container">
         <%= form.select :rating, (1..5).to_a, { include_blank: '?' }, { class: 'form-select', style: 'width: 60px;' } %>

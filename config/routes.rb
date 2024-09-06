@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rentals/destroy'
   get 'books/yearly_goals', to: 'books#yearly_goals'
   get 'books/reviews', to: 'books#reviews'
   get 'books/buy', to: 'books#buy'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :books do
+    resources :rentals, only: :destroy
     collection do
       post :import
     end

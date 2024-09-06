@@ -46,8 +46,19 @@ document.addEventListener('turbo:load', () => {
     $(this).toggle();
   });
 
-  $('#remove-rental').on('click', function() {
-    $('#book_rental_attributes_loaner_id').val('')
+  $('#remove-rental').on('click', function(e) {
+    e.preventDefault();
+    let rentalId = $(this).data('rental-id');
+    let bookId = $(this).data('book-id');
+    $.ajax({
+      url: `/books/${bookId}/rentals/${rentalId}`,
+      type: 'POST',
+      success: function (result) {
+      },
+      error: function (xhr, status, error) {
+        alert('Error removing rental: ' + error);
+      }
+    });
   })
 
   $('#book_status').change(function() {
@@ -62,7 +73,7 @@ document.addEventListener('turbo:load', () => {
     }
   });
 
-  $('.soft-delete-book').on('click', function() {
+  $('#soft-delete-book').on('click', function() {
     let bookId = $(this).data('book-id');
     $.ajax({
       url: '/books/remove_from_shelf/' + bookId,
