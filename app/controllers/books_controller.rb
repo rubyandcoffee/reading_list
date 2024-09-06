@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book.build_rental(loaner: Loaner.first) unless @book.rental
+    @book.build_rental unless @book.rental
   end
 
   def create

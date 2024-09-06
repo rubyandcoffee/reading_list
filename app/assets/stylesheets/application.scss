@@ -293,3 +293,12 @@ form {
 .custom-checkbox .form-check-input {
   margin-right: 8px; /* Space between checkbox and label */
 }
+
+.rating-container {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-left: 5px;
+  }
+}
