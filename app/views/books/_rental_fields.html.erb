@@ -14,7 +14,6 @@
     <% else %>
       <p>This book was borrowed from <%= @book.rental.loaner.name %></p>
     <% end %>
-    <button id="remove-rental" class="btn btn-sm btn-outline-warning" data-book-id="<%= @book.id %>" data-rental-id="<%= @book.rental.id %>">Remove rental</button>
   <% else %>
     <div id="rental-form" class="form-field hidden">
       <%= f.label :loaner_id %>

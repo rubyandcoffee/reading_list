@@ -46,21 +46,6 @@ document.addEventListener('turbo:load', () => {
     $(this).toggle();
   });
 
-  $('#remove-rental').on('click', function(e) {
-    e.preventDefault();
-    let rentalId = $(this).data('rental-id');
-    let bookId = $(this).data('book-id');
-    $.ajax({
-      url: `/books/${bookId}/rentals/${rentalId}`,
-      type: 'POST',
-      success: function (result) {
-      },
-      error: function (xhr, status, error) {
-        alert('Error removing rental: ' + error);
-      }
-    });
-  })
-
   $('#book_status').change(function() {
     if ($(this).val() === 'read') {
       $('#rating').show();

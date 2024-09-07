@@ -18,11 +18,16 @@
   <% end %>
 
   <div class="form-field">
-    <%= button_to 'Remove from shelf', remove_from_shelf_book_path(@book), method: :post, class: 'btn btn-outline-danger' %>
+    <%= button_to 'Remove from shelf', remove_from_shelf_book_path(@book), method: :post, class: 'btn btn-outline-warning ' %>
   </div>
   <div class="form-field">
     <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
   </div>
+  <% if @book.rental&.persisted? %>
+    <div class="form-field">
+      <%= button_to 'Delete rental', book_rental_path(@book, @book.rental), method: :delete, class: 'btn btn-outline-primary' %>
+    </div>
+  <% end %>
 </div>
 <%= render 'books/modals/authors/author_modal', author: Author.new, id: 'authorModal' %>
 <%= render 'books/modals/genres/genre_modal', genre: Genre.new, id: 'genreModal' %>
