@@ -29,14 +29,14 @@
                   <i class="<%= checkbox_icon(book) %>"></i>
                   <strong><%= book.series_position.ordinalize %></strong>
                   <%= link_to book.title, edit_book_path(book) %>
-                  <% if !book.purchased? %>
+                  <% unless book.purchased? %>
                     <span class="badge rounded-pill bg-danger">
                       <%= book.status %>
                       <span class="visually-hidden"><%= book.status %></span>
                     </span>
                   <% end %>
                   <% if book.rating.present? %>
-                    <% book.rating.times do |rate| %>
+                    <% book.rating.times do |_| %>
                       <i class="fa-solid fa-star"></i>
                     <% end %>
                   <% end %>

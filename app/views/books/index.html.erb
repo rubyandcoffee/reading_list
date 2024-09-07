@@ -20,7 +20,9 @@
             by
             <%= link_to book.author.full_name, author_path(book.author) %>
             <span class="badge text-<%= state_klass(book) %>"><%= book.status %></span>
-            <% if !book.purchased %><span class="badge text-bg-danger">Buy</span><% end %>
+            <% unless book.purchased %>
+              <span class="badge text-bg-danger">Buy</span>
+            <%  end %>
             <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>
             <% if book.rating.present? %>
               <% book.rating.times do |_| %>
