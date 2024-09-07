@@ -73,20 +73,6 @@ document.addEventListener('turbo:load', () => {
     }
   });
 
-  $('#soft-delete-book').on('click', function() {
-    let bookId = $(this).data('book-id');
-    $.ajax({
-      url: '/books/remove_from_shelf/' + bookId,
-      type: 'POST',
-      success: function (result) {
-        alert('Book removed from shelf');
-      },
-      error: function (xhr, status, error) {
-        alert('Error removing book: ' + error);
-      }
-    });
-  });
-
   $('.rating-option').on('click', function(e) {
     e.preventDefault();
     let bookId = $(this).data('book-id');

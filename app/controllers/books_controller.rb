@@ -54,6 +54,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def remove_from_shelf
+    if @book.destroy
+      flash[:notice] = 'Book removed from shelf successfully'
+      redirect_to books_path
+    else
+      flash[:alert] = 'Error removing book from shelf'
+      redirect_to books_path
+    end
+  end
+
   def buy
     @books = Book.where(purchased: false)
   end
@@ -109,14 +119,6 @@ class BooksController < ApplicationController
 
   def reviews
     @books = Book.where.not(rating: nil)
-  end
-
-  def remove_from_shelf
-    if @book.destroy
-      render json: { message: 'Book removed from shelf', redirect_url: books_path }, status: :ok
-    else
-      render json: { message: 'Error removing book' }, status: :unprocessable_entity
-    end
   end
 
   private

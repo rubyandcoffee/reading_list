@@ -18,6 +18,9 @@
   <% end %>
 
   <div class="form-field">
+    <%= button_to 'Remove from shelf', remove_from_shelf_book_path(@book), method: :post, class: 'btn btn-outline-danger' %>
+  </div>
+  <div class="form-field">
     <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
   </div>
 </div>

@@ -40,9 +40,6 @@
       <%= form.label 'Status', style: 'display: block;' %>
       <%= form.collection_select :status, Book::STATUSES, :to_s, :humanize, include_blank: true, class: 'form-select' %>
     </div>
-    <div class="form-field <%= 'hidden' unless @book.rental.present? && !@book.purchased %>" id="remove-from-shelf">
-      <button id="soft-delete-book" class="btn btn-sm btn-outline-info" data-book-id="<%= @book.id %>">Remove from shelf</button>
-    </div>
     <hr>
     <div class="form-field">
       <h6>Are you reading it this year?</h6>
