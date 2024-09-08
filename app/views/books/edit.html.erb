@@ -34,6 +34,6 @@
     <%= form.submit 'Update book', class: 'btn btn-success' %>
   <% end %>
 </div>
-<%= render 'books/modals/authors/author_modal', author: Author.new, id: 'authorModal' %>
-<%= render 'books/modals/genres/genre_modal', genre: Genre.new, id: 'genreModal' %>
-<%= render 'books/modals/series/series_modal', series: Series.new, id: "seriesModal" %>
+<%= render 'books/modals/authors/author_modal', author: Author.new, book: @book, id: 'authorModal' %>
+<%= render 'books/modals/genres/genre_modal', genre: Genre.new, book: @book, id: 'genreModal' %>
+<%= render 'books/modals/series/series_modal', series: Series.new, book: @book, id: "seriesModal" %>

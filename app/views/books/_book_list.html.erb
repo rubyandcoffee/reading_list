@@ -1,0 +1,10 @@
+<h5><%= title %></h5>
+<ul>
+  <% books.each do |book| %>
+    <li>
+      <%= link_to book.title, edit_book_path(book) %> by <%= book.author.full_name %>
+    </li>
+  <% end %>
+</ul>
+<%= will_paginate books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<div class="small-text"><%= books.count %> results</div>
