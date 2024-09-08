@@ -7,17 +7,17 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :author_id, presence: true
+  validates :genre, presence: true
 
   accepts_nested_attributes_for :book_goals, allow_destroy: true
   accepts_nested_attributes_for :rental, allow_destroy: true, reject_if: :all_blank
 
   scope :not_deleted, -> { where(deleted_at: nil) }
-  scope :tbr, -> { where(status: 'tbr') }
   scope :unrated, -> { where(status: 'read', rating: nil).or(where(status: 'dnf', rating: nil)) }
   scope :read, -> { where(status: 'read') }
   scope :unread, -> { where(status: 'unread') }
 
-  STATUSES = %w[unread read dnf reading tbr]
+  STATUSES = %w[unread read dnf reading]
   PAGE_LIMITS = { short: 200, medium: 400 }.freeze
 
   def self.ransackable_associations(auth_object = nil)
@@ -67,5 +67,11 @@ class Book < ApplicationRecord
 
   def dnf?
     status == 'dnf'
+  end
+
+  def self.tbr
+    Book
+      .joins(:book_goals)
+      .where(book_goals: { month: Time.now.strftime("%B"), year: Time.now.year} )
   end
 end

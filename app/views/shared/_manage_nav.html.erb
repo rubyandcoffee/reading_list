@@ -6,7 +6,7 @@
   { name: 'Todo', path: todo_books_path }
 ] %>
 <div class="container" style="margin-bottom: 20px;">
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs justify-content-end">
     <% links.each do |link| %>
       <li class="nav-item">
         <%= link_to link[:name], link[:path], class: "nav-link #{'active' if current_page?(link[:path])}" %>

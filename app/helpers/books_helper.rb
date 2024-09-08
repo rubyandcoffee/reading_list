@@ -35,7 +35,6 @@ module BooksHelper
   def state_klasses
     {
       'read' => 'bg-success',
-      'tbr' => 'bg-warning',
       'reading' => 'bg-primary',
       'unread' => 'bg-info',
       'dnf' => 'bg-primary'
@@ -46,7 +45,6 @@ module BooksHelper
     {
       'read' => 'fa-regular fa-square-check',
       'dnf' => 'fa-solid fa-poo',
-      'tbr' => 'fa-regular fa-square',
       'reading' => 'fa-regular fa-square',
       'unread' => 'fa-regular fa-square'
     }
