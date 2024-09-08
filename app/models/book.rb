@@ -7,7 +7,7 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :author_id, presence: true
-  validates :genre, presence: true
+  validates :genres, presence: true
 
   accepts_nested_attributes_for :book_goals, allow_destroy: true
   accepts_nested_attributes_for :rental, allow_destroy: true, reject_if: :all_blank
