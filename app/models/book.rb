@@ -60,4 +60,8 @@ class Book < ApplicationRecord
       'Long' => where('total_pages >= ?', PAGE_LIMITS[:medium])
     }.fetch(length)
   end
+
+  def read?
+    status == 'read'
+  end
 end

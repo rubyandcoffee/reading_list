@@ -71,7 +71,7 @@ class BooksController < ApplicationController
   end
 
   def unrated
-    @books = Book.unrated
+    @books = Book.unrated&.sort_by { |b| b.author.surname }
   end
   def update_rating
     if @book.update(rating: params[:rating])

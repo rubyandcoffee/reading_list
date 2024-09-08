@@ -67,7 +67,7 @@
         <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-secondary">Are you renting this book?</a>
       <% end %>
     </div>
-    <div id="rating" class="form-field <%= 'hidden' unless @book.status === 'read' %>">
+    <div id="rating" class="form-field <%= 'hidden' unless @book.read? %>">
       <hr>
       <%= form.label :rating, 'Rating' %>
       <div class="rating-container">

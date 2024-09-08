@@ -3,7 +3,7 @@
   <% @books.each do |book| %>
     <li style="margin-bottom: 10px;">
       <%= book.title %> by <%= book.author.full_name %>
-      <% if book.status == 'read' %>
+      <% if book.read? %>
         (read)
       <% end %>
     </li>
