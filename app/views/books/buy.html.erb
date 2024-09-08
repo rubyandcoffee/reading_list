@@ -2,9 +2,22 @@
   <div class="col-md-12">
     <h3>Shopping List</h3>
     <span class="float-end"><%= link_to 'Export as pdf', export_books_path(format: :pdf), class: 'btn btn-primary' %></span>
+    <p>If a book is checked, it means it has already been read.</p>
   </div>
 </div>
-<p>If a book is checked, it means it has already been read.</p>
-<% @books.each do |book| %>
-  <%= render partial: 'book_details', locals: { book: book } %>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <h5>Unread</h5>
+    <% @books.unread.each do |book| %>
+      <%= render partial: 'book_details', locals: { book: book } %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h5>Read</h5>
+    <% @books.read.each do |book| %>
+      <%= render partial: 'book_details', locals: { book: book } %>
+    <% end %>
+  </div>
+</div>

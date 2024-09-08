@@ -1,16 +1,17 @@
 <div class="row">
   <div class="col-md-12">
     <h3>Filter</h3>
-    <% if controller_name == 'books' %>
+    <% case controller_name %>
+    <% when 'books' %>
       <div id="new-book">
         <%= link_to new_book_path, class: 'btn btn-primary' do %>
           <i class="fa-solid fa-plus"></i> Add Book
         <% end %>
       </div>
       <%= render partial: 'shared/search/books' %>
-    <% elsif controller_name == 'authors' %>
+    <% when 'authors' %>
       <%= render partial: 'shared/search/authors' %>
-    <% elsif controller_name == 'genres' %>
+    <% when 'genres' %>
       <%= render partial: 'shared/search/genres' %>
     <% end %>
   </div>

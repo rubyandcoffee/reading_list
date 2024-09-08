@@ -1,6 +1,21 @@
 <div id="right-sidebar">
-  <h5>You have <%= Book.where(status: 'tbr').count %> books on your TBR list:</h5>
-  <% Book.where(status: 'tbr').includes(:genre, :author, :rental).each do |book| %>
+  <% if currently_reading.present? %>
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Currently reading</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <%= currently_reading.title %>
+        by <%= currently_reading.author.full_name %>
+        <span class="small-text">
+          <%= link_to 'Update Status', edit_book_path(currently_reading) %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <h5>You have <%= Book.tbr.count %> books on your TBR list:</h5>
+  <% Book.tbr.includes(:genre, :author, :rental).each do |book| %>
     <div class="card">
       <div class="card-body">
         <div class="pull-right">
@@ -22,9 +37,6 @@
         <p class="rental-text">
           <% if book.rental.present? %>
             Rental
-            <% if book.rental.loaner.week_duration.present? %>
-              due on <%= (book.rental.loaner.week_duration.weeks).strftime("%d %B") %>
-            <% end %>
           <% end %>
         </p>
         <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>

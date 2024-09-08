@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get 'reviews'
       get 'buy'
       get 'generator'
-      get 'unrated'
+      get 'todo'
     end
 
     member do

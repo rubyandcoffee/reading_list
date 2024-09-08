@@ -70,8 +70,11 @@ class BooksController < ApplicationController
     @books = Book.where(purchased: false)
   end
 
-  def unrated
-    @books = Book.where(status: 'read', rating: nil)
+  def todo
+    per_page = 10
+    @unrated_books = Book.unrated&.sort_by { |b| b.author.surname }.paginate(page: params[:page], per_page: per_page)
+    @no_page_books = Book.where(total_pages: nil).paginate(page: params[:page], per_page: per_page)
+    @no_genre_books = Book.left_outer_joins(:genres).where(genres: { id: nil }).paginate(page: params[:page], per_page: per_page)
   end
   def update_rating
     if @book.update(rating: params[:rating])
@@ -84,7 +87,7 @@ class BooksController < ApplicationController
   end
 
   def export
-    @books = Book.where(purchased: false)
+    @books = Book.where(purchased: false).sort_by { |b| b.author.surname }
 
     respond_to do |format|
       format.html

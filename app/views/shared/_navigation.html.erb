@@ -9,24 +9,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <div class="nav-item">
-            <%= link_to 'Authors', authors_path, class: 'nav-link' %>
-          </div>
-          <div class="nav-item">
-            <%= link_to 'Genres', genres_path, class: 'nav-link' %>
-          </div>
-          <div class="nav-item">
-            <%= link_to 'Series', series_index_path, class: 'nav-link' %>
-          </div>
-          <div class="nav-item">
-            <%= link_to 'Shopping List', buy_books_path, class: 'nav-link' %>
-          </div>
-          <div class="nav-item">
-            <%= link_to 'Unrated books', unrated_books_path, class: 'nav-link' %>
-          </div>
-          <div class="nav-item">
-            <%= link_to 'Reviews', reviews_books_path, class: 'nav-link' %>
-          </div>
+          <% links = [
+            { name: 'Authors', path: authors_path },
+            { name: 'Genres', path: genres_path },
+            { name: 'Series', path: series_index_path },
+            { name: 'Shopping List', path: buy_books_path },
+            { name: 'Todo', path: todo_books_path },
+            { name: 'Reviews', path: reviews_books_path }
+          ] %>
+
+          <% links.each do |link| %>
+            <div class="nav-item">
+              <%= link_to link[:name], link[:path], class: 'nav-link' %>
+            </div>
+          <% end %>
           <div class="nav-item">
             <%= link_to yearly_goals_books_path, class: 'nav-link' do %>
               <i class="fa-solid fa-bullseye"></i> Yearly Goals

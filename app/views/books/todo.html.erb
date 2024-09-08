@@ -1,0 +1,28 @@
+<h3 class="text-center">Tidy up your library!</h3>
+<% if @unrated_books.any? %>
+  <h5>Unrated books</h5>
+  <ul>
+    <% @unrated_books.each do |book| %>
+      <li>
+        <%= book.title %> by <%= book.author.full_name %>
+        <% if book.read? %>
+          (read)
+        <% end %>
+        <% (1..5).each do |rating_option| %>
+          <button class="rating-option btn btn-sm btn-outline-primary" data-book-id="<%= book.id %>" data-rating="<%= rating_option %>"><%= rating_option %></button>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+<% end %>
+<% if @no_page_books.any? %>
+  <%= render partial: 'book_list', locals: { title: 'Books with no pages', books: @no_page_books } %>
+  <hr>
+<% end %>
+<% if @no_genre_books.any? %>
+  <%= render partial: 'book_list', locals: { title: 'Books with no genres', books: @no_genre_books } %>
+<% end %>
+<% if @unrated_books.none? && @no_page_books.none? && @no_genre_books.none? %>
+  <p>You have nothing to do, yay!</p>
+<% end %>
