@@ -1,0 +1,20 @@
+<%= render partial: 'shared/manage_nav' %>
+
+<h3>Overview</h3>
+<p>Here's an overview of items you can manage:</p>
+
+<h5>Authors</h5>
+<p>You have <%= Author.all.count %> authors</p>
+
+<h5>Genres</h5>
+<p>You have <%= Genre.all.count %> genres</p>
+
+<h5>Series</h5>
+<p>You have <%= Series.all.count %> series</p>
+
+<h5>Todo</h5>
+<ul>
+  <li>Books that are read/DNF'd but don't have ratings yet: <%= Book.unrated.count %></li>
+  <li>You don't yet know the length of <%= Book.where(total_pages: nil).count %> books</li>
+  <li>Books without any genres: <%= Book.left_outer_joins(:genres).where(genres: { id: nil }).count %></li>
+</ul>

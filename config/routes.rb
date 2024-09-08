@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get 'buy'
       get 'generator'
       get 'todo'
+      get 'manage'
     end
 
     member do

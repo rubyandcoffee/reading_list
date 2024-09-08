@@ -1,0 +1,16 @@
+<% links = [
+  { name: 'Overview', path: manage_books_path },
+  { name: 'Authors', path: authors_path },
+  { name: 'Genres', path: genres_path },
+  { name: 'Series', path: series_index_path },
+  { name: 'Todo', path: todo_books_path }
+] %>
+<div class="container" style="margin-bottom: 20px;">
+  <ul class="nav nav-tabs">
+    <% links.each do |link| %>
+      <li class="nav-item">
+        <%= link_to link[:name], link[:path], class: "nav-link #{'active' if current_page?(link[:path])}" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

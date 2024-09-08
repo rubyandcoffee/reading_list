@@ -34,14 +34,32 @@ body {
   display: none;
 }
 
+.fa-solid {
+  margin-right: 5px;
+}
+
 .fa-star {
-  color: #F8D353
+  color: #F8D353;
+}
+
+.fa-cart-shopping {
+  color: #245391;
+}
+
+.fa-wand-magic-sparkles {
+  color: #8300ff;
+}
+
+.fa-bullseye {
+  color: #e7323f;
 }
 
 nav {
   h3 {
     color: #2d2828
   }
+
+  font-family: "Font Awesome 6 Free", sans-serif;
 }
 
 .book-generator {
