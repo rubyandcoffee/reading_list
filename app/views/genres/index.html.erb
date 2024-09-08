@@ -18,30 +18,32 @@
     <% end %>
   </div>
   <div class="col-md-9">
-    <div class="row">
-      <% if params[:q].present? %>
+    <% if @genre.present? && @books.any? %>
+      <div class="row">
         <div class="col-md-12 pull-right">
-          <div class="small-text"><%= @books.count %> results</div>
+          <div class="small-text"><%= @books&.count %> results</div>
           <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-md-9">
-        <div id="genres">
-          <% if params[:q].nil? %>
-            <h3>Genres</h3>
-            <p>Search on the left to filter books by genre</p>
-          <% else %>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <div id="genres">
             <h3><%= @genre.name %></h3>
             <ul>
               <% @books.each do |book| %>
                 <li><%= link_to book.title, edit_book_path(book) %> by <%= link_to book.author.full_name %> (<%= book.status %>)</li>
               <% end %>
             </ul>
-          <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% else %>
+      <h3>Genres</h3>
+      <% if params[:q].nil? %>
+        <p>Search on the left to filter books by genre</p>
+      <% else %>
+        <p>There are no books of that genre.</p>
+      <% end %>
+    <% end %>
   </div>
 </div>

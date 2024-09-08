@@ -2,10 +2,13 @@ class GenresController < ApplicationController
   before_action :set_genre, only: %i[ show edit update destroy ]
 
   def index
-    @genres = Genre.order('name')
+    @genres = Genre.order(:name)
     @q = Genre.ransack(params[:q])
-    @genre = @q.result(distinct: true).last
-    @books = @genre.books.order(:title).paginate(page: params[:page], per_page: 20)
+
+    genre_name = params.dig(:q, :books_genres_name_eq)
+    @genre = @q.result(distinct: true).find_by(name: genre_name)
+
+    @books = @genre.books.order(:title).paginate(page: params[:page], per_page: 20) if @genre.present?
   end
 
   def show

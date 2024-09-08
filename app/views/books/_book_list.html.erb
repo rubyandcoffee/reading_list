@@ -7,4 +7,10 @@
   <% end %>
 </ul>
 <%= will_paginate books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-<div class="small-text"><%= books.count %> results</div>
+<div class="small-text">
+  <%= books.count %> results
+  <div class="additional-info">
+    If you clean up 10 a day, you could have this finished
+    in <%= books.count / 10 %> days.
+  </div>
+</div>
