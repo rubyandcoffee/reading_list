@@ -22,7 +22,7 @@
     </div>
     <div class="form-field">
       <%= form.label :series_id, style: 'display: block;' %>
-      <%= form.select :series_id, Series.all.sort_by { |series| series.author.forename }.collect { |series| [series.name, series.id] }, include_blank: true %>
+      <%= form.select :series_id, Series.all.includes(:author).sort_by { |series| series.author.forename }.collect { |series| [series.name, series.id] }, include_blank: true %>
       <span class="small-text"><a href="#" data-bs-toggle="modal" data-bs-target="#seriesModal">Add missing series</a></span>
     </div>
     <div class="form-field">
@@ -39,9 +39,6 @@
     <div class="form-field">
       <%= form.label 'Status', style: 'display: block;' %>
       <%= form.collection_select :status, Book::STATUSES, :to_s, :humanize, include_blank: true, class: 'form-select' %>
-    </div>
-    <div class="form-field <%= 'hidden' unless @book.rental.present? && !@book.purchased %>" id="remove-from-shelf">
-      <button id="soft-delete-book" class="btn btn-sm btn-outline-info" data-book-id="<%= @book.id %>">Remove from shelf</button>
     </div>
     <hr>
     <div class="form-field">
@@ -67,7 +64,7 @@
         <%= render 'rental_fields', f: rental %>
       <% end %>
       <% unless @book.rental&.persisted? %>
-        <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-primary">Are you renting this book?</a>
+        <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-secondary">Are you renting this book?</a>
       <% end %>
     </div>
     <div id="rating" class="form-field <%= 'hidden' unless @book.status === 'read' %>">

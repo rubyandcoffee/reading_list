@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy remove_from_shelf update_rating ]
 
   def index
-    @q = Book.ransack(params[:q])
+    @q = Book.not_deleted.ransack(params[:q])
     @books = @q.result(distinct: true).includes(:genres, :author).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
@@ -45,11 +45,23 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    if @book.really_destroy!
+    if @book.destroy
       flash[:notice] = 'Book deleted successfully'
       redirect_to books_path
     else
       flash[:alert] = 'Error deleting book'
+      redirect_to books_path
+    end
+  end
+
+  def remove_from_shelf
+    date_now = Time.now.strftime("%Y-%m-%d %H:%M:%S.%6N")
+
+    if (@book.deleted_at = date_now)
+      flash[:notice] = 'Book removed from shelf successfully'
+      redirect_to books_path
+    else
+      flash[:alert] = 'Error removing book from shelf'
       redirect_to books_path
     end
   end
@@ -99,24 +111,16 @@ class BooksController < ApplicationController
 
   def yearly_goals
     @book_goals = BookGoal.this_year
-    @books = Book.with_deleted.joins(:book_goals).where(book_goals: { year: DateTime.now.year}).order(:title).paginate(page: params[:page], per_page: 20)
+    @books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year}).order(:title).paginate(page: params[:page], per_page: 20)
   end
 
   def generator
-    book = Book.where(status: 'unread').pluck(:id).sample
+    book = Book.not_deleted.where(status: 'unread').pluck(:id).sample
     @book = Book.find(book)
   end
 
   def reviews
     @books = Book.where.not(rating: nil)
-  end
-
-  def remove_from_shelf
-    if @book.destroy
-      render json: { message: 'Book removed from shelf', redirect_url: books_path }, status: :ok
-    else
-      render json: { message: 'Error removing book' }, status: :unprocessable_entity
-    end
   end
 
   private

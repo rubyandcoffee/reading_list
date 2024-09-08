@@ -1,5 +1,22 @@
 <div id="edit-book">
   <h1>Editing book</h1>
+  <div class="row">
+    <div class="col-md-6" style="display: flex;">
+      <div class="form-field" style="margin-right: 15px;">
+        <%= button_to 'Remove from shelf', remove_from_shelf_book_path(@book), method: :post, class: 'btn btn-outline-warning ' %>
+      </div>
+      <div class="form-field">
+        <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <% if @book.rental&.persisted? %>
+        <div class="form-field">
+          <%= button_to 'Delete rental', book_rental_path(@book, @book.rental), method: :delete, class: 'btn btn-outline-secondary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <%= form_with(model: @book) do |form| %>
     <% if @book.errors.any? %>
       <div style="color: red">
@@ -16,10 +33,6 @@
 
     <%= form.submit 'Update book', class: 'btn btn-success' %>
   <% end %>
-
-  <div class="form-field">
-    <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
-  </div>
 </div>
 <%= render 'books/modals/authors/author_modal', author: Author.new, id: 'authorModal' %>
 <%= render 'books/modals/genres/genre_modal', genre: Genre.new, id: 'genreModal' %>

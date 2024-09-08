@@ -4,9 +4,11 @@ class RentalsController < ApplicationController
 
   def destroy
     if @rental.destroy
-      render json: { message: 'You are no longer renting this book' }, status: :ok
+      flash[:notice] = 'Rental deleted successfully'
+      redirect_to edit_book_path(@book)
     else
-      render json: { message: 'Error removing rental' }, status: :unprocessable_entity
+      flash[:alert] = 'Error deleting rental'
+      redirect_to edit_book_path(@book)
     end
   end
 
