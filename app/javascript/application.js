@@ -51,6 +51,7 @@ document.addEventListener('turbo:load', () => {
       $('#rating').show();
       $('#remove-from-shelf').hide();
     } else if ($(this).val() === 'dnf') {
+      $('#rating').show();
       $('#remove-from-shelf').show();
     } else {
       $('#rating').hide();

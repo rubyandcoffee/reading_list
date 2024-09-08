@@ -64,4 +64,8 @@ class Book < ApplicationRecord
   def read?
     status == 'read'
   end
+
+  def dnf?
+    status == 'dnf'
+  end
 end
