@@ -13,7 +13,7 @@ class Book < ApplicationRecord
 
   scope :not_deleted, -> { where(deleted_at: nil) }
   scope :tbr, -> { where(status: 'tbr') }
-  scope :unrated, -> { where(status: 'read', rating: nil) }
+  scope :unrated, -> { where(status: 'read', rating: nil).or(where(status: 'dnf', rating: nil)) }
   scope :read, -> { where(status: 'read') }
   scope :unread, -> { where(status: 'unread') }
 

@@ -70,8 +70,9 @@ class BooksController < ApplicationController
     @books = Book.where(purchased: false)
   end
 
-  def unrated
-    @books = Book.unrated&.sort_by { |b| b.author.surname }
+  def todo
+    @unrated_books = Book.unrated&.sort_by { |b| b.author.surname }
+    @no_page_books = Book.where(total_pages: nil)
   end
   def update_rating
     if @book.update(rating: params[:rating])

@@ -1,0 +1,33 @@
+<h3>Tidy up your library!</h3>
+<% if @unrated_books.any? %>
+  <h5>Unrated books</h5>
+  <ul>
+    <% @unrated_books.each do |book| %>
+      <li>
+        <%= book.title %> by <%= book.author.full_name %>
+        <% if book.read? %>
+          (read)
+        <% end %>
+        <% (1..5).each do |rating_option| %>
+          <button class="rating-option btn btn-sm btn-outline-primary" data-book-id="<%= book.id %>" data-rating="<%= rating_option %>"><%= rating_option %></button>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<% if @no_page_books.any? %>
+  <h5>Books with no pages</h5>
+  <ul>
+    <% @no_page_books.each do |book| %>
+      <li>
+        <%= link_to book.title, edit_book_path(book) %> by <%= book.author.full_name %>
+        <% if book.read? %>
+          (read)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<% if @unrated_books.none? && @no_page_books.none? %>
+  <p>You have nothing to do, yay!</p>
+<% end %>

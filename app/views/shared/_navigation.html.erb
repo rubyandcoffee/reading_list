@@ -14,12 +14,11 @@
             { name: 'Genres', path: genres_path },
             { name: 'Series', path: series_index_path },
             { name: 'Shopping List', path: buy_books_path },
-            { name: 'Unrated books', path: unrated_books_path },
+            { name: 'Todo', path: todo_books_path },
             { name: 'Reviews', path: reviews_books_path }
           ] %>
 
           <% links.each do |link| %>
-            <% next if link[:name] == 'Unrated books' && Book.unrated.none? %>
             <div class="nav-item">
               <%= link_to link[:name], link[:path], class: 'nav-link' %>
             </div>
