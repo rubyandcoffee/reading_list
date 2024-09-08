@@ -84,7 +84,7 @@ class BooksController < ApplicationController
   end
 
   def export
-    @books = Book.where(purchased: false)
+    @books = Book.where(purchased: false).sort_by { |b| b.author.surname }
 
     respond_to do |format|
       format.html
