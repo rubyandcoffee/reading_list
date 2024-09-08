@@ -19,6 +19,7 @@
           ] %>
 
           <% links.each do |link| %>
+            <% next if link[:name] == 'Unrated books' && Book.unrated.none? %>
             <div class="nav-item">
               <%= link_to link[:name], link[:path], class: 'nav-link' %>
             </div>

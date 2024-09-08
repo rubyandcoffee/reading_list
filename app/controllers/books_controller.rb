@@ -71,7 +71,7 @@ class BooksController < ApplicationController
   end
 
   def unrated
-    @books = Book.where(status: 'read', rating: nil)
+    @books = Book.unrated
   end
   def update_rating
     if @book.update(rating: params[:rating])
