@@ -14,8 +14,8 @@
       </div>
     <% end %>
   </div>
-  <h5>You have <%= Book.where(status: 'tbr').count %> books on your TBR list:</h5>
-  <% Book.where(status: 'tbr').includes(:genre, :author, :rental).each do |book| %>
+  <h5>You have <%= Book.tbr.count %> books on your TBR list:</h5>
+  <% Book.tbr.includes(:genre, :author, :rental).each do |book| %>
     <div class="card">
       <div class="card-body">
         <div class="pull-right">

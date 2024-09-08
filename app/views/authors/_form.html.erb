@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :gender, style: 'display: block' %>
-    <%= form.select :gender, ['Female', 'Male'], { include_blank: true }, class: 'form-select' %>
+    <%= form.select :gender, %w[Female Male], { include_blank: true }, class: 'form-select' %>
   </div>
 
   <div>
