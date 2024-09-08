@@ -15,7 +15,8 @@
  */
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import "bootstrap";
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
   height: 100%;
@@ -24,6 +25,11 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Raleway', sans-serif;
 }
 
 .container {
