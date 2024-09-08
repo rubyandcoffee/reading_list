@@ -37,9 +37,6 @@
         <p class="rental-text">
           <% if book.rental.present? %>
             Rental
-            <% if book.rental.loaner.week_duration.present? %>
-              due on <%= (book.rental.loaner.week_duration.weeks).strftime("%d %B") %>
-            <% end %>
           <% end %>
         </p>
         <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>

@@ -52,8 +52,6 @@ class Book < ApplicationRecord
   end
 
   def self.filter_by_length(length)
-    books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year })
-
     {
       'Short' => books.short_books,
       'Medium' => books.medium_books,
