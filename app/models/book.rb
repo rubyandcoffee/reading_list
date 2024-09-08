@@ -14,6 +14,8 @@ class Book < ApplicationRecord
   scope :not_deleted, -> { where(deleted_at: nil) }
   scope :tbr, -> { where(status: 'tbr') }
   scope :unrated, -> { where(status: 'read', rating: nil) }
+  scope :read, -> { where(status: 'read') }
+  scope :unread, -> { where(status: 'unread') }
 
   STATUSES = %w[unread read dnf reading tbr]
   PAGE_LIMITS = { short: 200, medium: 400 }.freeze
