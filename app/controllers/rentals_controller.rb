@@ -3,7 +3,7 @@ class RentalsController < ApplicationController
   before_action :set_rental, only: :destroy
 
   def destroy
-    if @rental.really_destroy!
+    if @rental.destroy
       flash[:notice] = 'Rental deleted successfully'
       redirect_to edit_book_path(@book)
     else

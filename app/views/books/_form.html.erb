@@ -64,7 +64,7 @@
         <%= render 'rental_fields', f: rental %>
       <% end %>
       <% unless @book.rental&.persisted? %>
-        <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-primary">Are you renting this book?</a>
+        <a href="#" id="show-rental-form" class="btn btn-sm btn-outline-secondary">Are you renting this book?</a>
       <% end %>
     </div>
     <div id="rating" class="form-field <%= 'hidden' unless @book.status === 'read' %>">
