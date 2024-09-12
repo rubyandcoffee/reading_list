@@ -6,6 +6,7 @@ import "bootstrap"
 import "chartkick"
 import "Chart.bundle"
 import "@nathanvda/cocoon"
+import "./vue"
 
 document.addEventListener('turbo:load', () => {
   function getCSRFToken() {

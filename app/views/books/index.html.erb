@@ -12,6 +12,8 @@
         <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
       </div>
     </div>
+    <div id="app"><hello-world></hello-world></div>
+
     <% if @books.any? %>
       <ul>
         <% @books.each do |book| %>
