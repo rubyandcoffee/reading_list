@@ -11,3 +11,4 @@ pin "slim-select", to: "https://ga.jspm.io/npm:slim-select@2.6.0/dist/slimselect
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
 pin "@nathanvda/cocoon", to: "https://ga.jspm.io/npm:@nathanvda/cocoon@1.2.14/cocoon.js"
+pin "vue", to: "https://ga.jspm.io/npm:vue@3.2.26/dist/vue.esm-browser.js", preload: true
