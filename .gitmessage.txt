@@ -1,0 +1,17 @@
+# Title (required, max 50 characters):
+# A concise, one-line summary of the changes
+
+
+
+# Body (required):
+# Use bullet points to describe what was done and why.
+# Example:
+# - Fixed issue with token refresh during login
+# - Added fallback to homepage if token is invalid
+# - Updated unit tests for auth flow
+
+-
+
+# Related Jira item (required):
+# Example: "Resolves AB-123"
+Resolves
