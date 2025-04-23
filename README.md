@@ -17,12 +17,23 @@ A Ruby on Rails application for managing your library and tracking your reading 
 
 ## Features
 
-- Manage books, authors, genres, and series
-- Search functionality using Ransack
-- Export your book shopping list to PDF using Wicked PDF
-- Add ratings to your books
-- Track your reading goals
-- Track the individual status of each of your books
+- **Comprehensive Book Management**
+  Manage and organize a library of books, authors, genres, and series effortlessly.
+
+- **Advanced Search Functionality**
+  Easily find books, authors, or genres using powerful search capabilities provided by the Ransack gem.
+
+- **Generate PDF Reports**
+  Export your customized book shopping list or other data into a professionally styled PDF, powered by Wicked PDF.
+
+- **Book Ratings and Reviews**
+  Add ratings to your books to keep track of your preferences, helping you make informed decisions about your next read.
+
+- **Reading Goals Tracking**
+  Stay motivated by setting and monitoring your personalized reading goals, ensuring steady progress in your literary journey.
+
+- **Individual Book Status Tracking**
+  Track the status of each book in your library — whether it's unread, currently reading, or completed — for seamless organization.
 
 ## Getting Started
 
