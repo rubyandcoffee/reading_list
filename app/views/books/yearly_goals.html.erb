@@ -4,21 +4,33 @@
   </div>
 </div>
 <% if @books.any? %>
-  <div class="row" id="yearly-goals-header">
-    <div class="col-md-6">
-      <h5>You are reading <%= pluralize(@books.count, 'book') %> this year</h5>
-      <p>
-        This includes <%= @books.filter_by_length('Short').count %> short books,
-        <%= @books.filter_by_length('Medium').count %> medium books and
-        <%= @books.filter_by_length('Long').count %> long books.
-      </p>
-      <p>
-        You have already read <%= @books.where(status: 'read').count %> books this year (not including dnf),<br>
-        <%= @books.count - @books.where(status: 'read').count %> left to go.
-      </p>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card" style="width: 12rem; height: 14rem;">
+        <div class="card-body" style="text-align: center;">
+          <h5 class="card-title">
+            Reading<br>
+            <span style="font-size: 4rem;"><%= @books.count %></span><br>
+            this year
+          </h5>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <p>The recommendation is that for each month, you read each of the following:</p>
+    <div class="col-md-3">
+      <div class="card" style="width: 14rem; height: 14rem;">
+        <div class="card-body" style="text-align: center;">
+          <h5 class="card-title">
+            Read so far<br>
+            <span style="font-size: 4rem;"><%= @books.where(status: 'read').count %></span>
+          </h5>
+          <p class="card-text">
+            (<%= @books.count - @books.where(status: 'read').count %> left to go)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" id="yearly-goals-header">
+      <h3>Recommendations each month:</h3>
       <ul>
         <li>A book by Philippa Gregory (long)</li>
         <li>A book that's been on the bookshelf for years (medium)</li>
