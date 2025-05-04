@@ -67,7 +67,7 @@ class BooksController < ApplicationController
   end
 
   def buy
-    @books = Book.where(purchased: false)
+    @books = Book.where(buy: true)
   end
 
   def todo
@@ -87,7 +87,7 @@ class BooksController < ApplicationController
   end
 
   def export
-    @books = Book.where(purchased: false).sort_by { |b| b.author.surname }
+    @books = Book.where(buy: true).sort_by { |b| b.author.surname }
 
     respond_to do |format|
       format.html
@@ -132,6 +132,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
+      params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, :buy, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
     end
 end

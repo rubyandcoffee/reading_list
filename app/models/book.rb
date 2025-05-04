@@ -73,5 +73,6 @@ class Book < ApplicationRecord
     Book
       .joins(:book_goals)
       .where(book_goals: { month: Time.now.strftime("%B"), year: Time.now.year} )
+      .and(where(status: 'unread'))
   end
 end

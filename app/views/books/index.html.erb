@@ -22,7 +22,7 @@
             by
             <%= link_to book.author.full_name, author_path(book.author) %>
             <span class="badge text-<%= state_klass(book) %>"><%= book.status %></span>
-            <% unless book.purchased %>
+            <% if book.buy %>
               <span class="badge text-bg-danger">Buy</span>
             <%  end %>
             <span class="badge rounded-pill text-bg-<%= length_klass(book) %>"><%= book.length_in_words %></span>

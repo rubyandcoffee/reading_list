@@ -8,7 +8,7 @@
         </h5>
         <p class="card-text">
           <strong>Genres:</strong>
-          <% book.genres.each do |genre| %>
+          <% @book.genres.each do |genre| %>
             <%= link_to genre.name, genre %><br>
           <% end %>
           <strong>Currently on shelf:</strong> <%= @book.status %>

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 text-center book-generator">
     <i class="fa-solid fa-wand-magic-sparkles"></i>
-    <h3>Your next book to read is <strong><%= @book.title %></strong> by <%= @book.author.full_name %></h3>
+    <h3>Your next book to read is <strong><%= link_to @book.title, edit_book_path(@book) %></strong> by <%= @book.author.full_name %></h3>
   </div>
 </div>
