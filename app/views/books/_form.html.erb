@@ -56,8 +56,18 @@
     <hr>
     <div class="form-field">
       <%= form.check_box :purchased, { style: 'margin-right: 5px;' } %>
-      <%= form.label :purchased, 'Purchased' %>
+      <%= form.label :purchased do %>
+        <i class="fa-solid fa-sack-dollar"></i>
+        Purchased
+      <% end %>
       <span class="small-text">Remember to uncheck this if you don't own it yet</span>
+    </div>
+    <div class="form-field">
+      <%= form.check_box :buy, { style: 'margin-right: 5px;' } %>
+      <%= form.label :buy do %>
+        <i class="fa-solid fa-cart-shopping"></i>
+        Add to shopping list?
+      <% end %>
     </div>
     <div class="form-field">
       <%= form.fields_for :rental do |rental| %>
