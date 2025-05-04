@@ -28,6 +28,18 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+      <hr>
+      <h3>The Rules</h3>
+      <ol>
+        <li>You cannot buy a physical book without reading 3 physical books you already own</li>
+        <li>Each month, you must read at least 2 physical books you already own</li>
+        <li>If you DNF a physical book, you must donate it to a charity shop</li>
+      </ol>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <% Date::MONTHNAMES.each do |month| %>
         <div class="monthly-books">
           <% if @book_goals.where(month: month).any? %>
