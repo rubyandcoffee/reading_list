@@ -12,8 +12,31 @@
         <%= will_paginate @books, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
       </div>
     </div>
-    <div id="app"><hello-world></hello-world></div>
-
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card" style="width: 12rem; height: 6rem;">
+          <div class="card-body" style="text-align: center;">
+            <h5 class="card-title">You have <%= Book.all.count %> books</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card" style="width: 12rem; height: 6rem;">
+          <div class="card-body" style="text-align: center;">
+            <h5 class="card-title"><%= Book.unread.count %> books are unread</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card" style="width: 12rem; height: 6rem;">
+          <div class="card-body" style="text-align: center;">
+            <h5 class="card-title">So you've only read <%= ((Book.read.count.to_f / Book.count.to_f) * 100).round(0) %>%</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vue code below does work (as proof that VueJS is setup correctly), just commenting it out for now -->
+    <!-- <div id="app"><hello-world></hello-world></div>-->
     <% if @books.any? %>
       <ul>
         <% @books.each do |book| %>
