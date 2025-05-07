@@ -1,16 +1,19 @@
 <div id="right-sidebar">
-  <% if currently_reading.present? %>
+  <% if currently_reading.any? %>
     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
         <strong class="me-auto">Currently reading</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div class="toast-body">
-        <%= currently_reading.title %>
-        by <%= currently_reading.author.full_name %>
-        <span class="small-text">
-          <%= link_to 'Update Status', edit_book_path(currently_reading) %>
-        </span>
+        <% currently_reading.each do |reading| %>
+          <%= reading.title %>
+          by <%= reading.author.full_name %>
+          <span class="small-text">
+            <%= link_to 'Update Status', edit_book_path(reading) %>
+          </span>
+          <hr>
+        <% end %>
       </div>
     <% end %>
   </div>
