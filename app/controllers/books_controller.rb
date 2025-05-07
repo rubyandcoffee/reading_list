@@ -114,7 +114,11 @@ class BooksController < ApplicationController
 
   def yearly_goals
     @book_goals = BookGoal.this_year
-    @books = Book.joins(:book_goals).where(book_goals: { year: DateTime.now.year }).order(:title).paginate(page: params[:page], per_page: 20)
+    @books = Book
+               .joins(:book_goals)
+               .where(book_goals: { year: DateTime.now.year })
+               .order(:title)
+               .paginate(page: params[:page], per_page: 20)
   end
 
   def generator
