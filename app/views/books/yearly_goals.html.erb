@@ -56,8 +56,8 @@
         <div class="monthly-books">
           <% if @book_goals.where(month: month).any? %>
             <h3><%= month.nil? ? 'Undecided' : month %> (<%= @book_goals.where(month: month).map{ |goal| time_to_read(goal.book) }.compact.sum %> hours total)</h3>
-            <% @book_goals.includes(:book).where(month: month).each do |book_goal| %>
-              <%= render partial: 'book_details', locals: { book: Book.find(book_goal.book_id) } %>
+            <% @book_goals.includes(:book).joins(:book).where(month: month).order('books.status').each do |book_goal| %>
+              <%= render partial: 'book_details', locals: { book: book_goal.book } %>
             <% end %>
           <% end %>
         </div>
