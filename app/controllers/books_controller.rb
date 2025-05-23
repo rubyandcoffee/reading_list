@@ -10,6 +10,14 @@ class BooksController < ApplicationController
   end
 
   def new
+    # begin
+    #   1 / 0
+    # rescue ZeroDivisionError => exception
+    #   Sentry.capture_exception(exception)
+    # end
+    
+    # Sentry.capture_message("test message hi there 123")
+
     @book = Book.new
     @book.build_rental
   end
