@@ -11,6 +11,7 @@
     <%= javascript_include_tag "jquery" %>
     <script src="https://kit.fontawesome.com/92656d8ae3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.6.0/slimselect.css" integrity="sha512-ijXMfMV6D0xH0UfHpPnqrwbw9cjd4AbjtWbdfVd204tXEtJtvL3TTNztvqqr9AbLcCiuNTvqHL5c9v2hOjdjpA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%= Sentry.get_trace_propagation_meta.html_safe %>
   </head>
 
   <body>
