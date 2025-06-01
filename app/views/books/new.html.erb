@@ -1,3 +1,4 @@
+<h1>New Book</h1>
 <div id="app"
   data-component="BookForm"
   data-props="<%= {
@@ -5,5 +6,6 @@
     authors: Author.all.as_json(only: [:id, :forename, :surname], methods: [:full_name]),
     genres: Genre.all.as_json(only: [:id, :name]),
     series: Series.all.as_json(only: [:id, :name]),
+    loaners: Loaner.all.as_json(only: [:id, :name])
   }.to_json %>">
 </div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :book_goal_timelines
   resources :genres
 
   resources :authors do

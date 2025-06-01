@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Book goal timelines</h1>
+
+<div id="app"
+  data-component="BookGoalTimelineIndex"
+  data-props="<%= {
+     bookGoals: BookGoal.all.where(year: Date.current.year).as_json(
+       include: {
+         book: { only: [:id, :title, :author_id] },
+       },
+       only: [:id, :month, :year]
+     )
+   }.to_json %>">
+</div>
+
+<%= link_to "New book goal timeline", new_book_goal_timeline_path %>

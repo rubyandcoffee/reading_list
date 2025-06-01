@@ -8,7 +8,11 @@ module BooksHelper
   end
 
   def checkbox_icon(book)
-    checkbox_klasses.fetch(book.status)
+    if checkbox_klasses.include?(book.status)
+      checkbox_klasses.fetch(book.status)
+    else
+      'hidden'
+    end
   end
 
   def length_klass(book)

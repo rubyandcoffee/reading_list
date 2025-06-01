@@ -144,6 +144,16 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, :buy, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
+      params.require(:book).permit(
+        :title, :total_pages, :author_id, :status, :rating, :series_id, :series_position,
+        :purchased, :buy, :rental, :rental_source,
+        genre_ids: [],
+        book_goals_attributes: [:id, :month, :year, :_destroy],
+        rental_attributes: [:id, :loaner_id, :active, :due_date]
+      )
+    end
+
+    def author_params
+      params.require(:author).permit(:forename, :surname, :nationality, :gender)
     end
 end
