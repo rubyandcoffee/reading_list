@@ -18,16 +18,11 @@ class AuthorsController < ApplicationController
   end
 
   def create
-    @author = Author.new(author_params)
-
-    respond_to do |format|
-      if @author.save
-        format.html { redirect_to new_book_path(params[:book]), notice: "#{@author.full_name} has been added" }
-        format.json { render :show, status: :created, location: @author }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
+    author = Author.new(author_params)
+    if author.save
+      render json: author, status: :created
+    else
+      render json: { errors: author.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -66,6 +61,6 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.require(:author).permit(:forename, :gender, :nationality, :surname)
+      params.require(:author).permit(:forename, :surname, :nationality, :gender)
     end
 end

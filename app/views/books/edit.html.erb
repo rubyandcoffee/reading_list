@@ -1,39 +1,23 @@
-<div id="edit-book">
-  <h1>Editing book</h1>
-  <div class="row">
-    <div class="col-md-6" style="display: flex;">
-      <div class="form-field" style="margin-right: 15px;">
-        <%= button_to 'Remove from shelf', remove_from_shelf_book_path(@book), method: :post, class: 'btn btn-outline-warning ' %>
-      </div>
-      <div class="form-field">
-        <%= button_to 'Permanently delete', @book, method: :delete, class: 'btn btn-outline-danger' %>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <% if @book.rental&.persisted? %>
-        <div class="form-field">
-          <%= button_to 'Delete rental', book_rental_path(@book, @book.rental), method: :delete, class: 'btn btn-outline-secondary' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <%= form_with(model: @book) do |form| %>
-    <% if @book.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(@book.errors.count, 'error') %> prohibited this book from being saved:</h2>
-        <ul>
-          <% @book.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <%= render 'form', book: @book, form: form %>
-
-    <%= form.submit 'Update book', class: 'btn btn-success' %>
-  <% end %>
+<h1>Edit book</h1>
+<div id="app"
+  data-component="BookForm"
+  data-props="<%= {
+    book: @book.as_json(
+      include: {
+        book_goals: {},
+        genres: {},
+        author: {},
+        series: {},
+        rental: {
+          include: {
+            loaner: { only: [:id, :name] }
+          }
+        }
+      }
+    ),
+    authors: Author.all.as_json(only: [:id, :forename, :surname], methods: [:full_name]),
+    genres: Genre.all.as_json(only: [:id, :name]),
+    series: Series.all.as_json(only: [:id, :name]),
+    loaners: Loaner.all.as_json(only: [:id, :name])
+  }.to_json %>">
 </div>
-<%= render 'books/modals/authors/author_modal', author: Author.new, book: @book, id: 'authorModal' %>
-<%= render 'books/modals/genres/genre_modal', genre: Genre.new, book: @book, id: 'genreModal' %>
-<%= render 'books/modals/series/series_modal', series: Series.new, book: @book, id: "seriesModal" %>

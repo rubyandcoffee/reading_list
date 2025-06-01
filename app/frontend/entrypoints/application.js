@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import BookShow from '../components/BookShow.vue'
 import BookForm from '../components/BookForm.vue'
+import BookGoalTimelineShow from '../components/BookGoalTimelineShow.vue'
+import BookGoalTimelineNew from '../components/BookGoalTimelineNew.vue'
+import BookGoalTimelineIndex from '../components/BookGoalTimelineIndex.vue'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -11,7 +14,7 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-const componentsMap = { BookShow, BookForm }
+const componentsMap = { BookShow, BookForm, BookGoalTimelineShow, BookGoalTimelineNew, BookGoalTimelineIndex }
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('app');

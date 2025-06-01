@@ -17,16 +17,11 @@ class SeriesController < ApplicationController
   end
 
   def create
-    @series = Series.new(series_params)
-
-    respond_to do |format|
-      if @series.save
-        format.html { redirect_to new_book_path, notice: "Series was successfully created." }
-        format.json { render :new, status: :created, location: @series }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @series.errors, status: :unprocessable_entity }
-      end
+    series = Series.new(series_params)
+    if series.save
+      render json: series, status: :created
+    else
+      render json: { errors: series.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
