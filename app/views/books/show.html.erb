@@ -1,25 +1,8 @@
-<div class="row">
-  <div class="col">
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title">
-          <%= @book.title %><br> 
-          by <%= link_to @book.author.full_name, @book.author %>
-        </h5>
-        <p class="card-text">
-          <strong>Genres:</strong>
-          <% @book.genres.each do |genre| %>
-            <%= link_to genre.name, genre %><br>
-          <% end %>
-          <strong>Currently on shelf:</strong> <%= @book.status %>
-        </p>
-        <div class="d-inline-block">
-          <%= link_to "Edit this book", edit_book_path(@book), class: 'btn btn-primary' %>
-        </div>
-        <div class="d-inline-block">
-          <%= button_to "Remove this book", @book, method: :delete, class: 'btn btn-danger' %>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="app" data-component="BookShow" data-props="<%= @book.to_json(
+    include: {
+      author: { only: [:id, :forename, :surname], methods: [:full_name] },
+      genres: { only: [:id, :name] }
+    },
+    methods: [:status]
+  ) %>">
 </div>
