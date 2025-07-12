@@ -241,7 +241,7 @@ export default {
     authors: Array,
     genres: Array,
     series: Array,
-    loaners: Array, // <-- add this line
+    loaners: Array,
   },
   data() {
     return {
@@ -268,7 +268,7 @@ export default {
         rental_attributes: {
           id: this.book?.rental?.id || null,
           loaner_id: this.book?.rental?.loaner_id || null,
-          active: !!this.book?.rental?.active,
+          active: this.book?.rental?.active === true,
           due_date: this.book?.rental?.due_date || null
         },
         // Add other fields as needed
