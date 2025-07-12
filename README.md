@@ -44,8 +44,9 @@ These instructions will get you a copy of the project up and running on your loc
 Make sure you have the following installed on your system:
 
 - Ruby 3.2.2
-- Rails 7.0.8.4
+- Rails 7.1.x
 - SQLite3
+- Node.js & Yarn (for Vite)
 
 You can manage your Ruby versions using [chruby](https://github.com/postmodern/chruby).
 
@@ -119,4 +120,18 @@ We welcome contributions! Please follow these steps to contribute:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.# README
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Tech Stack
+
+- Ruby on Rails 7.1
+- SQLite3 (default database)
+- Bootstrap & Sass for styling
+- Vite for frontend assets
+- Ransack for advanced search
+- Wicked PDF for PDF export
+- Chartkick for charts
+- Redis for caching
+- Sentry for error tracking
+- Will Paginate for pagination
+- jQuery for dynamic UI
