@@ -115,17 +115,11 @@
       <v-card class="mb-4" outlined>
         <v-card-title>Shopping Bag</v-card-title>
         <v-card-text>
-          <div class="d-flex align-center">
-            <v-checkbox
-              v-model="form.buy"
-              label="Add to shopping list"
-              class="mr-4"
-            />
-            <v-checkbox
-              v-model="form.purchased"
-              label="Already purchased"
-            />
-          </div>
+          <v-radio-group v-model="form.purchase_status" row>
+            <v-radio label="Add to shopping list" value="buy" />
+            <v-radio label="Already purchased" value="purchased" />
+          </v-radio-group>
+
           <v-checkbox
             v-model="form.rental_attributes.active"
             label="This book is a rental"
@@ -263,6 +257,7 @@ export default {
         status: this.book?.status || null,
         purchased: this.book?.purchased || false,
         buy: this.book?.buy || false,
+        purchase_status: this.book?.buy ? "buy" : (this.book?.purchased ? "purchased" : ""),
         book_goals: this.book?.book_goals || [],
         rating: this.book?.rating || 0,
         rental_attributes: {
@@ -312,12 +307,12 @@ export default {
 
       const payload = {
         ...this.form,
-        id: this.book?.id,
-        series_id,
-        book_goals_attributes,
-        rental_attributes
+        buy: this.form.purchase_status === "buy",
+        purchased: this.form.purchase_status === "purchased",
+        // ...other fields...
       };
       delete payload.book_goals;
+      delete payload.purchase_status;
 
       const isEdit = !!this.book?.id;
       const url = isEdit ? `/books/${this.book.id}` : '/books';
