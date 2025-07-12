@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="app"
+  data-component="BookGoalTimelineShow"
+  data-props="<%= {
+     id: @book_goal_timeline.id,
+     week_one: @book_goal_timeline.week_one,
+     week_two: @book_goal_timeline.week_two,
+     week_three: @book_goal_timeline.week_three,
+     week_four: @book_goal_timeline.week_four
+   }.to_json %>">
+</div>
+
+<div>
+  <%= link_to "Edit this book goal timeline", edit_book_goal_timeline_path(@book_goal_timeline) %> |
+  <%= link_to "Back to book goal timelines", book_goal_timelines_path %>
+
+  <%= button_to "Destroy this book goal timeline", @book_goal_timeline, method: :delete %>
+</div>

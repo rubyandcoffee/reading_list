@@ -28,13 +28,15 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to books_url, notice: "#{@book.title} has been added to your bookshelf" }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new, status: :unprocessable_entity }
+    if @book.save
+      flash[:notice] = "#{@book.title} has been added to your bookshelf"
+      respond_to do |format|
+        format.html { redirect_to books_path }
+        format.json { render json: @book, status: :created }
+      end
+    else
+      respond_to do |format|
+        format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -53,13 +55,9 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    if @book.destroy
-      flash[:notice] = 'Book deleted successfully'
-      redirect_to books_path
-    else
-      flash[:alert] = 'Error deleting book'
-      redirect_to books_path
-    end
+    @book.destroy
+    flash[:notice] = "#{@book.title} has been removed from your bookshelf"
+    head :no_content
   end
 
   def remove_from_shelf
@@ -144,6 +142,16 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :total_pages, :author_id, :status, :rating, :series_id, :series_position, :purchased, :buy, genre_ids: [], book_goals_attributes: [:id, :month, :year, :_destroy], rental_attributes: [:id, :loaner_id, :active])
+      params.require(:book).permit(
+        :title, :total_pages, :author_id, :status, :rating, :series_id, :series_position,
+        :purchased, :buy, :rental, :rental_source,
+        genre_ids: [],
+        book_goals_attributes: [:id, :month, :year, :_destroy],
+        rental_attributes: [:id, :loaner_id, :active, :due_date]
+      )
+    end
+
+    def author_params
+      params.require(:author).permit(:forename, :surname, :nationality, :gender)
     end
 end

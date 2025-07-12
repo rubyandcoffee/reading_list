@@ -85,6 +85,11 @@ docker run -p 3000:3000 reading_list
 ```
 Open your browser and navigate to `http://localhost:3000`.
 
+To run Vite:
+```
+bin/vite dev
+```
+
 ## Usage
 
 You can easily navigate the application using the navigation bar at the top.

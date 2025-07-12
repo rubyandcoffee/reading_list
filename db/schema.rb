@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_04_193528) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_12_111617) do
   create_table "authors", force: :cascade do |t|
     t.string "forename"
     t.string "surname"
@@ -18,6 +18,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_04_193528) do
     t.datetime "updated_at", null: false
     t.string "gender"
     t.string "nationality"
+  end
+
+  create_table "book_goal_timelines", force: :cascade do |t|
+    t.integer "book_goal_id", null: false
+    t.integer "week_one"
+    t.integer "week_two"
+    t.integer "week_three"
+    t.integer "week_four"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_goal_id"], name: "index_book_goal_timelines_on_book_goal_id"
   end
 
   create_table "book_goals", force: :cascade do |t|
@@ -72,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_04_193528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
+    t.date "due_date"
     t.index ["book_id"], name: "index_rentals_on_book_id"
     t.index ["loaner_id"], name: "index_rentals_on_loaner_id"
   end
@@ -84,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_04_193528) do
     t.index ["author_id"], name: "index_series_on_author_id"
   end
 
+  add_foreign_key "book_goal_timelines", "book_goals"
   add_foreign_key "book_goals", "books"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "series"

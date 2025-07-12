@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "~> 7.0.8"
+gem "rails", "~> 7.1.3"
 gem "sprockets-rails"
 gem "sqlite3", "~> 1.4"
-gem "puma", "~> 5.6"
+gem "puma", "~> 6.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
@@ -23,6 +23,7 @@ gem 'cocoon'
 gem 'wicked_pdf'
 gem "sentry-ruby"
 gem "sentry-rails"
+gem 'vite_rails'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

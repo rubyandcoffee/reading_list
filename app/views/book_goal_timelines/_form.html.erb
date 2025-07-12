@@ -1,0 +1,42 @@
+<%= form_with(model: book_goal_timeline) do |form| %>
+  <% if book_goal_timeline.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(book_goal_timeline.errors.count, "error") %> prohibited this book_goal_timeline from being saved:</h2>
+
+      <ul>
+        <% book_goal_timeline.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :book_goal_id, style: "display: block" %>
+    <%= form.text_field :book_goal_id %>
+  </div>
+
+  <div>
+    <%= form.label :week_one, style: "display: block" %>
+    <%= form.number_field :week_one %>
+  </div>
+
+  <div>
+    <%= form.label :week_two, style: "display: block" %>
+    <%= form.number_field :week_two %>
+  </div>
+
+  <div>
+    <%= form.label :week_three, style: "display: block" %>
+    <%= form.number_field :week_three %>
+  </div>
+
+  <div>
+    <%= form.label :week_four, style: "display: block" %>
+    <%= form.number_field :week_four %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
