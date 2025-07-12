@@ -161,6 +161,14 @@
       </v-card>
 
       <v-btn color="primary" @click="submitForm">Save</v-btn>
+      <v-btn
+        v-if="book && book.id"
+        color="error"
+        class="ml-2"
+        @click="deleteBook"
+      >
+        Delete
+      </v-btn>
     </v-col>
   </v-row>
 
@@ -356,7 +364,7 @@ export default {
         } else {
           const data = await response.json();
           // Redirect to /books after successful save
-          window.location.href = '/books?notice=Book%20added%20successfully';
+          window.location.href = '/books';
         }
       } catch (e) {
         console.error('Network or JS error:', e);
@@ -475,6 +483,27 @@ export default {
       goal.year = year;
       goal.month = month;
       goal.menu = false;
+    },
+    async deleteBook() {
+      if (!this.book?.id) return;
+      if (!confirm('Are you sure you want to delete this book?')) return;
+      try {
+        const response = await fetch(`/books/${this.book.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+        });
+        if (!response.ok) {
+          alert('Failed to delete book');
+          return;
+        }
+        // Redirect after successful delete
+        window.location.href = '/books';
+      } catch (e) {
+        alert('Network error: ' + e.message);
+      }
     },
   }
 }
