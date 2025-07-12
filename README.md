@@ -126,12 +126,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Ruby on Rails 7.1
 - SQLite3 (default database)
-- Bootstrap & Sass for styling
+- VueJS
+- Vuetify for styling
 - Vite for frontend assets
 - Ransack for advanced search
 - Wicked PDF for PDF export
 - Chartkick for charts
 - Redis for caching
 - Sentry for error tracking
-- Will Paginate for pagination
-- jQuery for dynamic UI
